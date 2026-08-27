@@ -34217,7 +34217,7 @@
     "categoryLabel": "Tools",
     "price": null,
     "edibility": null,
-    "injectable": true,
+    "injectable": false,
     "tool": {
       "className": "GenericTool",
       "spriteIndex": 13,
@@ -34350,7 +34350,7 @@
     "categoryLabel": "Tools",
     "price": null,
     "edibility": null,
-    "injectable": true,
+    "injectable": false,
     "tool": {
       "className": "GenericTool",
       "spriteIndex": 15,
@@ -34502,7 +34502,7 @@
     "categoryLabel": "Tools",
     "price": null,
     "edibility": null,
-    "injectable": true,
+    "injectable": false,
     "tool": {
       "className": "GenericTool",
       "spriteIndex": 16,
@@ -34730,7 +34730,7 @@
     "categoryLabel": "Tools",
     "price": null,
     "edibility": null,
-    "injectable": true,
+    "injectable": false,
     "tool": {
       "className": "GenericTool",
       "spriteIndex": 14,

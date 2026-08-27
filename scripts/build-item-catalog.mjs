@@ -290,7 +290,9 @@ function parseTools(data) {
       categoryLabel: 'Tools',
       price: null,
       edibility: null,
-      injectable: true,
+      // The Trash Can upgrade is <trashCanLevel> on the Farmer, not an inventory
+      // item — injecting one gives an inert tool and doesn't raise the sell rate.
+      injectable: !/TrashCan$/.test(key),
       tool: {
         className: String(v?.ClassName ?? key),
         spriteIndex: sprite,

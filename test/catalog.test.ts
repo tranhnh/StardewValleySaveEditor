@@ -53,4 +53,16 @@ describe('catalog', () => {
   it('empty query returns the whole catalog', () => {
     expect(queryCatalog({}).length).toBe(CATALOG.length)
   })
+
+  it('trash cans are listed but not injectable; the other tool families stay injectable', () => {
+    const trashCans = CATALOG.filter((i) => /TrashCan$/.test(i.id))
+    expect(trashCans.length).toBeGreaterThan(0)
+    expect(trashCans.every((i) => i.injectable === false)).toBe(true)
+
+    const upgradeFamilies = CATALOG.filter(
+      (i) => i.kind === 'tool' && /(Axe|Pickaxe|Hoe|WateringCan)$/.test(i.id),
+    )
+    expect(upgradeFamilies.length).toBe(20) // 4 families x (base + 4 tiers)
+    expect(upgradeFamilies.every((i) => i.injectable === true)).toBe(true)
+  })
 })
