@@ -18,7 +18,6 @@ describe('xml', () => {
     const out = serializeSave(parsed)
     expect(out.startsWith('<?xml version="1.0" encoding="utf-8"?>')).toBe(true)
     expect(out).toContain('<name>Alex</name>')
-    // re-parsing the output must still succeed
     expect(() => parseSave(out)).not.toThrow()
   })
 

@@ -1,21 +1,12 @@
-// Low-level XML plumbing: capture the prolog, parse, serialize, download.
-// The parsed document is kept for the whole session and mutated in place so
-// that everything we do not touch is preserved byte-for-byte.
-
 export const XSI_NS = 'http://www.w3.org/2001/XMLSchema-instance'
 
 const DEFAULT_PROLOG = '<?xml version="1.0" encoding="utf-8"?>'
 
 export interface ParsedSave {
   doc: XMLDocument
-  /** The exact `<?xml ... ?>` string from the original file (BOM stripped). */
   prolog: string
 }
 
-/**
- * Parse raw save text. Throws with a readable message if the file is not the
- * XML we expect.
- */
 export function parseSave(raw: string): ParsedSave {
   const prologMatch = raw.match(/^﻿?\s*<\?xml[^>]*\?>/)
   const prolog = prologMatch ? prologMatch[0].replace(/^﻿/, '').trim() : DEFAULT_PROLOG
@@ -41,13 +32,11 @@ export function parseSave(raw: string): ParsedSave {
   return { doc, prolog }
 }
 
-/** Serialize the (possibly mutated) document back to a save-compatible string. */
 export function serializeSave({ doc, prolog }: ParsedSave): string {
   const body = new XMLSerializer().serializeToString(doc.documentElement)
   return `${prolog}\n${body}`
 }
 
-/** Trigger a browser download. The save file has no extension, so neither does this. */
 export function downloadText(fileName: string, text: string): void {
   const blob = new Blob([text], { type: 'application/xml' })
   const url = URL.createObjectURL(blob)
@@ -60,11 +49,6 @@ export function downloadText(fileName: string, text: string): void {
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
-// ---------------------------------------------------------------------------
-// Small DOM helpers used across the model layer.
-// ---------------------------------------------------------------------------
-
-/** First direct-child element with the given tag name. */
 export function child(parent: Element, tag: string): Element | null {
   for (let i = 0; i < parent.children.length; i++) {
     const el = parent.children[i]
@@ -73,7 +57,6 @@ export function child(parent: Element, tag: string): Element | null {
   return null
 }
 
-/** All direct-child elements with the given tag name. */
 export function children(parent: Element, tag: string): Element[] {
   const out: Element[] = []
   for (let i = 0; i < parent.children.length; i++) {
@@ -83,16 +66,12 @@ export function children(parent: Element, tag: string): Element[] {
   return out
 }
 
-/** Text content of a direct child, or `null` if the child is absent. */
 export function childText(parent: Element, tag: string): string | null {
   const el = child(parent, tag)
   return el ? (el.textContent ?? '') : null
 }
 
-/**
- * Set the text of a direct child if it exists. Returns whether a node was
- * found — callers use this to know if a field is present in this save version.
- */
+/** Returns whether the child existed, so callers can detect version-specific fields. */
 export function setChildText(parent: Element, tag: string, value: string): boolean {
   const el = child(parent, tag)
   if (!el) return false
@@ -101,16 +80,14 @@ export function setChildText(parent: Element, tag: string, value: string): boole
 }
 
 /**
- * Create an element in the null namespace, matching the rest of the save.
  * `document.createElement` on an XML document can land the node in the XHTML
- * namespace (and inject an `xmlns` attribute) depending on the DOM
- * implementation, which would corrupt the save.
+ * namespace and inject an `xmlns` attribute, which corrupts the save. The null
+ * namespace matches the rest of the document.
  */
 export function createEl(doc: Document, tag: string): Element {
   return doc.createElementNS(null, tag)
 }
 
-/** Parse text as an integer, falling back to `fallback` on missing/NaN. */
 export function toInt(text: string | null, fallback = 0): number {
   if (text == null) return fallback
   const n = Number.parseInt(text.trim(), 10)

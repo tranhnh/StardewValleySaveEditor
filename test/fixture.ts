@@ -1,5 +1,6 @@
-// A trimmed but structurally faithful Stardew 1.6 save. Enough nodes for the
-// editor's read/write paths; not a real farm.
+// Trimmed 1.6 saves for the read/write/inject paths. SAVE_1_6 has equipped
+// hat/boots/rings/clothing and a weapon to clone; SAVE_1_6_BARE has none, so
+// those types hit the bundled templates.
 
 export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
 <SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -200,9 +201,6 @@ export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
   <gameVersion>1.6.15</gameVersion>
 </SaveGame>`
 
-// A 1.6 save with a plain Object in the bag (so Object / big-craftable cloning
-// works) but no hat, boots or ring anywhere — forcing the bundled node
-// templates for those three types.
 export const SAVE_1_6_BARE = `<?xml version="1.0" encoding="utf-8"?>
 <SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <player>
@@ -257,7 +255,7 @@ export const SAVE_1_6_BARE = `<?xml version="1.0" encoding="utf-8"?>
   <gameVersion>1.6.15</gameVersion>
 </SaveGame>`
 
-// A pre-1.6 save whose inventory has no Object at all (forces the fallback).
+// Pre-1.6, no Object anywhere -> forces the legacy Object template.
 export const SAVE_LEGACY_EMPTY = `<?xml version="1.0" encoding="utf-8"?>
 <SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <player>

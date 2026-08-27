@@ -1,12 +1,7 @@
-// Extracts skeleton item-node templates from real save files, for use as
-// injection fallbacks when a save contains no node of a given type to clone.
-//
-//   node scripts/extract-templates.mjs [--from <dir>]
-//
-// Default --from is data/saves/ (git-ignored). Every identity, owner and stat
-// field is zeroed before writing, so the committed skeletons in
-// src/lib/generated/nodeTemplates.json hold no player-specific data — only the
-// element structure and order the game expects for that class.
+// Pulls skeleton item nodes out of real saves in data/saves/ (git-ignored, pass
+// --from <dir> to override) into src/lib/generated/nodeTemplates.json, used as
+// injection fallbacks. Every id / owner / stat is zeroed, so only the element
+// structure and order survive — no player data.
 
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -15,13 +10,9 @@ const OUT = 'src/lib/generated/nodeTemplates.json'
 const fromFlag = process.argv.indexOf('--from')
 const FROM = fromFlag >= 0 ? process.argv[fromFlag + 1] : 'data/saves'
 
-// key -> element names it may appear under, and the xsi:type.
-// Big craftables aren't listed: they are Objects with <bigCraftable>true</bigCraftable>,
-// so injection reuses the Object clone path rather than a template.
-// `injectXsi` is used when the source element carries no xsi:type of its own
-// (e.g. the equipped <shirtItem>/<pantsItem>, which are declared Clothing).
-// `rejectIf` skips a candidate node (e.g. a hat placed in the world carries a
-// <boundingBox>, which a worn/bagged one does not — we want the clean one).
+// `injectXsi`: source element has no xsi:type of its own (equipped <shirtItem>).
+// `rejectIf`: skip a candidate — a world-placed hat has a <boundingBox>, a worn
+// one doesn't, and we want the clean worn one.
 const TARGETS = [
   // Equipped-slot tags first so a clean worn item wins over a placed/chest one.
   { key: 'Hat', tags: ['hat', 'Item'], xsi: 'Hat', rejectIf: /<boundingBox>/ },
@@ -66,7 +57,7 @@ function findSaves(dir) {
   return out
 }
 
-/** Return the full `<tag ...>...</tag>` substring starting at/after `from`. */
+/** The full `<tag>…</tag>` substring from `from`, matching nesting. */
 function extractBalanced(xml, tag, from) {
   const token = new RegExp(`<${tag}(?:\\s[^>]*?)?(/?)>|</${tag}>`, 'g')
   token.lastIndex = from

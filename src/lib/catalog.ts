@@ -1,10 +1,4 @@
-// The full item catalog that powers search / category browsing in the
-// inventory tab.
-//
-// `generated/itemCatalog.json` is produced by `scripts/build-item-catalog.mjs`
-// from unpacked game data (see README). A small placeholder catalog is checked
-// in so the app builds before that data is provided; running the script
-// overwrites it with the real thing.
+// generated/itemCatalog.json is produced by scripts/build-item-catalog.mjs.
 
 import raw from './generated/itemCatalog.json'
 
@@ -21,27 +15,20 @@ export type ItemKind =
   | 'pants'
 
 export interface CatalogItem {
-  /** Qualified id used by the game, e.g. "(O)74", "(BC)16", "(F)1466". */
   qualifiedId: string
-  /** Unqualified id as a string, e.g. "74" or "Axe". */
+  /** String, not number: tool ids are class names like "Axe". */
   id: string
   kind: ItemKind
   name: string
-  /** Raw vanilla `Type` string for objects (e.g. "Minerals"), else null. */
+  /** Raw vanilla `Type` for objects (e.g. "Minerals"), else null. */
   type: string | null
-  /** Vanilla numeric category for objects / big craftables, else null. */
   category: number | null
-  /** Human-readable group used by the category filter. */
   categoryLabel: string
   price: number | null
   edibility: number | null
-  /** Whether the editor can inject this item into an inventory slot. */
   injectable: boolean
-  /** Boots only: stat bonuses and colour-sheet index from Data/Boots. */
   boots?: { defense: number; immunity: number; colorIndex: number }
-  /** Hats only: hair-draw flags from Data/Hats. */
   hat?: { skipHairDraw: boolean; ignoreHairstyleOffset: boolean }
-  /** Weapons only: combat stats from Data/Weapons. */
   weapon?: {
     minDamage: number
     maxDamage: number
@@ -54,7 +41,6 @@ export interface CatalogItem {
     critChance: number
     critMultiplier: number
   }
-  /** Tools only: class name, sprite indices and upgrade level from Data/Tools. */
   tool?: {
     className: string
     spriteIndex: number
@@ -62,14 +48,12 @@ export interface CatalogItem {
     upgradeLevel: number
     attachmentSlots: number
   }
-  /** Shirts / pants only: clothing type and sprite from Data/Shirts|Pants. */
   clothing?: {
     clothesType: number
     spriteIndex: number
     dyeable: boolean
     isPrismatic: boolean
   }
-  /** Furniture only: type id, rotations and source-rect maths from Data/Furniture. */
   furniture?: {
     furnitureType: number
     rotations: number
@@ -82,7 +66,6 @@ export interface CatalogItem {
   }
 }
 
-/** The item kinds the editor can currently inject. */
 export const INJECTABLE_KINDS = [
   'object',
   'bigCraftable',
@@ -109,12 +92,10 @@ export function catalogByQualifiedId(qualifiedId: string): CatalogItem | undefin
   return byQualifiedId.get(qualifiedId)
 }
 
-/** Look up a plain object by its unqualified numeric id. */
 export function catalogObject(objectId: number): CatalogItem | undefined {
   return byQualifiedId.get(`(O)${objectId}`)
 }
 
-/** Distinct category labels, sorted, for the filter dropdown. */
 export function catalogCategories(): string[] {
   return [...new Set(CATALOG.map((item) => item.categoryLabel))].sort((a, b) =>
     a.localeCompare(b),
@@ -127,7 +108,6 @@ export interface CatalogQuery {
   category?: string
 }
 
-/** Filter the catalog by free text (name or id) and category. */
 export function queryCatalog(query: CatalogQuery): CatalogItem[] {
   const text = (query.text ?? '').trim().toLowerCase()
   const category = query.category ?? 'all'

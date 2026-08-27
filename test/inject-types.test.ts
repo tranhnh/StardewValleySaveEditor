@@ -113,8 +113,6 @@ describe('inventory read after injecting a non-object type', () => {
   })
 })
 
-// --- weapons / tools / clothing / furniture -------------------------------
-
 const NEW_PAYLOADS: Record<string, ItemPayload> = {
   weapon: { kind: 'weapon', id: '4', name: 'Galaxy Sword', stack: 1, quality: 0 },
   tool: { kind: 'tool', id: 'IridiumAxe', name: 'Iridium Axe', stack: 1, quality: 0 },

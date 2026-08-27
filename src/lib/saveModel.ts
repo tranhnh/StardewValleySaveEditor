@@ -1,7 +1,3 @@
-// Typed read/write for the fields the editor exposes. Everything works
-// directly against the parsed <SaveGame> document; only the listed nodes are
-// touched, so the rest of the save is left exactly as it was.
-
 import { child, childText, children, createEl, setChildText, toInt } from './xml'
 import { LEVEL_TAG, XP_ORDER, type SkillKey } from './skills'
 
@@ -24,9 +20,8 @@ export interface CoreStats {
 
 export interface SkillsState {
   levels: Record<SkillKey, number>
-  /** Six entries in XP_ORDER order (farming, fishing, foraging, mining, combat, luck). */
+  /** Six entries, in XP_ORDER. */
   xp: number[]
-  /** Flat list of profession ids currently owned. */
   professions: number[]
 }
 
@@ -39,10 +34,6 @@ function playerEl(doc: XMLDocument): Element {
 function saveEl(doc: XMLDocument): Element {
   return doc.documentElement
 }
-
-// ---------------------------------------------------------------------------
-// Core
-// ---------------------------------------------------------------------------
 
 export function readCore(doc: XMLDocument): CoreStats {
   const player = playerEl(doc)
@@ -78,7 +69,7 @@ export function writeCore(doc: XMLDocument, core: CoreStats): void {
   setChildText(player, 'maxStamina', String(Math.trunc(core.maxStamina)))
   setChildText(player, 'millisecondsPlayed', String(Math.max(0, Math.round(core.hoursPlayed * 3_600_000))))
 
-  // Date lives at the SaveGame level, and several mirrors exist on the player.
+  // The date is stored on <SaveGame> and mirrored onto <player>.
   const seasonIndex = SEASONS.indexOf(core.season)
   setChildText(save, 'currentSeason', core.season)
   setChildText(player, 'seasonForSaveGame', String(seasonIndex))
@@ -95,10 +86,6 @@ export function formatPlayTime(hours: number): string {
   const m = totalMinutes % 60
   return `${h}h ${m.toString().padStart(2, '0')}m`
 }
-
-// ---------------------------------------------------------------------------
-// Skills
-// ---------------------------------------------------------------------------
 
 function experiencePointsEl(doc: XMLDocument): Element {
   const el = child(playerEl(doc), 'experiencePoints')

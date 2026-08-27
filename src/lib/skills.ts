@@ -1,15 +1,8 @@
-// Skill / profession reference data.
-
 export type SkillKey = 'farming' | 'fishing' | 'foraging' | 'mining' | 'combat' | 'luck'
 
-/**
- * Order of the six entries in <player><experiencePoints>. This matches the
- * game's internal skill indices (farming 0, fishing 1, foraging 2, mining 3,
- * combat 4, luck 5). Luck is unused by the game but the slot still exists.
- */
+/** Index order of the six <player><experiencePoints> entries (luck is unused but present). */
 export const XP_ORDER: SkillKey[] = ['farming', 'fishing', 'foraging', 'mining', 'combat', 'luck']
 
-/** Element name under <player> that stores each skill's level. */
 export const LEVEL_TAG: Record<SkillKey, string> = {
   farming: 'farmingLevel',
   fishing: 'fishingLevel',
@@ -19,7 +12,7 @@ export const LEVEL_TAG: Record<SkillKey, string> = {
   luck: 'luckLevel',
 }
 
-/** Cumulative XP required to *reach* each level (index 0 = level 0). */
+/** Cumulative XP to reach each level (index 0 = level 0). */
 export const XP_FOR_LEVEL: number[] = [
   0, 100, 380, 770, 1300, 2150, 3300, 4800, 6900, 10000, 15000,
 ]
@@ -38,9 +31,8 @@ export interface ProfessionChoice {
 }
 
 export interface SkillProfessions {
-  /** The level-5 fork: pick one. */
   tier5: [ProfessionChoice, ProfessionChoice]
-  /** The level-10 fork, keyed by the chosen tier-5 id. */
+  /** Keyed by the chosen tier-5 id. */
   tier10: Record<number, [ProfessionChoice, ProfessionChoice]>
 }
 

@@ -10,7 +10,6 @@ import {
   type CatalogItem,
 } from '../lib/catalog'
 
-/** Kinds that carry a stack + quality (the others are one-per-slot equipment). */
 const STACKABLE_KINDS = new Set(['object', 'bigCraftable'])
 
 const store = useSaveStore()
@@ -44,7 +43,6 @@ const canAdd = computed(() => {
   return selected.value?.injectable === true
 })
 
-/** Show stack + quality only when the selection (or the manual path) is stackable. */
 const showStackQuality = computed(() => {
   if (showCustom.value) return true
   return selected.value ? STACKABLE_KINDS.has(selected.value.kind) : false

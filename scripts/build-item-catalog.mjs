@@ -1,25 +1,8 @@
-// Builds src/lib/generated/itemCatalog.json from unpacked game data.
-//
-// Put the JSON exported by StardewXnbHack (or equivalent) anywhere under
-// data/raw/ — a single file, a handful, or the whole "Content (unpacked)"
-// folder; the script searches recursively. Then run: npm run build:catalog
-//
-// Localised variants (Boots.de-DE.json etc.) are ignored: only an exact
-// basename match counts.
-//
-// Recognised files (case-insensitive, 1.6 and pre-1.6 shapes both handled):
-//   Objects.json / ObjectInformation.json
-//   BigCraftables.json / BigCraftablesInformation.json
-//   Weapons.json
-//   Tools.json
-//   Boots.json
-//   Hats.json
-//   Furniture.json
-//   Shirts.json
-//   Pants.json
-//
-// Only ids, names, categories and prices are extracted — no descriptions or
-// other prose — so the generated catalog is plain factual metadata.
+// Builds src/lib/generated/itemCatalog.json from game data JSON placed anywhere
+// under data/raw/ (searched recursively; localised *.de-DE.json etc. skipped).
+// Handles the 1.6 and pre-1.6 shapes of Objects, BigCraftables, Weapons, Tools,
+// Boots, Hats, Furniture, Shirts, Pants. Extracts ids/names/categories/prices
+// and the per-kind fields injection needs — no descriptions.
 
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { basename, join, sep } from 'node:path'
@@ -79,8 +62,7 @@ const cleanName = (name, displayName, id) => {
   return String(id)
 }
 
-// Only a few of the raw object `Type` strings make sensible filter buckets;
-// the rest ("Basic", "asdf", "interactive", ...) collapse to "Other".
+// Object `Type` strings worth showing as a filter bucket; the rest -> "Other".
 const TYPE_LABEL = {
   Minerals: 'Minerals',
   Fish: 'Fish',
@@ -276,10 +258,8 @@ function parseWeapons(data) {
 
 function parseTools(data) {
   return Object.entries(data)
-    // The Trash Can upgrade is <trashCanLevel> on the Farmer, not an inventory
-    // item (there is no base "TrashCan" in Data/Tools), and injecting a
-    // *TrashCan GenericTool gives an inert item that doesn't change the sell
-    // rate — so it is left out of the catalog entirely.
+    // Trash Can is <trashCanLevel> on the Farmer, not an item — an injected
+    // *TrashCan is inert and wouldn't change the sell rate.
     .filter(([key]) => !/TrashCan$/.test(key))
     .map(([key, v]) => {
     const menu = num(v?.MenuSpriteIndex)
@@ -330,7 +310,7 @@ function parseClothes(data, prefix, kind, categoryLabel) {
   }))
 }
 
-// Furniture type string -> the game's furniture_type int (getTypeNumberFromName).
+// Furniture type string -> the game's furniture_type int.
 const FURNITURE_TYPE = {
   chair: 0,
   bench: 1,
@@ -350,7 +330,7 @@ const FURNITURE_TYPE = {
   torch: 16,
   sconce: 17,
 }
-// Types with dedicated Furniture subclasses we don't build yet.
+// Types with dedicated Furniture subclasses (bed/TV/etc.) — not injectable yet.
 const FURNITURE_SUBCLASS = new Set([
   'tv',
   'bed',

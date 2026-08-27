@@ -1,16 +1,7 @@
-// Inventory reading and, importantly, safe item injection.
-//
-// Strategy for adding an item (see README):
-//   1. Never grow the <items> list. Find an existing <Item xsi:nil="true" />.
-//   2. Never hand-write a class schema. Instead clone a real, already-valid node
-//      of the same xsi:type from the save (the game is strict about element
-//      order; a real node is correct for this exact game version). For hats,
-//      boots and rings that also means equipped slots (<hat>, <boots>,
-//      <leftRing>, <rightRing>), with the tag renamed to <Item>.
-//   3. Overwrite only identity + the type's own fields, neutralise any
-//      world/machine state, then replaceChild into the empty slot.
-//   4. Fall back to a bundled skeleton (src/lib/generated/nodeTemplates.json,
-//      extracted from real saves) only when the save has no node of that type.
+// Adding an item: find an <Item xsi:nil="true"/> slot, obtain a node of the
+// right xsi:type (clone one from the save — including equipped slots — or fall
+// back to a bundled skeleton), overwrite identity + type-specific fields, then
+// replaceChild. Cloning matters because the game is strict about element order.
 
 import {
   catalogByQualifiedId,
@@ -31,7 +22,7 @@ export const QUALITY_OPTIONS: { value: Quality; label: string }[] = [
 
 export interface ItemPayload {
   kind: InjectableKind
-  /** Unqualified id as a string, e.g. "74". */
+  /** String, not number: tool ids are class names like "Axe". */
   id: string
   name: string
   stack: number
@@ -45,7 +36,7 @@ export type SlotKind = 'empty' | 'object' | 'other'
 export interface InventorySlot {
   index: number
   kind: SlotKind
-  /** For `other`: the xsi:type, e.g. "MeleeWeapon", "Hat", "Ring", "Boots". */
+  /** For `other`: the xsi:type ("MeleeWeapon", "Hat", …). */
   typeName: string
   name: string
   objectId: number | null
@@ -56,8 +47,6 @@ export interface InventorySlot {
 export interface InjectResult {
   usedFallbackTemplate: boolean
 }
-
-// ---------------------------------------------------------------------------
 
 export function detectEra(doc: XMLDocument): GameEra {
   const raw = doc.querySelector('SaveGame > gameVersion')?.textContent?.trim() ?? ''
@@ -72,7 +61,6 @@ export function gameVersionString(doc: XMLDocument): string {
   return doc.querySelector('SaveGame > gameVersion')?.textContent?.trim() || 'unknown (pre-1.3)'
 }
 
-/** The host player's <items> element. */
 export function inventoryEl(doc: XMLDocument): Element {
   const player = doc.querySelector('SaveGame > player')
   if (!player) throw new Error('Save has no <player> element.')
@@ -81,7 +69,7 @@ export function inventoryEl(doc: XMLDocument): Element {
   return items
 }
 
-/** Backpack capacity: 12, 24 or 36. Falls back to the actual node count. */
+/** Backpack capacity (12/24/36), or the actual node count if the field is missing. */
 export function maxItems(doc: XMLDocument): number {
   const player = doc.querySelector('SaveGame > player')
   const fromNode = player ? toInt(childText(player, 'maxItems'), 0) : 0
@@ -96,8 +84,6 @@ function xsiType(el: Element): string {
 function isNil(el: Element): boolean {
   return (el.getAttributeNS(XSI_NS, 'nil') ?? el.getAttribute('xsi:nil')) === 'true'
 }
-
-// ---------------------------------------------------------------------------
 
 export function readInventory(doc: XMLDocument): InventorySlot[] {
   const items = inventoryEl(doc)
@@ -136,7 +122,6 @@ export function readInventory(doc: XMLDocument): InventorySlot[] {
   return slots
 }
 
-/** Coerce any number to a valid quality tier (0 normal, 1 silver, 2 gold, 4 iridium). */
 export function toQuality(n: number): Quality {
   return n === 1 || n === 2 || n === 4 ? n : 0
 }
@@ -157,7 +142,6 @@ export function setSlotQuality(doc: XMLDocument, index: number, quality: Quality
   setChildText(slotAt(doc, index), 'quality', String(quality))
 }
 
-/** Turn a populated slot back into an empty one: <Item xsi:nil="true" />. */
 export function clearSlot(doc: XMLDocument, index: number): void {
   const items = inventoryEl(doc)
   const current = items.children[index]
@@ -167,38 +151,24 @@ export function clearSlot(doc: XMLDocument, index: number): void {
   items.replaceChild(empty, current)
 }
 
-// ---------------------------------------------------------------------------
-// Injection
-// ---------------------------------------------------------------------------
-
-/**
- * True when `el` is a plain object node we can safely clone: not a big
- * craftable, not a machine holding something, not a container.
- */
 function isPlainObjectNode(el: Element): boolean {
   if (xsiType(el) !== 'Object') return false
   if ((childText(el, 'bigCraftable') ?? 'false') === 'true') return false
   if (childText(el, 'minutesUntilReady') && toInt(childText(el, 'minutesUntilReady'), 0) !== 0) return false
   const held = child(el, 'heldObject')
   if (held && held.children.length > 0) return false
-  if (child(el, 'items')) return false // chest-like
+  if (child(el, 'items')) return false // chest / container
   return true
 }
 
-/** Find any clonable Object anywhere in the document. */
 function findTemplateNode(doc: XMLDocument): { node: Element; renameToItem: boolean } | null {
-  const inv = inventoryEl(doc)
-
-  // 1. Prefer the host player's own inventory.
-  for (const el of Array.from(inv.children)) {
+  for (const el of Array.from(inventoryEl(doc).children)) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: false }
   }
-  // 2. Any other <Item xsi:type="Object"> in the save (other players, etc.).
   for (const el of Array.from(doc.getElementsByTagName('Item'))) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: false }
   }
-  // 3. Any world/chest <Object xsi:type="Object">. Same class, same schema, so
-  //    cloning and renaming the tag to <Item> is safe.
+  // World / chest <Object> is the same class as an inventory <Item> of xsi:type Object.
   for (const el of Array.from(doc.getElementsByTagName('Object'))) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: true }
   }
@@ -216,7 +186,6 @@ function renameElement(el: Element, newTag: string): Element {
   return replacement
 }
 
-/** Reset world/machine-only state carried over from a cloned node. */
 function neutralize(node: Element): void {
   const zero: Record<string, string> = {
     minutesUntilReady: '0',
@@ -246,7 +215,6 @@ function neutralize(node: Element): void {
   }
 }
 
-/** Catalog qualified-id prefix per kind (rings live under "(O)" in the catalog). */
 const QID_PREFIX: Record<InjectableKind, string> = {
   object: 'O',
   bigCraftable: 'BC',
@@ -260,12 +228,11 @@ const QID_PREFIX: Record<InjectableKind, string> = {
   furniture: 'F',
 }
 
-/** The xsi:type an item serializes as inside <items>. */
 function resolveXsiType(kind: InjectableKind, def: CatalogItem | undefined): string {
   switch (kind) {
     case 'object':
     case 'bigCraftable':
-      return 'Object' // big craftable = Object with <bigCraftable>true</bigCraftable>
+      return 'Object' // big craftable = Object + <bigCraftable>true</bigCraftable>
     case 'hat':
       return 'Hat'
     case 'boots':
@@ -284,7 +251,6 @@ function resolveXsiType(kind: InjectableKind, def: CatalogItem | undefined): str
   }
 }
 
-/** Equipped-slot element names on <player> that hold each xsi:type. */
 const EQUIPPED_SLOTS: Record<string, string[]> = {
   Hat: ['hat'],
   Boots: ['boots'],
@@ -292,7 +258,6 @@ const EQUIPPED_SLOTS: Record<string, string[]> = {
   Clothing: ['shirtItem', 'pantsItem'],
 }
 
-/** Plain Tool subclasses — used to derive a skeleton when we have no sample. */
 const TOOL_CLASSES = [
   'Axe',
   'Pickaxe',
@@ -307,13 +272,12 @@ const TOOL_CLASSES = [
   'GenericTool',
 ]
 
-/** Find an existing <Item xsi:type="X"> — or equipped <hat>/<boots>/<ring>/<shirtItem> — to clone. */
 function findTypedNode(doc: XMLDocument, xsi: string): { node: Element; tag: string } | null {
   for (const el of Array.from(doc.getElementsByTagName('Item'))) {
     if (xsiType(el) === xsi && !isNil(el)) return { node: el, tag: 'Item' }
   }
-  // Equipped slots are declared as their class, so they carry no xsi:type of
-  // their own — the slot name is what identifies the type.
+  // Equipped slots are declared as their class, so they carry no xsi:type;
+  // the slot name identifies the type.
   for (const slot of EQUIPPED_SLOTS[xsi] ?? []) {
     for (const el of Array.from(doc.getElementsByTagName(slot))) {
       if (!isNil(el) && el.children.length > 0) return { node: el, tag: slot }
@@ -326,16 +290,13 @@ function parseTemplate(doc: XMLDocument, xml: string): Element {
   const parsed = new DOMParser().parseFromString(xml, 'application/xml')
   if (parsed.querySelector('parsererror')) throw new Error('Internal: node template failed to parse.')
   const node = doc.importNode(parsed.documentElement, true) as Element
-  // The <SaveGame> root already declares xmlns:xsi; drop the template's own copy
-  // so the serialized slot matches the game's own (unprefixed-declaration) style.
-  node.removeAttribute('xmlns:xsi')
+  node.removeAttribute('xmlns:xsi') // <SaveGame> already declares it
   return node
 }
 
-// Skeletons extracted from real saves live in nodeTemplates.json. Ring is not
-// present in the sample saves, so this hand-authored skeleton (mirroring the
-// 1.6 Boots field order, which shares the Item base) is the last resort; the
-// clone-from-equipped path covers it whenever the save has a ring anywhere.
+// nodeTemplates.json holds skeletons extracted from real saves. Ring and
+// Slingshot have no sample there, so they are hand-authored from the shared
+// Item base; the clone path covers them when a save has one.
 const HAND_TEMPLATES: Record<string, string> = {
   Ring:
     `<Item xmlns:xsi="${XSI_NS}" xsi:type="Ring">` +
@@ -345,7 +306,6 @@ const HAND_TEMPLATES: Record<string, string> = {
     '<specialItem>false</specialItem><isRecipe>false</isRecipe>' +
     '<quality>0</quality><stack>1</stack><SpecialVariable>0</SpecialVariable>' +
     '<indexInTileSheet>0</indexInTileSheet><uniqueID>0</uniqueID></Item>',
-  // Slingshot has no sample in the source saves; fields mirror a 1.6 Tool base.
   Slingshot:
     `<Item xmlns:xsi="${XSI_NS}" xsi:type="Slingshot">` +
     '<isLostItem>false</isLostItem><category>-98</category>' +
@@ -364,7 +324,6 @@ const HAND_TEMPLATES: Record<string, string> = {
 function templateFor(xsi: string): string | undefined {
   const direct = (nodeTemplates as Record<string, string>)[xsi] ?? HAND_TEMPLATES[xsi]
   if (direct) return direct
-  // Derive a plain-tool skeleton for tool classes we have no sample of.
   if (TOOL_CLASSES.includes(xsi)) {
     const templates = nodeTemplates as Record<string, string>
     const base = templates.Hoe ?? templates.GenericTool
@@ -401,7 +360,6 @@ function obtainNode(doc: XMLDocument, xsi: string): ObtainedNode {
     let node = existing.node.cloneNode(true) as Element
     if (existing.tag !== 'Item') {
       node = renameElement(node, 'Item')
-      // Equipped <shirtItem>/<pantsItem> carry no xsi:type; a bare <Item> needs one.
       if (!node.getAttribute('xsi:type')) node.setAttributeNS(XSI_NS, 'xsi:type', xsi)
     }
     return { node, usedFallbackTemplate: false }
@@ -412,8 +370,6 @@ function obtainNode(doc: XMLDocument, xsi: string): ObtainedNode {
   }
   return { node: parseTemplate(doc, tpl), usedFallbackTemplate: true }
 }
-
-// --- per-kind field setters ------------------------------------------------
 
 function setId(node: Element, id: string, era: GameEra): void {
   for (const tag of ['parentSheetIndex', 'indexInTileSheet', 'initialParentTileIndex']) {
@@ -459,7 +415,7 @@ function applyObject(
 function applyHat(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
   setChildText(node, 'itemId', payload.id)
-  setChildText(node, 'parentSheetIndex', payload.id) // pre-1.6 only; no-op on 1.6
+  setChildText(node, 'parentSheetIndex', payload.id) // pre-1.6 only
   setChildText(node, 'category', '-95')
   setChildText(node, 'quality', '0')
   setChildText(node, 'stack', '1')
@@ -495,7 +451,7 @@ function applyRing(node: Element, payload: ItemPayload): void {
   setChildText(node, 'stack', '1')
 }
 
-/** Set every X/Y/Width/Height (+ nested Location/Size) on an XNA-rectangle element. */
+/** X/Y/Width/Height plus nested Location/Size, as XNA rectangles serialize. */
 function setRect(node: Element, tag: string, x: number, y: number, w: number, h: number): void {
   const rect = child(node, tag)
   if (!rect) return
@@ -548,7 +504,7 @@ function applyWeapon(node: Element, payload: ItemPayload, def: CatalogItem | und
 
 function applyTool(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
-  setChildText(node, 'itemId', payload.id) // tool itemIds are strings ("CopperAxe")
+  setChildText(node, 'itemId', payload.id) // string, e.g. "CopperAxe"
   setChildText(node, 'category', '-99')
   setChildText(node, 'stack', '1')
   setChildText(node, 'quality', '0')
@@ -574,7 +530,6 @@ function applyTool(node: Element, payload: ItemPayload, def: CatalogItem | undef
       attachments.appendChild(nil)
     }
   }
-  // A fresh watering can / rod starts empty.
   setChildText(node, 'WaterLeft', '0')
   setChildText(node, 'waterLeft', '0')
 }
@@ -614,10 +569,6 @@ function applyFurniture(node: Element, payload: ItemPayload, def: CatalogItem | 
   }
 }
 
-/**
- * Inject an item into the empty slot at `index`. Throws if the slot is not
- * empty, or if the type can neither be cloned from the save nor templated.
- */
 export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload): InjectResult {
   const items = inventoryEl(doc)
   const target = items.children[index]
@@ -663,7 +614,6 @@ export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload
   return { usedFallbackTemplate }
 }
 
-// Last-resort Object template, only for pre-1.6 saves with an empty inventory.
 // Field order follows StardewValley.Object's 1.5 serialization.
 const LEGACY_OBJECT_TEMPLATE = `<Item xmlns:xsi="${XSI_NS}" xsi:type="Object">
   <isLostItem>false</isLostItem>
