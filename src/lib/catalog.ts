@@ -27,6 +27,8 @@ export interface CatalogItem {
   price: number | null
   edibility: number | null
   injectable: boolean
+  /** Which spritesheet + tile index the icon comes from (objects, hats, etc.). */
+  sprite?: { sheet: string; index: number }
   boots?: { defense: number; immunity: number; colorIndex: number }
   hat?: { skipHairDraw: boolean; ignoreHairstyleOffset: boolean }
   weapon?: {
@@ -57,6 +59,7 @@ export interface CatalogItem {
   furniture?: {
     furnitureType: number
     rotations: number
+    texture: string
     srcX: number
     srcY: number
     srcW: number

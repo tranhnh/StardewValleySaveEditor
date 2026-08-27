@@ -78,6 +78,14 @@ const TYPE_LABEL = {
 const objLabel = (category, type) =>
   OBJ_CATEGORY[String(category)] ?? TYPE_LABEL[type] ?? 'Other'
 
+// A `Texture` value from game data -> the sprite-sheet key spriteRect() knows.
+// `fallback` is used for null/empty (the type's default sheet); unknown mod
+// sheets pass through by basename and resolve to a placeholder.
+const normTexture = (texture, fallback) => {
+  if (!texture) return fallback
+  return String(texture).replace(/\\/g, '/').split('/').pop()
+}
+
 function loadRaw() {
   if (!existsSync(RAW_DIR)) return {}
   const files = readdirSync(RAW_DIR, { recursive: true })
@@ -112,6 +120,8 @@ function parseObjects(data) {
     let category
     let price
     let edibility
+    let spriteIndex = num(id) ?? 0
+    let sheet = 'springobjects'
     if (typeof v === 'string') {
       const p = v.split('/')
       name = p[0]
@@ -126,6 +136,8 @@ function parseObjects(data) {
       category = typeof v.Category === 'number' ? v.Category : null
       price = num(v.Price)
       edibility = typeof v.Edibility === 'number' ? v.Edibility : null
+      spriteIndex = num(v.SpriteIndex) ?? spriteIndex
+      sheet = normTexture(v.Texture, 'springobjects')
     }
     const kind = type === 'Ring' ? 'ring' : 'object'
     return {
@@ -140,6 +152,7 @@ function parseObjects(data) {
       edibility,
       // The Combined Ring (880) has nested combinedRings state we can't build.
       injectable: kind === 'object' || (kind === 'ring' && id !== '880'),
+      sprite: { sheet, index: spriteIndex },
     }
   })
 }
@@ -159,6 +172,10 @@ function parseBigCraftables(data) {
       price: isStr ? num(p[1]) : num(v.Price),
       edibility: null,
       injectable: true,
+      sprite: {
+        sheet: isStr ? 'Craftables' : normTexture(v.Texture, 'Craftables'),
+        index: (isStr ? null : num(v.SpriteIndex)) ?? num(id) ?? 0,
+      },
     }
   })
 }
@@ -183,11 +200,13 @@ function parseBoots(data) {
         immunity: num(p[4]) ?? 0,
         colorIndex: num(p[5]) ?? 0,
       },
+      // Boots draw their menu icon from springobjects at their numeric id.
+      sprite: { sheet: 'springobjects', index: num(id) ?? 0 },
     }
   })
 }
 
-// Data/Hats: Name/Description/ShowRealHair/HideHairstyleOffset/tags/DisplayName
+// Data/Hats: Name/Description/ShowRealHair/HideHairstyleOffset/tags/DisplayName/SpriteIndex
 function parseHats(data) {
   return Object.entries(data).map(([id, v]) => {
     const p = String(v).split('/')
@@ -206,6 +225,7 @@ function parseHats(data) {
         skipHairDraw: (p[2] ?? '').toLowerCase() !== 'true',
         ignoreHairstyleOffset: (p[3] ?? '').toLowerCase() === 'true',
       },
+      sprite: { sheet: 'hats', index: num(p[6]) ?? num(id) ?? 0 },
     }
   })
 }
@@ -252,6 +272,7 @@ function parseWeapons(data) {
       edibility: null,
       injectable: true,
       weapon: w,
+      sprite: { sheet: 'weapons', index: num(id) ?? 0 },
     }
   })
 }
@@ -341,21 +362,50 @@ const FURNITURE_SUBCLASS = new Set([
   'randomized_plant',
 ])
 
-// Data/Furniture slash: name/type/tilesheetSize/boundingBoxSize/rotations/price/...
+// Furniture.GetDefaultWidthAndHeight — tile size for entries whose tilesheet
+// size field is "-1 -1". Unlisted types fall back to 1x1.
+const FURNITURE_DEFAULT_SIZE = {
+  chair: [1, 2],
+  bench: [2, 2],
+  couch: [3, 2],
+  armchair: [2, 2],
+  dresser: [2, 2],
+  'long table': [5, 3],
+  table: [2, 2],
+  bookcase: [2, 3],
+  painting: [2, 2],
+  lamp: [1, 3],
+  rug: [3, 2],
+  window: [1, 2],
+  fireplace: [1, 3],
+  bed: [2, 3],
+  torch: [1, 3],
+  sconce: [1, 2],
+  decor: [1, 1],
+}
+
+const FURNITURE_SHEET_W = { furniture: 512, furniture_2: 256, furniture_3: 208 }
+
+// Data/Furniture slash: name/type/tilesheetSize/boundingBoxSize/rotations/price/
+//                       placementRestriction/DisplayName/spriteIndex?/texture?/...
 function parseFurniture(data) {
-  const SHEET_W = 512
   return Object.entries(data).map(([id, v]) => {
     const p = String(v).split('/')
     const type = (p[1] ?? 'decor').trim()
-    const [tileW = 1, tileH = 1] = (p[2] ?? '-1 -1').split(' ').map((n) => {
-      const x = Number.parseInt(n, 10)
-      return Number.isFinite(x) && x > 0 ? x : 1
-    })
-    const [boxW = 1, boxH = 1] = (p[3] ?? '-1 -1').split(' ').map((n) => {
-      const x = Number.parseInt(n, 10)
-      return Number.isFinite(x) && x > 0 ? x : 1
-    })
-    const index = Number.parseInt(id, 10) || 0
+
+    const explicit = (p[2] ?? '').trim().split(' ').map((n) => Number.parseInt(n, 10))
+    const [tileW, tileH] =
+      explicit.length === 2 && explicit[0] > 0 && explicit[1] > 0
+        ? explicit
+        : (FURNITURE_DEFAULT_SIZE[type] ?? [1, 1])
+
+    const box = (p[3] ?? '').trim().split(' ').map((n) => Number.parseInt(n, 10))
+    const [boxW, boxH] = box.length === 2 && box[0] > 0 && box[1] > 0 ? box : [tileW, tileH]
+
+    const sheet = normTexture((p[9] ?? '').trim() || null, 'furniture')
+    const sheetW = FURNITURE_SHEET_W[sheet] ?? 512
+    const index = num(p[8]) ?? num(id) ?? 0
+
     return {
       qualifiedId: `(F)${id}`,
       id: String(id),
@@ -370,8 +420,9 @@ function parseFurniture(data) {
       furniture: {
         furnitureType: FURNITURE_TYPE[type] ?? 8,
         rotations: num(p[4]) ?? 1,
-        srcX: (index * 16) % SHEET_W,
-        srcY: Math.floor((index * 16) / SHEET_W) * 16,
+        texture: sheet,
+        srcX: (index * 16) % sheetW,
+        srcY: Math.floor((index * 16) / sheetW) * 16,
         srcW: tileW * 16,
         srcH: tileH * 16,
         boxW: boxW * 64,
