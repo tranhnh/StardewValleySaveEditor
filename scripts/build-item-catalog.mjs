@@ -228,58 +228,82 @@ function parseHats(data) {
   })
 }
 
+// Pre-1.6 Weapons is slash: Name/Desc/MinDmg/MaxDmg/Knockback/Speed/Precision/Defense/Type/...
 function parseWeapons(data) {
   return Object.entries(data).map(([id, v]) => {
     const isStr = typeof v === 'string'
+    const p = isStr ? String(v).split('/') : null
+    const w = isStr
+      ? {
+          minDamage: num(p[2]) ?? 0,
+          maxDamage: num(p[3]) ?? 0,
+          knockback: num(p[4]) ?? 0,
+          speed: num(p[5]) ?? 0,
+          precision: num(p[6]) ?? 0,
+          defense: num(p[7]) ?? 0,
+          type: num(p[8]) ?? 3,
+          areaOfEffect: num(p[11]) ?? 0,
+          critChance: 0.02,
+          critMultiplier: 3,
+        }
+      : {
+          minDamage: num(v.MinDamage) ?? 0,
+          maxDamage: num(v.MaxDamage) ?? 0,
+          knockback: Number(v.Knockback) || 0,
+          speed: num(v.Speed) ?? 0,
+          precision: num(v.Precision) ?? 0,
+          defense: num(v.Defense) ?? 0,
+          type: num(v.Type) ?? 3,
+          areaOfEffect: num(v.AreaOfEffect) ?? 0,
+          critChance: Number(v.CritChance) || 0.02,
+          critMultiplier: Number(v.CritMultiplier) || 3,
+        }
     return {
       qualifiedId: `(W)${id}`,
       id: String(id),
       kind: 'weapon',
-      name: isStr ? String(v).split('/')[0] : cleanName(v.Name, v.DisplayName, id),
+      name: isStr ? p[0] : cleanName(v.Name, v.DisplayName, id),
       type: null,
       category: -98,
       categoryLabel: 'Weapons',
-      price: isStr ? null : num(v.Price),
+      price: null,
       edibility: null,
-      injectable: false,
+      injectable: true,
+      weapon: w,
     }
   })
 }
 
 function parseTools(data) {
-  return Object.entries(data).map(([key, v]) => ({
-    qualifiedId: `(T)${key}`,
-    id: String(key),
-    kind: 'tool',
-    name: cleanName(v?.Name, v?.DisplayName, key),
-    type: null,
-    category: -99,
-    categoryLabel: 'Tools',
-    price: v && num(v.SalePrice) != null && num(v.SalePrice) >= 0 ? num(v.SalePrice) : null,
-    edibility: null,
-    injectable: false,
-  }))
-}
-
-function parseSlashList(data, prefix, kind, categoryLabel, priceIndex) {
-  return Object.entries(data).map(([id, v]) => {
-    const p = String(v).split('/')
+  return Object.entries(data).map(([key, v]) => {
+    const menu = num(v?.MenuSpriteIndex)
+    const sprite = num(v?.SpriteIndex) ?? 0
+    const upgrade = num(v?.UpgradeLevel)
+    const slots = num(v?.AttachmentSlots)
     return {
-      qualifiedId: `${prefix}${id}`,
-      id: String(id),
-      kind,
-      name: p[0],
+      qualifiedId: `(T)${key}`,
+      id: String(key),
+      kind: 'tool',
+      name: cleanName(v?.Name, v?.DisplayName, key),
       type: null,
-      category: null,
-      categoryLabel,
-      price: priceIndex != null ? num(p[priceIndex]) : null,
+      category: -99,
+      categoryLabel: 'Tools',
+      price: null,
       edibility: null,
-      injectable: false,
+      injectable: true,
+      tool: {
+        className: String(v?.ClassName ?? key),
+        spriteIndex: sprite,
+        menuSpriteIndex: menu != null && menu >= 0 ? menu : sprite,
+        upgradeLevel: upgrade != null && upgrade >= 0 ? upgrade : 0,
+        attachmentSlots: slots != null && slots >= 0 ? slots : 0,
+      },
     }
   })
 }
 
 function parseClothes(data, prefix, kind, categoryLabel) {
+  const clothesType = kind === 'pants' ? 1 : 0
   return Object.entries(data).map(([id, v]) => ({
     qualifiedId: `${prefix}${id}`,
     id: String(id),
@@ -290,8 +314,85 @@ function parseClothes(data, prefix, kind, categoryLabel) {
     categoryLabel,
     price: num(v?.Price),
     edibility: null,
-    injectable: false,
+    injectable: true,
+    clothing: {
+      clothesType,
+      spriteIndex: num(v?.SpriteIndex) ?? 0,
+      dyeable: v?.CanBeDyed === true,
+      isPrismatic: v?.IsPrismatic === true,
+    },
   }))
+}
+
+// Furniture type string -> the game's furniture_type int (getTypeNumberFromName).
+const FURNITURE_TYPE = {
+  chair: 0,
+  bench: 1,
+  couch: 2,
+  armchair: 3,
+  dresser: 4,
+  'long table': 5,
+  painting: 6,
+  lamp: 7,
+  decor: 8,
+  bookcase: 10,
+  table: 11,
+  rug: 12,
+  window: 13,
+  fireplace: 14,
+  bed: 15,
+  torch: 16,
+  sconce: 17,
+}
+// Types with dedicated Furniture subclasses we don't build yet.
+const FURNITURE_SUBCLASS = new Set([
+  'tv',
+  'bed',
+  'bed double',
+  'bed child',
+  'fishtank',
+  'dresser',
+  'randomized_plant',
+])
+
+// Data/Furniture slash: name/type/tilesheetSize/boundingBoxSize/rotations/price/...
+function parseFurniture(data) {
+  const SHEET_W = 512
+  return Object.entries(data).map(([id, v]) => {
+    const p = String(v).split('/')
+    const type = (p[1] ?? 'decor').trim()
+    const [tileW = 1, tileH = 1] = (p[2] ?? '-1 -1').split(' ').map((n) => {
+      const x = Number.parseInt(n, 10)
+      return Number.isFinite(x) && x > 0 ? x : 1
+    })
+    const [boxW = 1, boxH = 1] = (p[3] ?? '-1 -1').split(' ').map((n) => {
+      const x = Number.parseInt(n, 10)
+      return Number.isFinite(x) && x > 0 ? x : 1
+    })
+    const index = Number.parseInt(id, 10) || 0
+    return {
+      qualifiedId: `(F)${id}`,
+      id: String(id),
+      kind: 'furniture',
+      name: p[0],
+      type: null,
+      category: null,
+      categoryLabel: 'Furniture',
+      price: num(p[5]),
+      edibility: null,
+      injectable: !FURNITURE_SUBCLASS.has(type) && type !== 'tv',
+      furniture: {
+        furnitureType: FURNITURE_TYPE[type] ?? 8,
+        rotations: num(p[4]) ?? 1,
+        srcX: (index * 16) % SHEET_W,
+        srcY: Math.floor((index * 16) / SHEET_W) * 16,
+        srcW: tileW * 16,
+        srcH: tileH * 16,
+        boxW: boxW * 64,
+        boxH: boxH * 64,
+      },
+    }
+  })
 }
 
 function main() {
@@ -310,7 +411,7 @@ function main() {
   if (raw.tools) add('Tools', parseTools(raw.tools))
   if (raw.boots) add('Boots', parseBoots(raw.boots))
   if (raw.hats) add('Hats', parseHats(raw.hats))
-  if (raw.furniture) add('Furniture', parseSlashList(raw.furniture, '(F)', 'furniture', 'Furniture', 5))
+  if (raw.furniture) add('Furniture', parseFurniture(raw.furniture))
   if (raw.shirts) add('Shirts', parseClothes(raw.shirts, '(S)', 'shirt', 'Clothing'))
   if (raw.pants) add('Pants', parseClothes(raw.pants, '(P)', 'pants', 'Clothing'))
 

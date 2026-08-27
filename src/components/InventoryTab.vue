@@ -113,9 +113,9 @@ function onQualityInput(index: number, event: Event): void {
   <section class="card">
     <h2>Add an item</h2>
     <p class="muted" style="margin-top: 0">
-      Browsing {{ CATALOG.length.toLocaleString() }} items. Objects, big craftables, hats,
-      boots and rings can be added; weapons, tools, clothing and furniture are listed for
-      reference but not yet insertable.
+      Browsing {{ CATALOG.length.toLocaleString() }} items. Almost everything is
+      insertable now — the exceptions (the Combined Ring, and beds / TVs / fish tanks /
+      dressers) are marked <em>not yet</em>.
     </p>
 
     <div class="row" style="align-items: flex-end">

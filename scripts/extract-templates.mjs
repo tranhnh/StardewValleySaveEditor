@@ -18,10 +18,27 @@ const FROM = fromFlag >= 0 ? process.argv[fromFlag + 1] : 'data/saves'
 // key -> element names it may appear under, and the xsi:type.
 // Big craftables aren't listed: they are Objects with <bigCraftable>true</bigCraftable>,
 // so injection reuses the Object clone path rather than a template.
+// `injectXsi` is used when the source element carries no xsi:type of its own
+// (e.g. the equipped <shirtItem>/<pantsItem>, which are declared Clothing).
+// `rejectIf` skips a candidate node (e.g. a hat placed in the world carries a
+// <boundingBox>, which a worn/bagged one does not — we want the clean one).
 const TARGETS = [
-  { key: 'Hat', tags: ['Item', 'hat'], xsi: 'Hat' },
-  { key: 'Boots', tags: ['Item', 'boots'], xsi: 'Boots' },
-  { key: 'Ring', tags: ['Item', 'leftRing', 'rightRing'], xsi: 'Ring' },
+  // Equipped-slot tags first so a clean worn item wins over a placed/chest one.
+  { key: 'Hat', tags: ['hat', 'Item'], xsi: 'Hat', rejectIf: /<boundingBox>/ },
+  { key: 'Boots', tags: ['boots', 'Item'], xsi: 'Boots', rejectIf: /<boundingBox>/ },
+  { key: 'Ring', tags: ['leftRing', 'rightRing', 'Item'], xsi: 'Ring', rejectIf: /<boundingBox>/ },
+  { key: 'MeleeWeapon', tags: ['Item'], xsi: 'MeleeWeapon' },
+  { key: 'Clothing', tags: ['shirtItem', 'pantsItem'], noXsiType: true, injectXsi: 'Clothing' },
+  { key: 'Furniture', tags: ['Item', 'Furniture'], xsi: 'Furniture', plainOnly: true },
+  { key: 'Axe', tags: ['Item'], xsi: 'Axe' },
+  { key: 'Pickaxe', tags: ['Item'], xsi: 'Pickaxe' },
+  { key: 'Hoe', tags: ['Item'], xsi: 'Hoe' },
+  { key: 'WateringCan', tags: ['Item'], xsi: 'WateringCan' },
+  { key: 'FishingRod', tags: ['Item'], xsi: 'FishingRod' },
+  { key: 'MilkPail', tags: ['Item'], xsi: 'MilkPail' },
+  { key: 'Pan', tags: ['Item'], xsi: 'Pan' },
+  { key: 'Shears', tags: ['Item'], xsi: 'Shears' },
+  { key: 'GenericTool', tags: ['Item'], xsi: 'GenericTool' },
 ]
 
 function findSaves(dir) {
@@ -70,15 +87,22 @@ function extractBalanced(xml, tag, from) {
   return null
 }
 
+const FURNITURE_SUBCLASS_HINT = /<(bedType|screenPosition|tankFish|heldItems|bedSpot)\b/
+
 function findNode(xml, target) {
   for (const tag of target.tags) {
-    const open = new RegExp(`<${tag}\\s[^>]*xsi:type="${target.xsi}"[^>]*>`, 'g')
+    const open = target.noXsiType
+      ? new RegExp(`<${tag}(?:\\s[^>]*)?>`, 'g')
+      : new RegExp(`<${tag}\\s[^>]*xsi:type="${target.xsi}"[^>]*>`, 'g')
     let m
     while ((m = open.exec(xml))) {
+      if (m[0].endsWith('/>')) continue // nil / empty slot
       const node = extractBalanced(xml, tag, m.index)
-      if (!node) continue
+      if (!node || node.endsWith('/>')) continue
       if (target.bigCraftable && !node.includes('<bigCraftable>true</bigCraftable>')) continue
-      if (target.bigCraftable && node.includes('<items>')) continue // skip chests
+      if (target.plainOnly && FURNITURE_SUBCLASS_HINT.test(node)) continue
+      if (target.rejectIf && target.rejectIf.test(node)) continue
+      if (node.includes('<items>') || node.includes('<heldItems>')) continue // containers
       return { node, tag }
     }
   }
@@ -88,46 +112,88 @@ function findNode(xml, target) {
 const replaceLeaf = (xml, tag, value) =>
   xml.replace(new RegExp(`<${tag}>[^<]*</${tag}>`, 'g'), `<${tag}>${value}</${tag}>`)
 
+const ZERO_TAGS = [
+  'parentSheetIndex',
+  'indexInTileSheet',
+  'initialParentTileIndex',
+  'InitialParentTileIndex',
+  'currentParentTileIndex',
+  'indexOfMenuItemView',
+  'IndexOfMenuItemView',
+  'itemId',
+  'which',
+  'uniqueID',
+  'owner',
+  'preservedParentSheetIndex',
+  'price',
+  'defenseBonus',
+  'immunityBonus',
+  'appliedBootSheetIndex',
+  'indexInColorSheet',
+  'minutesUntilReady',
+  'quality',
+  'SpecialVariable',
+  // weapons
+  'minDamage',
+  'maxDamage',
+  'speed',
+  'addedPrecision',
+  'addedDefense',
+  'addedAreaOfEffect',
+  'knockback',
+  'critChance',
+  'critMultiplier',
+  'type',
+  'swingTicker',
+  'upgradeLevel',
+  'numAttachmentSlots',
+  // tools
+  'WaterLeft',
+  'waterLeft',
+  'additionalPower',
+  'CastDirection',
+  // clothing
+  'clothesType',
+  'indexInTileSheetFemale',
+  // furniture
+  'currentRotation',
+  'rotations',
+  'drawHeightOffset',
+  'sourceIndexOffset',
+]
+
 function neutralize(xml, key) {
   let out = xml
   for (const tag of ['name', 'Name', 'DisplayName']) out = replaceLeaf(out, tag, key)
-  for (const tag of [
-    'parentSheetIndex',
-    'indexInTileSheet',
-    'initialParentTileIndex',
-    'itemId',
-    'which',
-    'uniqueID',
-    'owner',
-    'preservedParentSheetIndex',
-    'price',
-    'defenseBonus',
-    'immunityBonus',
-    'appliedBootSheetIndex',
-    'minutesUntilReady',
-    'quality',
-    'SpecialVariable',
-  ]) {
-    out = replaceLeaf(out, tag, '0')
-  }
+  for (const tag of ZERO_TAGS) out = replaceLeaf(out, tag, '0')
   for (const tag of ['stack', 'Stack']) out = replaceLeaf(out, tag, '1')
-  out = out.replace(
-    /<tileLocation>.*?<\/tileLocation>/,
-    '<tileLocation><X>0</X><Y>0</Y></tileLocation>',
-  )
+  out = out
+    .replace(/<tileLocation>.*?<\/tileLocation>/, '<tileLocation><X>0</X><Y>0</Y></tileLocation>')
+    .replace(/<attachments>.*?<\/attachments>/, '<attachments />')
+    .replace(/<modData>.*?<\/modData>/, '')
+    .replace(/<modData\s*\/>/, '')
+    .replace(
+      /<clothesColor>.*?<\/clothesColor>/,
+      '<clothesColor><R>255</R><G>255</G><B>255</B><A>255</A></clothesColor>',
+    )
   return out
 }
 
-function renameOuter(node, tag) {
-  if (tag === 'Item') return node
+function renameOuter(node, tag, injectXsi) {
+  if (tag !== 'Item') {
+    node = node
+      .replace(new RegExp(`^<${tag}(\\s|>)`), '<Item$1')
+      .replace(new RegExp(`</${tag}>$`), '</Item>')
+  }
+  if (injectXsi && !/^<Item\s[^>]*xsi:type=/.test(node)) {
+    node = node.replace(/^<Item(\s|>)/, `<Item xsi:type="${injectXsi}"$1`)
+  }
   return node
-    .replace(new RegExp(`^<${tag}(\\s|>)`), '<Item$1')
-    .replace(new RegExp(`</${tag}>$`), '</Item>')
 }
 
 function ensureXmlns(node) {
   if (node.includes('xmlns:xsi=')) return node
-  return node.replace(/^<Item\s/, '<Item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ')
+  return node.replace(/^<Item(\s|>)/, '<Item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"$1')
 }
 
 function main() {
@@ -159,7 +225,8 @@ function main() {
       delete templates[target.key]
       continue
     }
-    const skeleton = ensureXmlns(neutralize(renameOuter(hit.node, hit.tag), target.key))
+    const renamed = renameOuter(hit.node, hit.tag, target.injectXsi)
+    const skeleton = ensureXmlns(neutralize(renamed, target.key))
     templates[target.key] = skeleton
     found.push(`${target.key} (${skeleton.length} chars, from ${hit.from.split('/').pop()})`)
   }

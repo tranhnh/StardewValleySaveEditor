@@ -118,6 +118,46 @@ export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
       <uniqueID>1</uniqueID>
     </leftRing>
     <rightRing xsi:nil="true" />
+    <shirtItem>
+      <isLostItem>false</isLostItem>
+      <category>-100</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Aquamarine Shirt</name>
+      <parentSheetIndex>9</parentSheetIndex>
+      <itemId>1009</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <price>50</price>
+      <indexInTileSheet>9</indexInTileSheet>
+      <indexInTileSheetFemale xsi:nil="true" />
+      <clothesType>0</clothesType>
+      <dyeable>false</dyeable>
+      <clothesColor><R>255</R><G>255</G><B>255</B><A>255</A></clothesColor>
+      <isPrismatic>false</isPrismatic>
+    </shirtItem>
+    <pantsItem>
+      <isLostItem>false</isLostItem>
+      <category>-100</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Farmer Pants</name>
+      <parentSheetIndex>0</parentSheetIndex>
+      <itemId>0</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <price>50</price>
+      <indexInTileSheet>0</indexInTileSheet>
+      <indexInTileSheetFemale xsi:nil="true" />
+      <clothesType>1</clothesType>
+      <dyeable>true</dyeable>
+      <clothesColor><R>255</R><G>235</G><B>203</B><A>255</A></clothesColor>
+      <isPrismatic>false</isPrismatic>
+    </pantsItem>
   </player>
   <locations>
     <GameLocation xsi:type="Farm">

@@ -246,15 +246,6 @@ function neutralize(node: Element): void {
   }
 }
 
-/** The xsi:type each injectable kind serializes as inside <items>. */
-const XSI_TYPE: Record<InjectableKind, 'Object' | 'Hat' | 'Boots' | 'Ring'> = {
-  object: 'Object',
-  bigCraftable: 'Object', // big craftable = Object with <bigCraftable>true</bigCraftable>
-  hat: 'Hat',
-  boots: 'Boots',
-  ring: 'Ring',
-}
-
 /** Catalog qualified-id prefix per kind (rings live under "(O)" in the catalog). */
 const QID_PREFIX: Record<InjectableKind, string> = {
   object: 'O',
@@ -262,6 +253,35 @@ const QID_PREFIX: Record<InjectableKind, string> = {
   hat: 'H',
   boots: 'B',
   ring: 'O',
+  weapon: 'W',
+  tool: 'T',
+  shirt: 'S',
+  pants: 'P',
+  furniture: 'F',
+}
+
+/** The xsi:type an item serializes as inside <items>. */
+function resolveXsiType(kind: InjectableKind, def: CatalogItem | undefined): string {
+  switch (kind) {
+    case 'object':
+    case 'bigCraftable':
+      return 'Object' // big craftable = Object with <bigCraftable>true</bigCraftable>
+    case 'hat':
+      return 'Hat'
+    case 'boots':
+      return 'Boots'
+    case 'ring':
+      return 'Ring'
+    case 'weapon':
+      return def && ['32', '33', '34'].includes(def.id) ? 'Slingshot' : 'MeleeWeapon'
+    case 'tool':
+      return def?.tool?.className ?? 'GenericTool'
+    case 'shirt':
+    case 'pants':
+      return 'Clothing'
+    case 'furniture':
+      return 'Furniture'
+  }
 }
 
 /** Equipped-slot element names on <player> that hold each xsi:type. */
@@ -269,16 +289,34 @@ const EQUIPPED_SLOTS: Record<string, string[]> = {
   Hat: ['hat'],
   Boots: ['boots'],
   Ring: ['leftRing', 'rightRing'],
+  Clothing: ['shirtItem', 'pantsItem'],
 }
 
-/** Find an existing <Item xsi:type="X"> — or equipped <hat>/<boots>/<ring> — to clone. */
+/** Plain Tool subclasses — used to derive a skeleton when we have no sample. */
+const TOOL_CLASSES = [
+  'Axe',
+  'Pickaxe',
+  'Hoe',
+  'WateringCan',
+  'FishingRod',
+  'MilkPail',
+  'Shears',
+  'Pan',
+  'Lantern',
+  'Wand',
+  'GenericTool',
+]
+
+/** Find an existing <Item xsi:type="X"> — or equipped <hat>/<boots>/<ring>/<shirtItem> — to clone. */
 function findTypedNode(doc: XMLDocument, xsi: string): { node: Element; tag: string } | null {
   for (const el of Array.from(doc.getElementsByTagName('Item'))) {
     if (xsiType(el) === xsi && !isNil(el)) return { node: el, tag: 'Item' }
   }
+  // Equipped slots are declared as their class, so they carry no xsi:type of
+  // their own — the slot name is what identifies the type.
   for (const slot of EQUIPPED_SLOTS[xsi] ?? []) {
     for (const el of Array.from(doc.getElementsByTagName(slot))) {
-      if (xsiType(el) === xsi && !isNil(el)) return { node: el, tag: slot }
+      if (!isNil(el) && el.children.length > 0) return { node: el, tag: slot }
     }
   }
   return null
@@ -307,11 +345,32 @@ const HAND_TEMPLATES: Record<string, string> = {
     '<specialItem>false</specialItem><isRecipe>false</isRecipe>' +
     '<quality>0</quality><stack>1</stack><SpecialVariable>0</SpecialVariable>' +
     '<indexInTileSheet>0</indexInTileSheet><uniqueID>0</uniqueID></Item>',
+  // Slingshot has no sample in the source saves; fields mirror a 1.6 Tool base.
+  Slingshot:
+    `<Item xmlns:xsi="${XSI_NS}" xsi:type="Slingshot">` +
+    '<isLostItem>false</isLostItem><category>-98</category>' +
+    '<hasBeenInInventory>true</hasBeenInInventory><name>Slingshot</name>' +
+    '<parentSheetIndex>0</parentSheetIndex><itemId>0</itemId>' +
+    '<specialItem>false</specialItem><isRecipe>false</isRecipe>' +
+    '<quality>0</quality><stack>1</stack><SpecialVariable>0</SpecialVariable>' +
+    '<initialParentTileIndex>0</initialParentTileIndex>' +
+    '<currentParentTileIndex>0</currentParentTileIndex>' +
+    '<indexOfMenuItemView>0</indexOfMenuItemView><instantUse>false</instantUse>' +
+    '<isEfficient>false</isEfficient><animationSpeedModifier>1</animationSpeedModifier>' +
+    '<upgradeLevel>0</upgradeLevel><numAttachmentSlots>1</numAttachmentSlots>' +
+    '<attachments><Object xsi:nil="true" /></attachments></Item>',
 }
 
 function templateFor(xsi: string): string | undefined {
-  const fromSaves = (nodeTemplates as Record<string, string>)[xsi]
-  return fromSaves ?? HAND_TEMPLATES[xsi]
+  const direct = (nodeTemplates as Record<string, string>)[xsi] ?? HAND_TEMPLATES[xsi]
+  if (direct) return direct
+  // Derive a plain-tool skeleton for tool classes we have no sample of.
+  if (TOOL_CLASSES.includes(xsi)) {
+    const templates = nodeTemplates as Record<string, string>
+    const base = templates.Hoe ?? templates.GenericTool
+    if (base) return base.replace(/xsi:type="[A-Za-z]+"/, `xsi:type="${xsi}"`)
+  }
+  return undefined
 }
 
 interface ObtainedNode {
@@ -319,9 +378,7 @@ interface ObtainedNode {
   usedFallbackTemplate: boolean
 }
 
-function obtainNode(doc: XMLDocument, kind: InjectableKind): ObtainedNode {
-  const xsi = XSI_TYPE[kind]
-
+function obtainNode(doc: XMLDocument, xsi: string): ObtainedNode {
   if (xsi === 'Object') {
     const template = findTemplateNode(doc)
     if (template) {
@@ -342,7 +399,11 @@ function obtainNode(doc: XMLDocument, kind: InjectableKind): ObtainedNode {
   const existing = findTypedNode(doc, xsi)
   if (existing) {
     let node = existing.node.cloneNode(true) as Element
-    if (existing.tag !== 'Item') node = renameElement(node, 'Item')
+    if (existing.tag !== 'Item') {
+      node = renameElement(node, 'Item')
+      // Equipped <shirtItem>/<pantsItem> carry no xsi:type; a bare <Item> needs one.
+      if (!node.getAttribute('xsi:type')) node.setAttributeNS(XSI_NS, 'xsi:type', xsi)
+    }
     return { node, usedFallbackTemplate: false }
   }
   const tpl = templateFor(xsi)
@@ -434,6 +495,125 @@ function applyRing(node: Element, payload: ItemPayload): void {
   setChildText(node, 'stack', '1')
 }
 
+/** Set every X/Y/Width/Height (+ nested Location/Size) on an XNA-rectangle element. */
+function setRect(node: Element, tag: string, x: number, y: number, w: number, h: number): void {
+  const rect = child(node, tag)
+  if (!rect) return
+  setChildText(rect, 'X', String(x))
+  setChildText(rect, 'Y', String(y))
+  setChildText(rect, 'Width', String(w))
+  setChildText(rect, 'Height', String(h))
+  const loc = child(rect, 'Location')
+  if (loc) {
+    setChildText(loc, 'X', String(x))
+    setChildText(loc, 'Y', String(y))
+  }
+  const size = child(rect, 'Size')
+  if (size) {
+    setChildText(size, 'X', String(w))
+    setChildText(size, 'Y', String(h))
+  }
+}
+
+const WEAPON_ID_TAGS = [
+  'parentSheetIndex',
+  'itemId',
+  'initialParentTileIndex',
+  'InitialParentTileIndex',
+  'currentParentTileIndex',
+  'indexOfMenuItemView',
+  'IndexOfMenuItemView',
+]
+
+function applyWeapon(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  for (const tag of WEAPON_ID_TAGS) setChildText(node, tag, payload.id)
+  setChildText(node, 'category', '-98')
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+  const w = def?.weapon
+  if (w) {
+    setChildText(node, 'minDamage', String(w.minDamage))
+    setChildText(node, 'maxDamage', String(w.maxDamage))
+    setChildText(node, 'speed', String(w.speed))
+    setChildText(node, 'addedPrecision', String(w.precision))
+    setChildText(node, 'addedDefense', String(w.defense))
+    setChildText(node, 'addedAreaOfEffect', String(w.areaOfEffect))
+    setChildText(node, 'knockback', String(w.knockback))
+    setChildText(node, 'critChance', String(w.critChance))
+    setChildText(node, 'critMultiplier', String(w.critMultiplier))
+    setChildText(node, 'type', String(w.type))
+  }
+}
+
+function applyTool(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  setChildText(node, 'itemId', payload.id) // tool itemIds are strings ("CopperAxe")
+  setChildText(node, 'category', '-99')
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+
+  const t = def?.tool
+  if (t) {
+    for (const tag of ['parentSheetIndex', 'indexOfMenuItemView', 'IndexOfMenuItemView']) {
+      setChildText(node, tag, String(t.menuSpriteIndex))
+    }
+    for (const tag of ['initialParentTileIndex', 'InitialParentTileIndex', 'currentParentTileIndex']) {
+      setChildText(node, tag, String(t.spriteIndex))
+    }
+    setChildText(node, 'upgradeLevel', String(t.upgradeLevel))
+    setChildText(node, 'numAttachmentSlots', String(t.attachmentSlots))
+  }
+
+  const attachments = child(node, 'attachments')
+  if (attachments) {
+    while (attachments.firstChild) attachments.removeChild(attachments.firstChild)
+    for (let i = 0; i < (t?.attachmentSlots ?? 0); i++) {
+      const nil = createEl(node.ownerDocument, 'Object')
+      nil.setAttributeNS(XSI_NS, 'xsi:nil', 'true')
+      attachments.appendChild(nil)
+    }
+  }
+  // A fresh watering can / rod starts empty.
+  setChildText(node, 'WaterLeft', '0')
+  setChildText(node, 'waterLeft', '0')
+}
+
+function applyClothing(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  setChildText(node, 'itemId', payload.id)
+  setChildText(node, 'category', '-100')
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+  const c = def?.clothing
+  if (c) {
+    setChildText(node, 'parentSheetIndex', String(c.spriteIndex))
+    setChildText(node, 'indexInTileSheet', String(c.spriteIndex))
+    setChildText(node, 'clothesType', String(c.clothesType))
+    setChildText(node, 'dyeable', String(c.dyeable))
+    setChildText(node, 'isPrismatic', String(c.isPrismatic))
+  }
+  if (def?.price != null) setChildText(node, 'price', String(def.price))
+}
+
+function applyFurniture(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  for (const tag of ['parentSheetIndex', 'itemId']) setChildText(node, tag, payload.id)
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+  if (def?.price != null) setChildText(node, 'price', String(def.price))
+  const f = def?.furniture
+  if (f) {
+    setChildText(node, 'furniture_type', String(f.furnitureType))
+    setChildText(node, 'rotations', String(f.rotations))
+    setChildText(node, 'currentRotation', '0')
+    setRect(node, 'sourceRect', f.srcX, f.srcY, f.srcW, f.srcH)
+    setRect(node, 'defaultSourceRect', f.srcX, f.srcY, f.srcW, f.srcH)
+    setRect(node, 'boundingBox', 0, 0, f.boxW, f.boxH)
+    setRect(node, 'defaultBoundingBox', 0, 0, f.boxW, f.boxH)
+  }
+}
+
 /**
  * Inject an item into the empty slot at `index`. Throws if the slot is not
  * empty, or if the type can neither be cloned from the save nor templated.
@@ -445,7 +625,8 @@ export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload
   if (!isNil(target)) throw new Error(`Slot ${index} is not empty. Clear it first.`)
 
   const def = catalogByQualifiedId(`(${QID_PREFIX[payload.kind]})${payload.id}`)
-  const { node, usedFallbackTemplate } = obtainNode(doc, payload.kind)
+  const xsi = resolveXsiType(payload.kind, def)
+  const { node, usedFallbackTemplate } = obtainNode(doc, xsi)
   neutralize(node)
 
   const era = detectEra(doc)
@@ -462,6 +643,19 @@ export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload
       break
     case 'ring':
       applyRing(node, payload)
+      break
+    case 'weapon':
+      applyWeapon(node, payload, def)
+      break
+    case 'tool':
+      applyTool(node, payload, def)
+      break
+    case 'shirt':
+    case 'pants':
+      applyClothing(node, payload, def)
+      break
+    case 'furniture':
+      applyFurniture(node, payload, def)
       break
   }
 

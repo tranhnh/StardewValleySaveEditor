@@ -41,10 +41,60 @@ export interface CatalogItem {
   boots?: { defense: number; immunity: number; colorIndex: number }
   /** Hats only: hair-draw flags from Data/Hats. */
   hat?: { skipHairDraw: boolean; ignoreHairstyleOffset: boolean }
+  /** Weapons only: combat stats from Data/Weapons. */
+  weapon?: {
+    minDamage: number
+    maxDamage: number
+    knockback: number
+    speed: number
+    precision: number
+    defense: number
+    type: number
+    areaOfEffect: number
+    critChance: number
+    critMultiplier: number
+  }
+  /** Tools only: class name, sprite indices and upgrade level from Data/Tools. */
+  tool?: {
+    className: string
+    spriteIndex: number
+    menuSpriteIndex: number
+    upgradeLevel: number
+    attachmentSlots: number
+  }
+  /** Shirts / pants only: clothing type and sprite from Data/Shirts|Pants. */
+  clothing?: {
+    clothesType: number
+    spriteIndex: number
+    dyeable: boolean
+    isPrismatic: boolean
+  }
+  /** Furniture only: type id, rotations and source-rect maths from Data/Furniture. */
+  furniture?: {
+    furnitureType: number
+    rotations: number
+    srcX: number
+    srcY: number
+    srcW: number
+    srcH: number
+    boxW: number
+    boxH: number
+  }
 }
 
 /** The item kinds the editor can currently inject. */
-export const INJECTABLE_KINDS = ['object', 'bigCraftable', 'hat', 'boots', 'ring'] as const
+export const INJECTABLE_KINDS = [
+  'object',
+  'bigCraftable',
+  'hat',
+  'boots',
+  'ring',
+  'weapon',
+  'tool',
+  'shirt',
+  'pants',
+  'furniture',
+] as const
 export type InjectableKind = (typeof INJECTABLE_KINDS)[number]
 
 export function isInjectableKind(kind: ItemKind): kind is InjectableKind {

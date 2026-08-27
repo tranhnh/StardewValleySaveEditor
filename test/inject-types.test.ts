@@ -112,3 +112,94 @@ describe('inventory read after injecting a non-object type', () => {
     expect(slot.name).toBe('Cowboy Hat')
   })
 })
+
+// --- weapons / tools / clothing / furniture -------------------------------
+
+const NEW_PAYLOADS: Record<string, ItemPayload> = {
+  weapon: { kind: 'weapon', id: '4', name: 'Galaxy Sword', stack: 1, quality: 0 },
+  tool: { kind: 'tool', id: 'IridiumAxe', name: 'Iridium Axe', stack: 1, quality: 0 },
+  shirt: { kind: 'shirt', id: '1000', name: 'Classic Overalls', stack: 1, quality: 0 },
+  pants: { kind: 'pants', id: '1', name: 'Shorts', stack: 1, quality: 0 },
+  furniture: { kind: 'furniture', id: '0', name: 'Oak Chair', stack: 1, quality: 0 },
+}
+
+describe.each([
+  ['weapon', 'MeleeWeapon'],
+  ['tool', 'Axe'],
+  ['shirt', 'Clothing'],
+  ['pants', 'Clothing'],
+  ['furniture', 'Furniture'],
+] as const)('inject %s', (kind, xsi) => {
+  const payload = NEW_PAYLOADS[kind]
+
+  it('round-trips from the bundled template on a bare save', () => {
+    const parsed = parseSave(SAVE_1_6_BARE)
+    const before = readInventory(parsed.doc).length
+    injectItem(parsed.doc, 0, payload)
+
+    const out = serializeSave(parsed)
+    expect(out).not.toContain('xmlns="http://www.w3.org/1999/xhtml"')
+
+    const reparsed = parseSave(out)
+    expect(readInventory(reparsed.doc)).toHaveLength(before)
+    const node = firstSlot(reparsed.doc)
+    expect(node.getAttribute('xsi:type')).toBe(xsi)
+    expect(node.querySelector('name')?.textContent).toBe(payload.name)
+    expect(node.querySelector('itemId')?.textContent).toBe(payload.id)
+  })
+
+  it('clones an existing node when the save has one', () => {
+    // SAVE_1_6 has a MeleeWeapon in the bag and equipped shirt/pants.
+    const hasClone = kind === 'weapon' || kind === 'shirt' || kind === 'pants'
+    if (!hasClone) return
+    const parsed = parseSave(SAVE_1_6)
+    const result = injectItem(parsed.doc, 0, payload)
+    expect(result.usedFallbackTemplate).toBe(false)
+    const node = firstSlot(roundTrip(parsed).doc)
+    expect(node.getAttribute('xsi:type')).toBe(xsi)
+    expect(node.querySelector('name')?.textContent).toBe(payload.name)
+  })
+})
+
+describe('per-type field mapping — weapons / tools / clothing / furniture', () => {
+  it('weapon: damage, speed and crit come from the catalog', () => {
+    const parsed = parseSave(SAVE_1_6_BARE)
+    injectItem(parsed.doc, 0, NEW_PAYLOADS.weapon)
+    const node = firstSlot(roundTrip(parsed).doc)
+    expect(node.querySelector('minDamage')?.textContent).toBe('60') // Galaxy Sword
+    expect(node.querySelector('maxDamage')?.textContent).toBe('80')
+    expect(node.querySelector('speed')?.textContent).toBe('8')
+    expect(node.querySelector('critMultiplier')?.textContent).toBe('3')
+  })
+
+  it('tool: string itemId, upgrade level and padded attachment slots', () => {
+    const parsed = parseSave(SAVE_1_6_BARE)
+    injectItem(parsed.doc, 0, { kind: 'tool', id: 'IridiumRod', name: 'Iridium Rod', stack: 1, quality: 0 })
+    const node = firstSlot(roundTrip(parsed).doc)
+    expect(node.getAttribute('xsi:type')).toBe('FishingRod')
+    expect(node.querySelector('itemId')?.textContent).toBe('IridiumRod')
+    expect(node.querySelector('upgradeLevel')?.textContent).toBe('3')
+    expect(node.querySelector('numAttachmentSlots')?.textContent).toBe('2')
+    expect(node.getElementsByTagName('attachments')[0].children).toHaveLength(2)
+  })
+
+  it('clothing: clothesType differs for shirt vs pants', () => {
+    const shirt = parseSave(SAVE_1_6_BARE)
+    injectItem(shirt.doc, 0, NEW_PAYLOADS.shirt)
+    expect(firstSlot(roundTrip(shirt).doc).querySelector('clothesType')?.textContent).toBe('0')
+
+    const pants = parseSave(SAVE_1_6_BARE)
+    injectItem(pants.doc, 0, NEW_PAYLOADS.pants)
+    expect(firstSlot(roundTrip(pants).doc).querySelector('clothesType')?.textContent).toBe('1')
+  })
+
+  it('furniture: type id, rotations and source rect are computed', () => {
+    const parsed = parseSave(SAVE_1_6_BARE)
+    injectItem(parsed.doc, 0, NEW_PAYLOADS.furniture)
+    const node = firstSlot(roundTrip(parsed).doc)
+    expect(node.getElementsByTagName('furniture_type')[0].textContent).toBe('0') // chair
+    expect(node.getElementsByTagName('rotations')[0].textContent).toBe('4')
+    const rect = node.getElementsByTagName('sourceRect')[0]
+    expect(rect.getElementsByTagName('Width')[0].textContent).toBe('16')
+  })
+})

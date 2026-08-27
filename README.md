@@ -49,20 +49,24 @@ editor never hand-writes an item node. Instead (`src/lib/items.ts`):
 2. It finds a real, already-valid node of the right `xsi:type` to clone:
    - **Objects** (and big craftables, which are `Object` + `bigCraftable=true`):
      the player's bag, then any `<Item>` / world `<Object>` in the save.
-   - **Hats, boots, rings:** any `<Item xsi:type="…">` plus the equipped slots
-     `<hat>`, `<boots>`, `<leftRing>`, `<rightRing>`. Equipped tags are renamed
-     to `<Item>` — same class, same schema.
-3. It overwrites only identity and that type's own fields (hat hair flags, boots
-   defense/immunity, etc.), pulled from the catalog, and neutralises world/
-   machine state.
+   - **Hats, boots, rings, weapons, tools, clothing, furniture:** any
+     `<Item xsi:type="…">` plus the equipped slots `<hat>`, `<boots>`,
+     `<leftRing>`, `<rightRing>`, `<shirtItem>`, `<pantsItem>`. Equipped tags
+     are renamed to `<Item>` (and given an `xsi:type` if they lacked one).
+3. It overwrites identity and that type's own fields, pulled from the catalog:
+   hat hair flags; boots defense/immunity; weapon damage/speed/crit; tool class,
+   sprite indices, upgrade level and attachment slots; clothing type/colour;
+   furniture type, rotations and computed source rect. Then it neutralises
+   world/machine state.
 4. It swaps the clone into the empty slot with `replaceChild`.
 
 If the save has no node of that type to clone, it falls back to a bundled
-skeleton from `src/lib/generated/nodeTemplates.json` (see below). The object
-fallback is only trusted for pre-1.6 saves; the UI warns when any fallback runs.
+skeleton from `src/lib/generated/nodeTemplates.json` (see below). Tool classes
+with no skeleton are derived from the `Hoe` one. The object fallback is only
+trusted for pre-1.6 saves; the UI warns when any fallback runs.
 
-Weapons, tools, clothing and furniture are **not** insertable yet — they appear
-in the catalog for reference only.
+Not insertable: the Combined Ring, and furniture subclasses (beds, TVs, fish
+tanks, dressers) — they appear in the catalog marked "not yet".
 
 ### Node templates
 
@@ -97,10 +101,12 @@ A small placeholder catalog is checked in so the app builds without step 1–3.
 ## Scope / limitations
 
 - Edits the **host player** only (not farmhands).
-- Inventory: the catalog lists every item type. Objects, big craftables, hats,
-  boots and rings can be **added**; weapons, tools, clothing and furniture are
-  searchable but not yet insertable. Non-object slots can't be edited in place,
-  only cleared.
+- Inventory: nearly every item can be **added** — objects, big craftables, hats,
+  boots, rings, weapons, tools, shirts, pants and (non-subclass) furniture. The
+  Combined Ring and furniture subclasses (bed/TV/fish tank/dresser) are the
+  exceptions. Non-object slots can't be edited in place, only cleared.
+- Tools are added at their catalogued upgrade level (e.g. `IridiumAxe`), not a
+  chosen one; watering cans/rods start empty.
 - In shared-wallet co-op, the game may override player gold with the team total.
 - Any object can also be added by entering a numeric id manually.
 - **Always keep a backup of your save folder.**
