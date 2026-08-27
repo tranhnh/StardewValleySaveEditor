@@ -59,14 +59,29 @@ Only if the save contains no `Object` anywhere to clone does it fall back to a
 bundled template, and that path is only trusted for pre-1.6 saves. The UI warns
 when the fallback is used.
 
+### Item catalog
+
+The inventory tab's search / category browser is backed by
+`src/lib/generated/itemCatalog.json`, generated from unpacked game data:
+
+1. Export the game's data files with [StardewXnbHack](https://github.com/Pathoschild/StardewXnbHack)
+   (drop it in the game folder and run it).
+2. Copy these JSON files into `data/raw/` (git-ignored — game content is never
+   committed): `Objects`, `BigCraftables`, `Weapons`, `Tools`, `Boots`, `Hats`,
+   `Furniture`, `Shirts`, `Pants`.
+3. Run `npm run build:catalog`. It extracts only ids, names, categories and
+   prices into `src/lib/generated/itemCatalog.json`, which *is* committed.
+
+A small placeholder catalog is checked in so the app builds without step 1–3.
+
 ## Scope / limitations
 
 - Edits the **host player** only (not farmhands).
-- Inventory: `Object` items only. Tools, weapons, rings, boots and hats are
-  shown but locked.
+- Inventory: the catalog lists every item type, but only `Object` items can be
+  **added**. Tools, weapons, rings, boots, hats and furniture are searchable but
+  not yet insertable, and existing ones in a slot stay locked.
 - In shared-wallet co-op, the game may override player gold with the team total.
-- `src/lib/itemData.ts` is a short curated list for the "add item" dropdown; any
-  other item can be added by entering a numeric object id.
+- Any object can also be added by entering a numeric id manually.
 - **Always keep a backup of your save folder.**
 
 ## Not affiliated with ConcernedApe. Use at your own risk.

@@ -178,7 +178,7 @@ describe('inventory', () => {
     expect(node.getAttribute('xsi:type')).toBe('Object')
     expect(node.querySelector('itemId')?.textContent).toBe('74') // 1.6 field kept
     expect(node.querySelector('parentSheetIndex')?.textContent).toBe('74')
-    expect(node.querySelector('category')?.textContent).toBe('-2') // from COMMON_ITEMS
+    expect(node.querySelector('category')?.textContent).toBe('-2') // from the catalog
   })
 
   it('refuses to inject into a non-empty slot', () => {

@@ -399,6 +399,62 @@ button.sm {
   color: var(--muted);
 }
 
+/* ---- catalog browser ---- */
+.catalog-list {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.catalog-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  text-align: left;
+  font-weight: 400;
+  cursor: pointer;
+}
+.catalog-row:last-child {
+  border-bottom: none;
+}
+.catalog-row:hover {
+  background: var(--surface-sunk);
+}
+.catalog-row.selected {
+  background: var(--accent-weak);
+}
+.catalog-row.disabled {
+  cursor: default;
+  color: var(--muted);
+}
+.catalog-row.disabled:hover {
+  background: var(--surface);
+}
+.catalog-row .name {
+  font-weight: 550;
+}
+.catalog-row.disabled .name {
+  font-weight: 400;
+}
+.catalog-row .grow {
+  flex: 1;
+}
+.tag {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
 /* ---- footer / action bar ---- */
 .actionbar {
   display: flex;

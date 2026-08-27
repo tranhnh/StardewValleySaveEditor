@@ -8,7 +8,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "build:catalog": "node scripts/build-item-catalog.mjs"
   },
   "dependencies": {
     "pinia": "^2.3.1",

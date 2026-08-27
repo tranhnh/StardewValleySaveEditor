@@ -10,7 +10,7 @@
 //   4. Only fall back to a bundled template when the save contains no Object
 //      anywhere to clone (rare) and the save is pre-1.6.
 
-import { COMMON_ITEMS, type ItemDef } from './itemData'
+import { catalogObject, type CatalogItem } from './catalog'
 import { XSI_NS, child, childText, createEl, setChildText, toInt } from './xml'
 
 export type Quality = 0 | 1 | 2 | 4
@@ -238,7 +238,12 @@ function neutralize(node: Element): void {
   }
 }
 
-function applyPayload(node: Element, payload: ItemPayload, era: GameEra, def: ItemDef | undefined): void {
+function applyPayload(
+  node: Element,
+  payload: ItemPayload,
+  era: GameEra,
+  def: CatalogItem | undefined,
+): void {
   const id = String(payload.objectId)
   for (const tag of ['name', 'Name', 'DisplayName']) setChildText(node, tag, payload.name)
   for (const tag of ['parentSheetIndex', 'indexInTileSheet', 'initialParentTileIndex']) {
@@ -248,12 +253,16 @@ function applyPayload(node: Element, payload: ItemPayload, era: GameEra, def: It
   setChildText(node, 'quality', String(payload.quality))
   if (era === 'v16plus') setChildText(node, 'itemId', id)
 
+  // If the catalog knows this object, copy its native metadata so the injected
+  // node looks native before the game refreshes it on load.
   if (def) {
-    setChildText(node, 'category', String(def.category))
-    setChildText(node, 'Category', String(def.category))
-    setChildText(node, 'type', def.type)
-    setChildText(node, 'price', String(def.price))
-    setChildText(node, 'edibility', String(def.edibility))
+    if (def.category != null) {
+      setChildText(node, 'category', String(def.category))
+      setChildText(node, 'Category', String(def.category))
+    }
+    if (def.type) setChildText(node, 'type', def.type)
+    if (def.price != null) setChildText(node, 'price', String(def.price))
+    if (def.edibility != null) setChildText(node, 'edibility', String(def.edibility))
   }
 }
 
@@ -268,7 +277,7 @@ export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload
   if (!target) throw new Error(`No inventory slot at index ${index}.`)
   if (!isNil(target)) throw new Error(`Slot ${index} is not empty. Clear it first.`)
 
-  const def = COMMON_ITEMS.find((d) => d.id === payload.objectId)
+  const def = catalogObject(payload.objectId)
 
   const template = findTemplateNode(doc)
   let node: Element
