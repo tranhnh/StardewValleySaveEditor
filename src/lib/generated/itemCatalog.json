@@ -34208,25 +34208,6 @@
     }
   },
   {
-    "qualifiedId": "(T)CopperTrashCan",
-    "id": "CopperTrashCan",
-    "kind": "tool",
-    "name": "Copper Trash Can",
-    "type": null,
-    "category": -99,
-    "categoryLabel": "Tools",
-    "price": null,
-    "edibility": null,
-    "injectable": false,
-    "tool": {
-      "className": "GenericTool",
-      "spriteIndex": 13,
-      "menuSpriteIndex": 13,
-      "upgradeLevel": 1,
-      "attachmentSlots": 0
-    }
-  },
-  {
     "qualifiedId": "(T)CopperWateringCan",
     "id": "CopperWateringCan",
     "kind": "tool",
@@ -34336,25 +34317,6 @@
       "className": "Pickaxe",
       "spriteIndex": 147,
       "menuSpriteIndex": 173,
-      "upgradeLevel": 3,
-      "attachmentSlots": 0
-    }
-  },
-  {
-    "qualifiedId": "(T)GoldTrashCan",
-    "id": "GoldTrashCan",
-    "kind": "tool",
-    "name": "Gold Trash Can",
-    "type": null,
-    "category": -99,
-    "categoryLabel": "Tools",
-    "price": null,
-    "edibility": null,
-    "injectable": false,
-    "tool": {
-      "className": "GenericTool",
-      "spriteIndex": 15,
-      "menuSpriteIndex": 15,
       "upgradeLevel": 3,
       "attachmentSlots": 0
     }
@@ -34490,25 +34452,6 @@
       "menuSpriteIndex": 11,
       "upgradeLevel": 3,
       "attachmentSlots": 2
-    }
-  },
-  {
-    "qualifiedId": "(T)IridiumTrashCan",
-    "id": "IridiumTrashCan",
-    "kind": "tool",
-    "name": "Iridium Trash Can",
-    "type": null,
-    "category": -99,
-    "categoryLabel": "Tools",
-    "price": null,
-    "edibility": null,
-    "injectable": false,
-    "tool": {
-      "className": "GenericTool",
-      "spriteIndex": 16,
-      "menuSpriteIndex": 16,
-      "upgradeLevel": 4,
-      "attachmentSlots": 0
     }
   },
   {
@@ -34716,25 +34659,6 @@
       "className": "Pickaxe",
       "spriteIndex": 119,
       "menuSpriteIndex": 145,
-      "upgradeLevel": 2,
-      "attachmentSlots": 0
-    }
-  },
-  {
-    "qualifiedId": "(T)SteelTrashCan",
-    "id": "SteelTrashCan",
-    "kind": "tool",
-    "name": "Steel Trash Can",
-    "type": null,
-    "category": -99,
-    "categoryLabel": "Tools",
-    "price": null,
-    "edibility": null,
-    "injectable": false,
-    "tool": {
-      "className": "GenericTool",
-      "spriteIndex": 14,
-      "menuSpriteIndex": 14,
       "upgradeLevel": 2,
       "attachmentSlots": 0
     }

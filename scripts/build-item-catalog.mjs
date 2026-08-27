@@ -275,7 +275,13 @@ function parseWeapons(data) {
 }
 
 function parseTools(data) {
-  return Object.entries(data).map(([key, v]) => {
+  return Object.entries(data)
+    // The Trash Can upgrade is <trashCanLevel> on the Farmer, not an inventory
+    // item (there is no base "TrashCan" in Data/Tools), and injecting a
+    // *TrashCan GenericTool gives an inert item that doesn't change the sell
+    // rate — so it is left out of the catalog entirely.
+    .filter(([key]) => !/TrashCan$/.test(key))
+    .map(([key, v]) => {
     const menu = num(v?.MenuSpriteIndex)
     const sprite = num(v?.SpriteIndex) ?? 0
     const upgrade = num(v?.UpgradeLevel)
@@ -290,9 +296,7 @@ function parseTools(data) {
       categoryLabel: 'Tools',
       price: null,
       edibility: null,
-      // The Trash Can upgrade is <trashCanLevel> on the Farmer, not an inventory
-      // item — injecting one gives an inert tool and doesn't raise the sell rate.
-      injectable: !/TrashCan$/.test(key),
+      injectable: true,
       tool: {
         className: String(v?.ClassName ?? key),
         spriteIndex: sprite,

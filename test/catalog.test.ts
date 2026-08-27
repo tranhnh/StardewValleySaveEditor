@@ -54,10 +54,9 @@ describe('catalog', () => {
     expect(queryCatalog({}).length).toBe(CATALOG.length)
   })
 
-  it('trash cans are listed but not injectable; the other tool families stay injectable', () => {
-    const trashCans = CATALOG.filter((i) => /TrashCan$/.test(i.id))
-    expect(trashCans.length).toBeGreaterThan(0)
-    expect(trashCans.every((i) => i.injectable === false)).toBe(true)
+  it('trash-can tools are absent; the four upgrade families are fully present', () => {
+    // Trash Can is a <trashCanLevel> int on the Farmer, not an item.
+    expect(CATALOG.some((i) => i.kind === 'tool' && /TrashCan$/.test(i.id))).toBe(false)
 
     const upgradeFamilies = CATALOG.filter(
       (i) => i.kind === 'tool' && /(Axe|Pickaxe|Hoe|WateringCan)$/.test(i.id),
