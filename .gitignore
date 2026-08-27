@@ -3,6 +3,7 @@ dist
 *.local
 .DS_Store
 .vite
+/public/sample_*
 
 # Unpacked game data — copyrighted, never committed. Only the derived
 # src/lib/generated/itemCatalog.json (ids/names/categories/prices) is checked in.

@@ -5,10 +5,12 @@ import { QUALITY_OPTIONS, toQuality, type ItemPayload } from '../lib/items'
 import {
   CATALOG,
   catalogCategories,
+  catalogObject,
   isInjectableKind,
   queryCatalog,
   type CatalogItem,
 } from '../lib/catalog'
+import ItemIcon from './ItemIcon.vue'
 
 const STACKABLE_KINDS = new Set(['object', 'bigCraftable'])
 
@@ -145,6 +147,7 @@ function onQualityInput(index: number, event: Event): void {
         :aria-disabled="!item.injectable"
         @click="pick(item)"
       >
+        <ItemIcon :item="item" />
         <span class="name">{{ item.name }}</span>
         <code>{{ item.qualifiedId }}</code>
         <span class="grow" />
@@ -218,6 +221,7 @@ function onQualityInput(index: number, event: Event): void {
         </template>
 
         <template v-else>
+          <ItemIcon :item="catalogObject(slot.objectId ?? -1)" :size="18" />
           <span class="name">{{ slot.name }}</span>
           <code>#{{ slot.objectId }}</code>
           <span class="grow" />
