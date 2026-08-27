@@ -1,7 +1,11 @@
 // Builds src/lib/generated/itemCatalog.json from unpacked game data.
 //
-// Drop the JSON files exported by StardewXnbHack (or equivalent) into
-// data/raw/, then run:  npm run build:catalog
+// Put the JSON exported by StardewXnbHack (or equivalent) anywhere under
+// data/raw/ — a single file, a handful, or the whole "Content (unpacked)"
+// folder; the script searches recursively. Then run: npm run build:catalog
+//
+// Localised variants (Boots.de-DE.json etc.) are ignored: only an exact
+// basename match counts.
 //
 // Recognised files (case-insensitive, 1.6 and pre-1.6 shapes both handled):
 //   Objects.json / ObjectInformation.json
@@ -18,7 +22,7 @@
 // other prose — so the generated catalog is plain factual metadata.
 
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
-import { basename, join } from 'node:path'
+import { basename, join, sep } from 'node:path'
 
 const RAW_DIR = 'data/raw'
 const OUT = 'src/lib/generated/itemCatalog.json'
@@ -42,7 +46,7 @@ const OBJ_CATEGORY = {
   '-21': 'Bait',
   '-22': 'Tackle',
   '-23': 'Fishing',
-  '-24': 'Decor',
+  '-24': 'Furniture',
   '-25': 'Cooking Ingredients',
   '-26': 'Artisan Goods',
   '-27': 'Artisan Goods',
@@ -75,16 +79,34 @@ const cleanName = (name, displayName, id) => {
   return String(id)
 }
 
+// Only a few of the raw object `Type` strings make sensible filter buckets;
+// the rest ("Basic", "asdf", "interactive", ...) collapse to "Other".
+const TYPE_LABEL = {
+  Minerals: 'Minerals',
+  Fish: 'Fish',
+  Cooking: 'Cooking',
+  Crafting: 'Crafting',
+  Seeds: 'Seeds',
+  Arch: 'Artifacts',
+  Ring: 'Rings',
+  Litter: 'Litter',
+  Quest: 'Quest Items',
+}
+
 const objLabel = (category, type) =>
-  OBJ_CATEGORY[String(category)] ?? (type && type !== 'Basic' ? type : 'Other')
+  OBJ_CATEGORY[String(category)] ?? TYPE_LABEL[type] ?? 'Other'
 
 function loadRaw() {
   if (!existsSync(RAW_DIR)) return {}
-  const files = readdirSync(RAW_DIR).filter((f) => f.toLowerCase().endsWith('.json'))
+  const files = readdirSync(RAW_DIR, { recursive: true })
+    .map((f) => join(RAW_DIR, f))
+    .filter((f) => f.toLowerCase().endsWith('.json'))
+    // shallowest path first, so a top-level file wins over a nested copy
+    .sort((a, b) => a.split(sep).length - b.split(sep).length)
   const find = (...names) => {
     for (const n of names) {
       const hit = files.find((f) => basename(f, '.json').toLowerCase() === n.toLowerCase())
-      if (hit) return JSON.parse(readFileSync(join(RAW_DIR, hit), 'utf8'))
+      if (hit) return JSON.parse(readFileSync(hit, 'utf8'))
     }
     return null
   }
