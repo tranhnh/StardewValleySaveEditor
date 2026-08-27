@@ -89,6 +89,30 @@ describe('spriteRect', () => {
     expect(r).toMatchObject({ x: (224 * 16) % 208, y: Math.floor((224 * 16) / 208) * 16 })
   })
 
+  it('resolves shirts on the dense 16-column, 8px grid (left half of shirts.png)', () => {
+    // Classic Overalls, SpriteIndex 0
+    expect(rectFor('(S)1000')).toMatchObject({
+      sheet: 'shirts.png',
+      x: 0,
+      y: 0,
+      w: 8,
+      h: 8,
+      dyeMask: { x: 128, y: 0 },
+    })
+    // Navy Tuxedo, SpriteIndex 185 — 185 % 32 = 25 landed in the empty dye-mask
+    // half under the old 32-column math; the real grid is 16 cols x 8px.
+    const y = Math.floor(185 / 16) * 8
+    const x = (185 % 16) * 8
+    expect(rectFor('(S)1185')).toMatchObject({
+      sheet: 'shirts.png',
+      x,
+      y,
+      w: 8,
+      h: 8,
+      dyeMask: { x: x + 128, y },
+    })
+  })
+
   it('returns null for pants (no clean inventory sprite)', () => {
     expect(rectFor('(P)1')).toBeNull()
   })
