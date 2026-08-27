@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { parseSave, serializeSave, type ParsedSave } from '../src/lib/xml'
 import { injectItem, readInventory, type ItemPayload } from '../src/lib/items'
+import { packColor } from '../src/lib/color'
 import { SAVE_1_6, SAVE_1_6_BARE } from './fixture'
 
 const roundTrip = (p: ParsedSave) => parseSave(serializeSave(p))
@@ -47,7 +48,6 @@ describe.each(['bigCraftable', 'hat', 'boots', 'ring'] as const)('inject %s', (k
     const parsed = parseSave(SAVE_1_6_BARE)
     const result = injectItem(parsed.doc, 0, payload)
 
-    // big craftables reuse the Object clone path (Wood is present), so no fallback
     expect(result.usedFallbackTemplate).toBe(kind !== 'bigCraftable')
 
     const reparsed = roundTrip(parsed)
@@ -75,7 +75,6 @@ describe('per-type field mapping from the catalog', () => {
     const node = firstSlot(roundTrip(parsed).doc)
     expect(node.querySelector('category')?.textContent).toBe('-95')
     expect(node.querySelector('itemId')?.textContent).toBe('0')
-    // Cowboy Hat: ShowRealHair=false -> skipHairDraw true; HideHairstyle=true
     expect(node.querySelector('skipHairDraw')?.textContent).toBe('true')
     expect(node.querySelector('ignoreHairstyleOffset')?.textContent).toBe('true')
   })
@@ -85,7 +84,7 @@ describe('per-type field mapping from the catalog', () => {
     injectItem(parsed.doc, 0, PAYLOADS.boots)
     const node = firstSlot(roundTrip(parsed).doc)
     expect(node.querySelector('category')?.textContent).toBe('-97')
-    expect(node.querySelector('defenseBonus')?.textContent).toBe('1') // Sneakers +1 defense
+    expect(node.querySelector('defenseBonus')?.textContent).toBe('1')
     expect(node.querySelector('immunityBonus')?.textContent).toBe('0')
     expect(node.querySelector('indexInColorSheet')?.textContent).toBe('0')
     expect(node.querySelector('price')?.textContent).toBe('50')
@@ -103,13 +102,29 @@ describe('per-type field mapping from the catalog', () => {
 })
 
 describe('inventory read after injecting a non-object type', () => {
-  it('shows the slot as a locked "other" entry with the right type name', () => {
+  it('shows the slot as a locked "other" entry with type name and a catalog id', () => {
     const parsed = parseSave(SAVE_1_6)
     injectItem(parsed.doc, 0, PAYLOADS.hat)
     const slot = readInventory(roundTrip(parsed).doc)[0]
     expect(slot.kind).toBe('other')
     expect(slot.typeName).toBe('Hat')
     expect(slot.name).toBe('Cowboy Hat')
+    expect(slot.qualifiedId).toBe('(H)0')
+  })
+
+  it.each([
+    ['hat', { kind: 'hat', id: '0', name: 'Cowboy Hat' }, '(H)0'],
+    ['boots', { kind: 'boots', id: '504', name: 'Sneakers' }, '(B)504'],
+    ['ring', { kind: 'ring', id: '517', name: 'Glow Ring' }, '(O)517'],
+    ['weapon', { kind: 'weapon', id: '4', name: 'Galaxy Sword' }, '(W)4'],
+    ['tool', { kind: 'tool', id: 'IridiumAxe', name: 'Iridium Axe' }, '(T)IridiumAxe'],
+    ['furniture', { kind: 'furniture', id: '0', name: 'Oak Chair' }, '(F)0'],
+  ] as const)('derives a qualified id for a locked %s slot', (_kind, base, qid) => {
+    const parsed = parseSave(SAVE_1_6_BARE)
+    injectItem(parsed.doc, 0, { ...base, stack: 1, quality: 0 } as ItemPayload)
+    const slot = readInventory(roundTrip(parsed).doc)[0]
+    expect(slot.kind).toBe('other')
+    expect(slot.qualifiedId).toBe(qid)
   })
 })
 
@@ -147,7 +162,6 @@ describe.each([
   })
 
   it('clones an existing node when the save has one', () => {
-    // SAVE_1_6 has a MeleeWeapon in the bag and equipped shirt/pants.
     const hasClone = kind === 'weapon' || kind === 'shirt' || kind === 'pants'
     if (!hasClone) return
     const parsed = parseSave(SAVE_1_6)
@@ -164,7 +178,7 @@ describe('per-type field mapping — weapons / tools / clothing / furniture', ()
     const parsed = parseSave(SAVE_1_6_BARE)
     injectItem(parsed.doc, 0, NEW_PAYLOADS.weapon)
     const node = firstSlot(roundTrip(parsed).doc)
-    expect(node.querySelector('minDamage')?.textContent).toBe('60') // Galaxy Sword
+    expect(node.querySelector('minDamage')?.textContent).toBe('60')
     expect(node.querySelector('maxDamage')?.textContent).toBe('80')
     expect(node.querySelector('speed')?.textContent).toBe('8')
     expect(node.querySelector('critMultiplier')?.textContent).toBe('3')
@@ -195,9 +209,66 @@ describe('per-type field mapping — weapons / tools / clothing / furniture', ()
     const parsed = parseSave(SAVE_1_6_BARE)
     injectItem(parsed.doc, 0, NEW_PAYLOADS.furniture)
     const node = firstSlot(roundTrip(parsed).doc)
-    expect(node.getElementsByTagName('furniture_type')[0].textContent).toBe('0') // chair
+    expect(node.getElementsByTagName('furniture_type')[0].textContent).toBe('0')
     expect(node.getElementsByTagName('rotations')[0].textContent).toBe('4')
     const rect = node.getElementsByTagName('sourceRect')[0]
     expect(rect.getElementsByTagName('Width')[0].textContent).toBe('16')
+  })
+})
+
+describe('clothing colour', () => {
+  const colorOf = (node: Element) => {
+    const cc = node.querySelector('clothesColor')!
+    const t = (tag: string) => cc.querySelector(tag)?.textContent
+    return { r: t('R'), g: t('G'), b: t('B'), a: t('A'), packed: t('PackedValue') }
+  }
+
+  it('writes the chosen colour + authoritative PackedValue, not the donor node’s', () => {
+    const parsed = parseSave(SAVE_1_6)
+    injectItem(parsed.doc, 0, {
+      kind: 'pants', id: '0', name: 'Farmer Pants', stack: 1, quality: 0, color: '#123456',
+    })
+    const node = firstSlot(roundTrip(parsed).doc)
+    expect(colorOf(node)).toEqual({
+      r: '18', g: '52', b: '86', a: '255',
+      packed: String(packColor({ r: 0x12, g: 0x34, b: 0x56 })),
+    })
+  })
+
+  it('falls back to the catalog DefaultColor when no colour is chosen', () => {
+    const parsed = parseSave(SAVE_1_6_BARE)
+    injectItem(parsed.doc, 0, {
+      kind: 'shirt', id: '1227', name: 'Antiquity Shirt', stack: 1, quality: 0,
+    })
+    expect(colorOf(firstSlot(roundTrip(parsed).doc))).toMatchObject({
+      r: '255', g: '0', b: '0', packed: String(packColor({ r: 255, g: 0, b: 0 })),
+    })
+  })
+
+  it('readInventory surfaces a clothing slot with its parsed colour', () => {
+    const parsed = parseSave(SAVE_1_6)
+    injectItem(parsed.doc, 0, {
+      kind: 'shirt', id: '1000', name: 'Classic Overalls', stack: 1, quality: 0, color: '#00ff80',
+    })
+    expect(readInventory(roundTrip(parsed).doc)[0]).toMatchObject({
+      kind: 'clothing',
+      typeName: 'Clothing',
+      qualifiedId: '(S)1000',
+      isPrismatic: false,
+      clothesColor: { r: 0, g: 255, b: 128 },
+    })
+  })
+
+  it('keeps two copies of one id distinguishable by colour', () => {
+    const parsed = parseSave(SAVE_1_6)
+    injectItem(parsed.doc, 0, {
+      kind: 'shirt', id: '1000', name: 'Classic Overalls', stack: 1, quality: 0, color: '#ff0000',
+    })
+    injectItem(parsed.doc, 3, {
+      kind: 'shirt', id: '1000', name: 'Classic Overalls', stack: 1, quality: 0, color: '#0000ff',
+    })
+    const slots = readInventory(roundTrip(parsed).doc)
+    expect(slots[0].clothesColor).toEqual({ r: 255, g: 0, b: 0 })
+    expect(slots[3].clothesColor).toEqual({ r: 0, g: 0, b: 255 })
   })
 })

@@ -32995,7 +32995,8 @@
       "clothesType": 1,
       "spriteIndex": 10,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33013,7 +33014,8 @@
       "clothesType": 1,
       "spriteIndex": 5,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffffff"
     }
   },
   {
@@ -33031,7 +33033,8 @@
       "clothesType": 1,
       "spriteIndex": 2,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33049,7 +33052,8 @@
       "clothesType": 1,
       "spriteIndex": 0,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33067,7 +33071,8 @@
       "clothesType": 1,
       "spriteIndex": 8,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33085,7 +33090,8 @@
       "clothesType": 1,
       "spriteIndex": 6,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffffff"
     }
   },
   {
@@ -33103,7 +33109,8 @@
       "clothesType": 1,
       "spriteIndex": 7,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffffff"
     }
   },
   {
@@ -33121,7 +33128,8 @@
       "clothesType": 1,
       "spriteIndex": 4,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33139,7 +33147,8 @@
       "clothesType": 1,
       "spriteIndex": 14,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33157,7 +33166,8 @@
       "clothesType": 1,
       "spriteIndex": 8,
       "dyeable": false,
-      "isPrismatic": true
+      "isPrismatic": true,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33175,7 +33185,8 @@
       "clothesType": 1,
       "spriteIndex": 0,
       "dyeable": false,
-      "isPrismatic": true
+      "isPrismatic": true,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33193,7 +33204,8 @@
       "clothesType": 1,
       "spriteIndex": 12,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33211,7 +33223,8 @@
       "clothesType": 1,
       "spriteIndex": 13,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33229,7 +33242,8 @@
       "clothesType": 1,
       "spriteIndex": 1,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33247,7 +33261,8 @@
       "clothesType": 1,
       "spriteIndex": 11,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33265,7 +33280,8 @@
       "clothesType": 1,
       "spriteIndex": 3,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33283,7 +33299,8 @@
       "clothesType": 1,
       "spriteIndex": 9,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33301,7 +33318,8 @@
       "clothesType": 1,
       "spriteIndex": 15,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33815,7 +33833,8 @@
       "clothesType": 0,
       "spriteIndex": 136,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33833,7 +33852,8 @@
       "clothesType": 0,
       "spriteIndex": 152,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -33851,7 +33871,8 @@
       "clothesType": 0,
       "spriteIndex": 227,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -33869,7 +33890,8 @@
       "clothesType": 0,
       "spriteIndex": 9,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -33887,7 +33909,8 @@
       "clothesType": 0,
       "spriteIndex": 215,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -33905,7 +33928,8 @@
       "clothesType": 0,
       "spriteIndex": 196,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -33923,7 +33947,8 @@
       "clothesType": 0,
       "spriteIndex": 295,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -33941,7 +33966,8 @@
       "clothesType": 0,
       "spriteIndex": 195,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -33959,7 +33985,8 @@
       "clothesType": 0,
       "spriteIndex": 203,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -33977,7 +34004,8 @@
       "clothesType": 0,
       "spriteIndex": 206,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -33995,7 +34023,8 @@
       "clothesType": 0,
       "spriteIndex": 177,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34013,7 +34042,8 @@
       "clothesType": 0,
       "spriteIndex": 176,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34031,7 +34061,8 @@
       "clothesType": 0,
       "spriteIndex": 301,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34049,7 +34080,8 @@
       "clothesType": 0,
       "spriteIndex": 221,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34067,7 +34099,8 @@
       "clothesType": 0,
       "spriteIndex": 134,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34085,7 +34118,8 @@
       "clothesType": 0,
       "spriteIndex": 138,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34103,7 +34137,8 @@
       "clothesType": 0,
       "spriteIndex": 172,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34121,7 +34156,8 @@
       "clothesType": 0,
       "spriteIndex": 278,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34139,7 +34175,8 @@
       "clothesType": 0,
       "spriteIndex": 161,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34157,7 +34194,8 @@
       "clothesType": 0,
       "spriteIndex": 242,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34175,7 +34213,8 @@
       "clothesType": 0,
       "spriteIndex": 245,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34193,7 +34232,8 @@
       "clothesType": 0,
       "spriteIndex": 155,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34211,7 +34251,8 @@
       "clothesType": 0,
       "spriteIndex": 265,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34229,7 +34270,8 @@
       "clothesType": 0,
       "spriteIndex": 18,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34247,7 +34289,8 @@
       "clothesType": 0,
       "spriteIndex": 266,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34265,7 +34308,8 @@
       "clothesType": 0,
       "spriteIndex": 237,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34283,7 +34327,8 @@
       "clothesType": 0,
       "spriteIndex": 247,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34301,7 +34346,8 @@
       "clothesType": 0,
       "spriteIndex": 140,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34319,7 +34365,8 @@
       "clothesType": 0,
       "spriteIndex": 274,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34337,7 +34384,8 @@
       "clothesType": 0,
       "spriteIndex": 231,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34355,7 +34403,8 @@
       "clothesType": 0,
       "spriteIndex": 239,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34373,7 +34422,8 @@
       "clothesType": 0,
       "spriteIndex": 218,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34391,7 +34441,8 @@
       "clothesType": 0,
       "spriteIndex": 250,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34409,7 +34460,8 @@
       "clothesType": 0,
       "spriteIndex": 156,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34427,7 +34479,8 @@
       "clothesType": 0,
       "spriteIndex": 213,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34445,7 +34498,8 @@
       "clothesType": 0,
       "spriteIndex": 234,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34463,7 +34517,8 @@
       "clothesType": 0,
       "spriteIndex": 0,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34481,7 +34536,8 @@
       "clothesType": 0,
       "spriteIndex": 202,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34499,7 +34555,8 @@
       "clothesType": 0,
       "spriteIndex": 201,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34517,7 +34574,8 @@
       "clothesType": 0,
       "spriteIndex": 248,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34535,7 +34593,8 @@
       "clothesType": 0,
       "spriteIndex": 149,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34553,7 +34612,8 @@
       "clothesType": 0,
       "spriteIndex": 131,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34571,7 +34631,8 @@
       "clothesType": 0,
       "spriteIndex": 276,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34589,7 +34650,8 @@
       "clothesType": 0,
       "spriteIndex": 133,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34607,7 +34669,8 @@
       "clothesType": 0,
       "spriteIndex": 132,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34625,7 +34688,8 @@
       "clothesType": 0,
       "spriteIndex": 141,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34643,7 +34707,8 @@
       "clothesType": 0,
       "spriteIndex": 262,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34661,7 +34726,8 @@
       "clothesType": 0,
       "spriteIndex": 263,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34679,7 +34745,8 @@
       "clothesType": 0,
       "spriteIndex": 211,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34697,7 +34764,8 @@
       "clothesType": 0,
       "spriteIndex": 3,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34715,7 +34783,8 @@
       "clothesType": 0,
       "spriteIndex": 194,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34733,7 +34802,8 @@
       "clothesType": 0,
       "spriteIndex": 291,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -34751,7 +34821,8 @@
       "clothesType": 0,
       "spriteIndex": 163,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34769,7 +34840,8 @@
       "clothesType": 0,
       "spriteIndex": 275,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34787,7 +34859,8 @@
       "clothesType": 0,
       "spriteIndex": 229,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34805,7 +34878,8 @@
       "clothesType": 0,
       "spriteIndex": 127,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -34823,7 +34897,8 @@
       "clothesType": 0,
       "spriteIndex": 208,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34841,7 +34916,8 @@
       "clothesType": 0,
       "spriteIndex": 279,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34859,7 +34935,8 @@
       "clothesType": 0,
       "spriteIndex": 153,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#f9ae89"
     }
   },
   {
@@ -34877,7 +34954,8 @@
       "clothesType": 0,
       "spriteIndex": 35,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34895,7 +34973,8 @@
       "clothesType": 0,
       "spriteIndex": 158,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#96c864"
     }
   },
   {
@@ -34913,7 +34992,8 @@
       "clothesType": 0,
       "spriteIndex": 157,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34931,7 +35011,8 @@
       "clothesType": 0,
       "spriteIndex": 226,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34949,7 +35030,8 @@
       "clothesType": 0,
       "spriteIndex": 154,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -34967,7 +35049,8 @@
       "clothesType": 0,
       "spriteIndex": 235,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -34985,7 +35068,8 @@
       "clothesType": 0,
       "spriteIndex": 246,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35003,7 +35087,8 @@
       "clothesType": 0,
       "spriteIndex": 283,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35021,7 +35106,8 @@
       "clothesType": 0,
       "spriteIndex": 170,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35039,7 +35125,8 @@
       "clothesType": 0,
       "spriteIndex": 294,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35057,7 +35144,8 @@
       "clothesType": 0,
       "spriteIndex": 284,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35075,7 +35163,8 @@
       "clothesType": 0,
       "spriteIndex": 150,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35093,7 +35182,8 @@
       "clothesType": 0,
       "spriteIndex": 222,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35111,7 +35201,8 @@
       "clothesType": 0,
       "spriteIndex": 238,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35129,7 +35220,8 @@
       "clothesType": 0,
       "spriteIndex": 8,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35147,7 +35239,8 @@
       "clothesType": 0,
       "spriteIndex": 188,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35165,7 +35258,8 @@
       "clothesType": 0,
       "spriteIndex": 160,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35183,7 +35277,8 @@
       "clothesType": 0,
       "spriteIndex": 183,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35201,7 +35296,8 @@
       "clothesType": 0,
       "spriteIndex": 167,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35219,7 +35315,8 @@
       "clothesType": 0,
       "spriteIndex": 11,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35237,7 +35334,8 @@
       "clothesType": 0,
       "spriteIndex": 189,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35255,7 +35353,8 @@
       "clothesType": 0,
       "spriteIndex": 281,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35273,7 +35372,8 @@
       "clothesType": 0,
       "spriteIndex": 255,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35291,7 +35391,8 @@
       "clothesType": 0,
       "spriteIndex": 270,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35309,7 +35410,8 @@
       "clothesType": 0,
       "spriteIndex": 7,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35327,7 +35429,8 @@
       "clothesType": 0,
       "spriteIndex": 205,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35345,7 +35448,8 @@
       "clothesType": 0,
       "spriteIndex": 34,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35363,7 +35467,8 @@
       "clothesType": 0,
       "spriteIndex": 20,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35381,7 +35486,8 @@
       "clothesType": 0,
       "spriteIndex": 190,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35399,7 +35505,8 @@
       "clothesType": 0,
       "spriteIndex": 28,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35417,7 +35524,8 @@
       "clothesType": 0,
       "spriteIndex": 210,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35435,7 +35543,8 @@
       "clothesType": 0,
       "spriteIndex": 225,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35453,7 +35562,8 @@
       "clothesType": 0,
       "spriteIndex": 174,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35471,7 +35581,8 @@
       "clothesType": 0,
       "spriteIndex": 175,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35489,7 +35600,8 @@
       "clothesType": 0,
       "spriteIndex": 186,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35507,7 +35619,8 @@
       "clothesType": 0,
       "spriteIndex": 297,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35525,7 +35638,8 @@
       "clothesType": 0,
       "spriteIndex": 151,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35543,7 +35657,8 @@
       "clothesType": 0,
       "spriteIndex": 179,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35561,7 +35676,8 @@
       "clothesType": 0,
       "spriteIndex": 299,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffc300"
     }
   },
   {
@@ -35579,7 +35695,8 @@
       "clothesType": 0,
       "spriteIndex": 192,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35597,7 +35714,8 @@
       "clothesType": 0,
       "spriteIndex": 230,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35615,7 +35733,8 @@
       "clothesType": 0,
       "spriteIndex": 168,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35633,7 +35752,8 @@
       "clothesType": 0,
       "spriteIndex": 187,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35651,7 +35771,8 @@
       "clothesType": 0,
       "spriteIndex": 137,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#cf2815"
     }
   },
   {
@@ -35669,7 +35790,8 @@
       "clothesType": 0,
       "spriteIndex": 5,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35687,7 +35809,8 @@
       "clothesType": 0,
       "spriteIndex": 26,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35705,7 +35828,8 @@
       "clothesType": 0,
       "spriteIndex": 12,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35723,7 +35847,8 @@
       "clothesType": 0,
       "spriteIndex": 42,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35741,7 +35866,8 @@
       "clothesType": 0,
       "spriteIndex": 293,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35759,7 +35885,8 @@
       "clothesType": 0,
       "spriteIndex": 272,
       "dyeable": false,
-      "isPrismatic": true
+      "isPrismatic": true,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35777,7 +35904,8 @@
       "clothesType": 0,
       "spriteIndex": 17,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35795,7 +35923,8 @@
       "clothesType": 0,
       "spriteIndex": 285,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35813,7 +35942,8 @@
       "clothesType": 0,
       "spriteIndex": 292,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -35831,7 +35961,8 @@
       "clothesType": 0,
       "spriteIndex": 2,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35849,7 +35980,8 @@
       "clothesType": 0,
       "spriteIndex": 257,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35867,7 +35999,8 @@
       "clothesType": 0,
       "spriteIndex": 300,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0093a7"
     }
   },
   {
@@ -35885,7 +36018,8 @@
       "clothesType": 0,
       "spriteIndex": 185,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35903,7 +36037,8 @@
       "clothesType": 0,
       "spriteIndex": 87,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#dc303e"
     }
   },
   {
@@ -35921,7 +36056,8 @@
       "clothesType": 0,
       "spriteIndex": 173,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35939,7 +36075,8 @@
       "clothesType": 0,
       "spriteIndex": 220,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -35957,7 +36094,8 @@
       "clothesType": 0,
       "spriteIndex": 16,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35975,7 +36113,8 @@
       "clothesType": 0,
       "spriteIndex": 171,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -35993,7 +36132,8 @@
       "clothesType": 0,
       "spriteIndex": 193,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36011,7 +36151,8 @@
       "clothesType": 0,
       "spriteIndex": 240,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36029,7 +36170,8 @@
       "clothesType": 0,
       "spriteIndex": 256,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36047,7 +36189,8 @@
       "clothesType": 0,
       "spriteIndex": 264,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36065,7 +36208,8 @@
       "clothesType": 0,
       "spriteIndex": 267,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36083,7 +36227,8 @@
       "clothesType": 0,
       "spriteIndex": 166,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36101,7 +36246,8 @@
       "clothesType": 0,
       "spriteIndex": 15,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36119,7 +36265,8 @@
       "clothesType": 0,
       "spriteIndex": 224,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36137,7 +36284,8 @@
       "clothesType": 0,
       "spriteIndex": 27,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36155,7 +36303,8 @@
       "clothesType": 0,
       "spriteIndex": 216,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36173,7 +36322,8 @@
       "clothesType": 0,
       "spriteIndex": 41,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -36191,7 +36341,8 @@
       "clothesType": 0,
       "spriteIndex": 38,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -36209,7 +36360,8 @@
       "clothesType": 0,
       "spriteIndex": 272,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36227,7 +36379,8 @@
       "clothesType": 0,
       "spriteIndex": 269,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36245,7 +36398,8 @@
       "clothesType": 0,
       "spriteIndex": 223,
       "dyeable": false,
-      "isPrismatic": true
+      "isPrismatic": true,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36263,7 +36417,8 @@
       "clothesType": 0,
       "spriteIndex": 289,
       "dyeable": false,
-      "isPrismatic": true
+      "isPrismatic": true,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -36281,7 +36436,8 @@
       "clothesType": 0,
       "spriteIndex": 288,
       "dyeable": false,
-      "isPrismatic": true
+      "isPrismatic": true,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -36299,7 +36455,8 @@
       "clothesType": 0,
       "spriteIndex": 197,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36317,7 +36474,8 @@
       "clothesType": 0,
       "spriteIndex": 260,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36335,7 +36493,8 @@
       "clothesType": 0,
       "spriteIndex": 241,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36353,7 +36512,8 @@
       "clothesType": 0,
       "spriteIndex": 280,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36371,7 +36531,8 @@
       "clothesType": 0,
       "spriteIndex": 251,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36389,7 +36550,8 @@
       "clothesType": 0,
       "spriteIndex": 162,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36407,7 +36569,8 @@
       "clothesType": 0,
       "spriteIndex": 13,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36425,7 +36588,8 @@
       "clothesType": 0,
       "spriteIndex": 184,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36443,7 +36607,8 @@
       "clothesType": 0,
       "spriteIndex": 243,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36461,7 +36626,8 @@
       "clothesType": 0,
       "spriteIndex": 244,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36479,7 +36645,8 @@
       "clothesType": 0,
       "spriteIndex": 39,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36497,7 +36664,8 @@
       "clothesType": 0,
       "spriteIndex": 233,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36515,7 +36683,8 @@
       "clothesType": 0,
       "spriteIndex": 19,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36533,7 +36702,8 @@
       "clothesType": 0,
       "spriteIndex": 259,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36551,7 +36721,8 @@
       "clothesType": 0,
       "spriteIndex": 261,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36569,7 +36740,8 @@
       "clothesType": 0,
       "spriteIndex": 236,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -36587,7 +36759,8 @@
       "clothesType": 0,
       "spriteIndex": 1,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36605,7 +36778,8 @@
       "clothesType": 0,
       "spriteIndex": 22,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36623,7 +36797,8 @@
       "clothesType": 0,
       "spriteIndex": 23,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36641,7 +36816,8 @@
       "clothesType": 0,
       "spriteIndex": 24,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36659,7 +36835,8 @@
       "clothesType": 0,
       "spriteIndex": 25,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36677,7 +36854,8 @@
       "clothesType": 0,
       "spriteIndex": 31,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36695,7 +36873,8 @@
       "clothesType": 0,
       "spriteIndex": 32,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36713,7 +36892,8 @@
       "clothesType": 0,
       "spriteIndex": 33,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36731,7 +36911,8 @@
       "clothesType": 0,
       "spriteIndex": 36,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36749,7 +36930,8 @@
       "clothesType": 0,
       "spriteIndex": 37,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36767,7 +36949,8 @@
       "clothesType": 0,
       "spriteIndex": 40,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36785,7 +36968,8 @@
       "clothesType": 0,
       "spriteIndex": 43,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36803,7 +36987,8 @@
       "clothesType": 0,
       "spriteIndex": 44,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36821,7 +37006,8 @@
       "clothesType": 0,
       "spriteIndex": 45,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36839,7 +37025,8 @@
       "clothesType": 0,
       "spriteIndex": 46,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36857,7 +37044,8 @@
       "clothesType": 0,
       "spriteIndex": 47,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36875,7 +37063,8 @@
       "clothesType": 0,
       "spriteIndex": 48,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36893,7 +37082,8 @@
       "clothesType": 0,
       "spriteIndex": 49,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36911,7 +37101,8 @@
       "clothesType": 0,
       "spriteIndex": 50,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36929,7 +37120,8 @@
       "clothesType": 0,
       "spriteIndex": 51,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36947,7 +37139,8 @@
       "clothesType": 0,
       "spriteIndex": 52,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36965,7 +37158,8 @@
       "clothesType": 0,
       "spriteIndex": 53,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -36983,7 +37177,8 @@
       "clothesType": 0,
       "spriteIndex": 54,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37001,7 +37196,8 @@
       "clothesType": 0,
       "spriteIndex": 55,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37019,7 +37215,8 @@
       "clothesType": 0,
       "spriteIndex": 56,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37037,7 +37234,8 @@
       "clothesType": 0,
       "spriteIndex": 57,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37055,7 +37253,8 @@
       "clothesType": 0,
       "spriteIndex": 58,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37073,7 +37272,8 @@
       "clothesType": 0,
       "spriteIndex": 59,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37091,7 +37291,8 @@
       "clothesType": 0,
       "spriteIndex": 60,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37109,7 +37310,8 @@
       "clothesType": 0,
       "spriteIndex": 61,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37127,7 +37329,8 @@
       "clothesType": 0,
       "spriteIndex": 62,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37145,7 +37348,8 @@
       "clothesType": 0,
       "spriteIndex": 63,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37163,7 +37367,8 @@
       "clothesType": 0,
       "spriteIndex": 64,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37181,7 +37386,8 @@
       "clothesType": 0,
       "spriteIndex": 65,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37199,7 +37405,8 @@
       "clothesType": 0,
       "spriteIndex": 66,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37217,7 +37424,8 @@
       "clothesType": 0,
       "spriteIndex": 67,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37235,7 +37443,8 @@
       "clothesType": 0,
       "spriteIndex": 68,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37253,7 +37462,8 @@
       "clothesType": 0,
       "spriteIndex": 69,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37271,7 +37481,8 @@
       "clothesType": 0,
       "spriteIndex": 70,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37289,7 +37500,8 @@
       "clothesType": 0,
       "spriteIndex": 72,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37307,7 +37519,8 @@
       "clothesType": 0,
       "spriteIndex": 73,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37325,7 +37538,8 @@
       "clothesType": 0,
       "spriteIndex": 74,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37343,7 +37557,8 @@
       "clothesType": 0,
       "spriteIndex": 75,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37361,7 +37576,8 @@
       "clothesType": 0,
       "spriteIndex": 76,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37379,7 +37595,8 @@
       "clothesType": 0,
       "spriteIndex": 77,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37397,7 +37614,8 @@
       "clothesType": 0,
       "spriteIndex": 78,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37415,7 +37633,8 @@
       "clothesType": 0,
       "spriteIndex": 79,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37433,7 +37652,8 @@
       "clothesType": 0,
       "spriteIndex": 80,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37451,7 +37671,8 @@
       "clothesType": 0,
       "spriteIndex": 81,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37469,7 +37690,8 @@
       "clothesType": 0,
       "spriteIndex": 82,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37487,7 +37709,8 @@
       "clothesType": 0,
       "spriteIndex": 83,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37505,7 +37728,8 @@
       "clothesType": 0,
       "spriteIndex": 84,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37523,7 +37747,8 @@
       "clothesType": 0,
       "spriteIndex": 85,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37541,7 +37766,8 @@
       "clothesType": 0,
       "spriteIndex": 86,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37559,7 +37785,8 @@
       "clothesType": 0,
       "spriteIndex": 88,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37577,7 +37804,8 @@
       "clothesType": 0,
       "spriteIndex": 89,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37595,7 +37823,8 @@
       "clothesType": 0,
       "spriteIndex": 90,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37613,7 +37842,8 @@
       "clothesType": 0,
       "spriteIndex": 91,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37631,7 +37861,8 @@
       "clothesType": 0,
       "spriteIndex": 92,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37649,7 +37880,8 @@
       "clothesType": 0,
       "spriteIndex": 93,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37667,7 +37899,8 @@
       "clothesType": 0,
       "spriteIndex": 94,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37685,7 +37918,8 @@
       "clothesType": 0,
       "spriteIndex": 95,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37703,7 +37937,8 @@
       "clothesType": 0,
       "spriteIndex": 96,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37721,7 +37956,8 @@
       "clothesType": 0,
       "spriteIndex": 97,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37739,7 +37975,8 @@
       "clothesType": 0,
       "spriteIndex": 98,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37757,7 +37994,8 @@
       "clothesType": 0,
       "spriteIndex": 99,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37775,7 +38013,8 @@
       "clothesType": 0,
       "spriteIndex": 100,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37793,7 +38032,8 @@
       "clothesType": 0,
       "spriteIndex": 101,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37811,7 +38051,8 @@
       "clothesType": 0,
       "spriteIndex": 102,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37829,7 +38070,8 @@
       "clothesType": 0,
       "spriteIndex": 103,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37847,7 +38089,8 @@
       "clothesType": 0,
       "spriteIndex": 104,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37865,7 +38108,8 @@
       "clothesType": 0,
       "spriteIndex": 105,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37883,7 +38127,8 @@
       "clothesType": 0,
       "spriteIndex": 106,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37901,7 +38146,8 @@
       "clothesType": 0,
       "spriteIndex": 107,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37919,7 +38165,8 @@
       "clothesType": 0,
       "spriteIndex": 108,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37937,7 +38184,8 @@
       "clothesType": 0,
       "spriteIndex": 109,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37955,7 +38203,8 @@
       "clothesType": 0,
       "spriteIndex": 110,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37973,7 +38222,8 @@
       "clothesType": 0,
       "spriteIndex": 111,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -37991,7 +38241,8 @@
       "clothesType": 0,
       "spriteIndex": 112,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38009,7 +38260,8 @@
       "clothesType": 0,
       "spriteIndex": 113,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38027,7 +38279,8 @@
       "clothesType": 0,
       "spriteIndex": 114,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38045,7 +38298,8 @@
       "clothesType": 0,
       "spriteIndex": 115,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38063,7 +38317,8 @@
       "clothesType": 0,
       "spriteIndex": 116,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38081,7 +38336,8 @@
       "clothesType": 0,
       "spriteIndex": 117,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38099,7 +38355,8 @@
       "clothesType": 0,
       "spriteIndex": 118,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38117,7 +38374,8 @@
       "clothesType": 0,
       "spriteIndex": 119,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38135,7 +38393,8 @@
       "clothesType": 0,
       "spriteIndex": 120,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38153,7 +38412,8 @@
       "clothesType": 0,
       "spriteIndex": 121,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38171,7 +38431,8 @@
       "clothesType": 0,
       "spriteIndex": 122,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38189,7 +38450,8 @@
       "clothesType": 0,
       "spriteIndex": 124,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38207,7 +38469,8 @@
       "clothesType": 0,
       "spriteIndex": 125,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38225,7 +38488,8 @@
       "clothesType": 0,
       "spriteIndex": 126,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38243,7 +38507,8 @@
       "clothesType": 0,
       "spriteIndex": 144,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38261,7 +38526,8 @@
       "clothesType": 0,
       "spriteIndex": 145,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38279,7 +38545,8 @@
       "clothesType": 0,
       "spriteIndex": 146,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38297,7 +38564,8 @@
       "clothesType": 0,
       "spriteIndex": 147,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38315,7 +38583,8 @@
       "clothesType": 0,
       "spriteIndex": 181,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38333,7 +38602,8 @@
       "clothesType": 0,
       "spriteIndex": 182,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38351,7 +38621,8 @@
       "clothesType": 0,
       "spriteIndex": 159,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38369,7 +38640,8 @@
       "clothesType": 0,
       "spriteIndex": 123,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38387,7 +38659,8 @@
       "clothesType": 0,
       "spriteIndex": 214,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38405,7 +38678,8 @@
       "clothesType": 0,
       "spriteIndex": 191,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38423,7 +38697,8 @@
       "clothesType": 0,
       "spriteIndex": 271,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38441,7 +38716,8 @@
       "clothesType": 0,
       "spriteIndex": 286,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -38459,7 +38735,8 @@
       "clothesType": 0,
       "spriteIndex": 277,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38477,7 +38754,8 @@
       "clothesType": 0,
       "spriteIndex": 14,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38495,7 +38773,8 @@
       "clothesType": 0,
       "spriteIndex": 4,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38513,7 +38792,8 @@
       "clothesType": 0,
       "spriteIndex": 217,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38531,7 +38811,8 @@
       "clothesType": 0,
       "spriteIndex": 207,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38549,7 +38830,8 @@
       "clothesType": 0,
       "spriteIndex": 228,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38567,7 +38849,8 @@
       "clothesType": 0,
       "spriteIndex": 209,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38585,7 +38868,8 @@
       "clothesType": 0,
       "spriteIndex": 258,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38603,7 +38887,8 @@
       "clothesType": 0,
       "spriteIndex": 200,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38621,7 +38906,8 @@
       "clothesType": 0,
       "spriteIndex": 148,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38639,7 +38925,8 @@
       "clothesType": 0,
       "spriteIndex": 30,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38657,7 +38944,8 @@
       "clothesType": 0,
       "spriteIndex": 139,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -38675,7 +38963,8 @@
       "clothesType": 0,
       "spriteIndex": 128,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -38693,7 +38982,8 @@
       "clothesType": 0,
       "spriteIndex": 169,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38711,7 +39001,8 @@
       "clothesType": 0,
       "spriteIndex": 254,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38729,7 +39020,8 @@
       "clothesType": 0,
       "spriteIndex": 10,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38747,7 +39039,8 @@
       "clothesType": 0,
       "spriteIndex": 212,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38765,7 +39058,8 @@
       "clothesType": 0,
       "spriteIndex": 6,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38783,7 +39077,8 @@
       "clothesType": 0,
       "spriteIndex": 130,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -38801,7 +39096,8 @@
       "clothesType": 0,
       "spriteIndex": 129,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -38819,7 +39115,8 @@
       "clothesType": 0,
       "spriteIndex": 287,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -38837,7 +39134,8 @@
       "clothesType": 0,
       "spriteIndex": 143,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38855,7 +39153,8 @@
       "clothesType": 0,
       "spriteIndex": 249,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38873,7 +39172,8 @@
       "clothesType": 0,
       "spriteIndex": 199,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38891,7 +39191,8 @@
       "clothesType": 0,
       "spriteIndex": 282,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38909,7 +39210,8 @@
       "clothesType": 0,
       "spriteIndex": 252,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38927,7 +39229,8 @@
       "clothesType": 0,
       "spriteIndex": 164,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -38945,7 +39248,8 @@
       "clothesType": 0,
       "spriteIndex": 232,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -38963,7 +39267,8 @@
       "clothesType": 0,
       "spriteIndex": 290,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -38981,7 +39286,8 @@
       "clothesType": 0,
       "spriteIndex": 298,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -38999,7 +39305,8 @@
       "clothesType": 0,
       "spriteIndex": 142,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ffebcb"
     }
   },
   {
@@ -39017,7 +39324,8 @@
       "clothesType": 0,
       "spriteIndex": 180,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39035,7 +39343,8 @@
       "clothesType": 0,
       "spriteIndex": 178,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39053,7 +39362,8 @@
       "clothesType": 0,
       "spriteIndex": 204,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39071,7 +39381,8 @@
       "clothesType": 0,
       "spriteIndex": 198,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39089,7 +39400,8 @@
       "clothesType": 0,
       "spriteIndex": 253,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39107,7 +39419,8 @@
       "clothesType": 0,
       "spriteIndex": 273,
       "dyeable": true,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39125,7 +39438,8 @@
       "clothesType": 0,
       "spriteIndex": 165,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -39143,7 +39457,8 @@
       "clothesType": 0,
       "spriteIndex": 268,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39161,7 +39476,8 @@
       "clothesType": 0,
       "spriteIndex": 71,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {
@@ -39179,7 +39495,8 @@
       "clothesType": 0,
       "spriteIndex": 29,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -39197,7 +39514,8 @@
       "clothesType": 0,
       "spriteIndex": 135,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -39215,7 +39533,8 @@
       "clothesType": 0,
       "spriteIndex": 21,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": null
     }
   },
   {
@@ -39233,7 +39552,8 @@
       "clothesType": 0,
       "spriteIndex": 296,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#0032c8"
     }
   },
   {
@@ -39251,7 +39571,8 @@
       "clothesType": 0,
       "spriteIndex": 219,
       "dyeable": false,
-      "isPrismatic": false
+      "isPrismatic": false,
+      "defaultColor": "#ff0000"
     }
   },
   {

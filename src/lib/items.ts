@@ -1,13 +1,9 @@
-// Adding an item: find an <Item xsi:nil="true"/> slot, obtain a node of the
-// right xsi:type (clone one from the save — including equipped slots — or fall
-// back to a bundled skeleton), overwrite identity + type-specific fields, then
-// replaceChild. Cloning matters because the game is strict about element order.
-
 import {
   catalogByQualifiedId,
   type CatalogItem,
   type InjectableKind,
 } from './catalog'
+import { packColor, parseColorHex, unpackColor, type Rgb } from './color'
 import nodeTemplates from './generated/nodeTemplates.json'
 import { XSI_NS, child, childText, createEl, setChildText, toInt } from './xml'
 
@@ -22,26 +18,28 @@ export const QUALITY_OPTIONS: { value: Quality; label: string }[] = [
 
 export interface ItemPayload {
   kind: InjectableKind
-  /** String, not number: tool ids are class names like "Axe". */
   id: string
   name: string
   stack: number
   quality: Quality
+  color?: string | null
 }
 
 export type GameEra = 'v16plus' | 'legacy'
 
-export type SlotKind = 'empty' | 'object' | 'other'
+export type SlotKind = 'empty' | 'object' | 'other' | 'clothing'
 
 export interface InventorySlot {
   index: number
   kind: SlotKind
-  /** For `other`: the xsi:type ("MeleeWeapon", "Hat", …). */
   typeName: string
   name: string
   objectId: number | null
   stack: number
   quality: Quality
+  qualifiedId?: string | null
+  clothesColor?: Rgb | null
+  isPrismatic?: boolean
 }
 
 export interface InjectResult {
@@ -69,7 +67,6 @@ export function inventoryEl(doc: XMLDocument): Element {
   return items
 }
 
-/** Backpack capacity (12/24/36), or the actual node count if the field is missing. */
 export function maxItems(doc: XMLDocument): number {
   const player = doc.querySelector('SaveGame > player')
   const fromNode = player ? toInt(childText(player, 'maxItems'), 0) : 0
@@ -107,15 +104,35 @@ export function readInventory(doc: XMLDocument): InventorySlot[] {
         stack: toInt(childText(el, 'stack') ?? childText(el, 'Stack'), 1),
         quality: toQuality(toInt(childText(el, 'quality'), 0)),
       })
-    } else {
+    } else if (type === 'Clothing') {
+      const idRaw = (childText(el, 'itemId') ?? childText(el, 'parentSheetIndex') ?? '').trim()
+      const ct = (childText(el, 'clothesType') ?? '').trim().toUpperCase()
+      const prefix = ct === 'PANTS' || ct === '1' ? '(P)' : '(S)'
       slots.push({
         index,
-        kind: 'other',
-        typeName: type || el.tagName,
+        kind: 'clothing',
+        typeName: 'Clothing',
         name: childText(el, 'name') ?? childText(el, 'Name') ?? '',
         objectId: null,
         stack: 1,
         quality: 0,
+        qualifiedId: idRaw ? `${prefix}${idRaw}` : null,
+        clothesColor: readClothesColor(el),
+        isPrismatic: (childText(el, 'isPrismatic') ?? 'false') === 'true',
+      })
+    } else {
+      const typeName = type || el.tagName
+      const idRaw = (childText(el, 'itemId') ?? childText(el, 'parentSheetIndex') ?? '').trim()
+      const prefix = otherQidPrefix(type)
+      slots.push({
+        index,
+        kind: 'other',
+        typeName,
+        name: childText(el, 'name') ?? childText(el, 'Name') ?? '',
+        objectId: null,
+        stack: 1,
+        quality: 0,
+        qualifiedId: prefix && idRaw ? `(${prefix})${idRaw}` : null,
       })
     }
   }
@@ -124,6 +141,30 @@ export function readInventory(doc: XMLDocument): InventorySlot[] {
 
 export function toQuality(n: number): Quality {
   return n === 1 || n === 2 || n === 4 ? n : 0
+}
+
+function otherQidPrefix(type: string): string | null {
+  if (type === 'MeleeWeapon' || type === 'Slingshot') return 'W'
+  if (type === 'Hat') return 'H'
+  if (type === 'Boots') return 'B'
+  if (type === 'Ring') return 'O'
+  if (type === 'Furniture') return 'F'
+  if (TOOL_CLASSES.includes(type)) return 'T'
+  return null
+}
+
+function readClothesColor(el: Element): Rgb | null {
+  const cc = child(el, 'clothesColor')
+  if (!cc || isNil(cc)) return null
+  const packed = childText(cc, 'PackedValue')
+  if (packed != null && packed.trim() !== '') {
+    const n = Number(packed.trim())
+    if (Number.isFinite(n)) return unpackColor(n)
+  }
+  const r = toInt(childText(cc, 'R'), -1)
+  const g = toInt(childText(cc, 'G'), -1)
+  const b = toInt(childText(cc, 'B'), -1)
+  return r >= 0 && g >= 0 && b >= 0 ? { r, g, b } : null
 }
 
 function slotAt(doc: XMLDocument, index: number): Element {
@@ -157,7 +198,7 @@ function isPlainObjectNode(el: Element): boolean {
   if (childText(el, 'minutesUntilReady') && toInt(childText(el, 'minutesUntilReady'), 0) !== 0) return false
   const held = child(el, 'heldObject')
   if (held && held.children.length > 0) return false
-  if (child(el, 'items')) return false // chest / container
+  if (child(el, 'items')) return false
   return true
 }
 
@@ -168,7 +209,6 @@ function findTemplateNode(doc: XMLDocument): { node: Element; renameToItem: bool
   for (const el of Array.from(doc.getElementsByTagName('Item'))) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: false }
   }
-  // World / chest <Object> is the same class as an inventory <Item> of xsi:type Object.
   for (const el of Array.from(doc.getElementsByTagName('Object'))) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: true }
   }
@@ -232,7 +272,7 @@ function resolveXsiType(kind: InjectableKind, def: CatalogItem | undefined): str
   switch (kind) {
     case 'object':
     case 'bigCraftable':
-      return 'Object' // big craftable = Object + <bigCraftable>true</bigCraftable>
+      return 'Object'
     case 'hat':
       return 'Hat'
     case 'boots':
@@ -276,8 +316,6 @@ function findTypedNode(doc: XMLDocument, xsi: string): { node: Element; tag: str
   for (const el of Array.from(doc.getElementsByTagName('Item'))) {
     if (xsiType(el) === xsi && !isNil(el)) return { node: el, tag: 'Item' }
   }
-  // Equipped slots are declared as their class, so they carry no xsi:type;
-  // the slot name identifies the type.
   for (const slot of EQUIPPED_SLOTS[xsi] ?? []) {
     for (const el of Array.from(doc.getElementsByTagName(slot))) {
       if (!isNil(el) && el.children.length > 0) return { node: el, tag: slot }
@@ -290,13 +328,10 @@ function parseTemplate(doc: XMLDocument, xml: string): Element {
   const parsed = new DOMParser().parseFromString(xml, 'application/xml')
   if (parsed.querySelector('parsererror')) throw new Error('Internal: node template failed to parse.')
   const node = doc.importNode(parsed.documentElement, true) as Element
-  node.removeAttribute('xmlns:xsi') // <SaveGame> already declares it
+  node.removeAttribute('xmlns:xsi')
   return node
 }
 
-// nodeTemplates.json holds skeletons extracted from real saves. Ring and
-// Slingshot have no sample there, so they are hand-authored from the shared
-// Item base; the clone path covers them when a save has one.
 const HAND_TEMPLATES: Record<string, string> = {
   Ring:
     `<Item xmlns:xsi="${XSI_NS}" xsi:type="Ring">` +
@@ -415,7 +450,7 @@ function applyObject(
 function applyHat(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
   setChildText(node, 'itemId', payload.id)
-  setChildText(node, 'parentSheetIndex', payload.id) // pre-1.6 only
+  setChildText(node, 'parentSheetIndex', payload.id)
   setChildText(node, 'category', '-95')
   setChildText(node, 'quality', '0')
   setChildText(node, 'stack', '1')
@@ -451,7 +486,6 @@ function applyRing(node: Element, payload: ItemPayload): void {
   setChildText(node, 'stack', '1')
 }
 
-/** X/Y/Width/Height plus nested Location/Size, as XNA rectangles serialize. */
 function setRect(node: Element, tag: string, x: number, y: number, w: number, h: number): void {
   const rect = child(node, tag)
   if (!rect) return
@@ -504,7 +538,7 @@ function applyWeapon(node: Element, payload: ItemPayload, def: CatalogItem | und
 
 function applyTool(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
-  setChildText(node, 'itemId', payload.id) // string, e.g. "CopperAxe"
+  setChildText(node, 'itemId', payload.id)
   setChildText(node, 'category', '-99')
   setChildText(node, 'stack', '1')
   setChildText(node, 'quality', '0')
@@ -534,6 +568,30 @@ function applyTool(node: Element, payload: ItemPayload, def: CatalogItem | undef
   setChildText(node, 'waterLeft', '0')
 }
 
+function setClothesColor(node: Element, rgb: Rgb): void {
+  const doc = node.ownerDocument
+  let cc = child(node, 'clothesColor')
+  if (!cc) {
+    cc = createEl(doc, 'clothesColor')
+    node.appendChild(cc)
+  }
+  cc.removeAttributeNS(XSI_NS, 'nil')
+  cc.removeAttribute('xsi:nil')
+  while (cc.firstChild) cc.removeChild(cc.firstChild)
+  const parts: [string, number][] = [
+    ['R', rgb.r],
+    ['G', rgb.g],
+    ['B', rgb.b],
+    ['A', 255],
+    ['PackedValue', packColor(rgb)],
+  ]
+  for (const [tag, value] of parts) {
+    const el = createEl(doc, tag)
+    el.textContent = String(value)
+    cc.appendChild(el)
+  }
+}
+
 function applyClothing(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
   setChildText(node, 'itemId', payload.id)
@@ -549,6 +607,10 @@ function applyClothing(node: Element, payload: ItemPayload, def: CatalogItem | u
     setChildText(node, 'isPrismatic', String(c.isPrismatic))
   }
   if (def?.price != null) setChildText(node, 'price', String(def.price))
+
+  const rgb =
+    parseColorHex(payload.color) ?? parseColorHex(c?.defaultColor ?? null) ?? { r: 255, g: 255, b: 255 }
+  setClothesColor(node, rgb)
 }
 
 function applyFurniture(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
@@ -614,7 +676,6 @@ export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload
   return { usedFallbackTemplate }
 }
 
-// Field order follows StardewValley.Object's 1.5 serialization.
 const LEGACY_OBJECT_TEMPLATE = `<Item xmlns:xsi="${XSI_NS}" xsi:type="Object">
   <isLostItem>false</isLostItem>
   <category>-2</category>

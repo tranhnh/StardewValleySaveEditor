@@ -64,7 +64,6 @@ body {
   padding: 40px 20px 72px;
 }
 
-/* ---- header ---- */
 header h1 {
   font-size: 1.4rem;
   font-weight: 650;
@@ -76,7 +75,6 @@ header .muted {
   margin: 0;
 }
 
-/* ---- typography ---- */
 h2 {
   font-size: 0.95rem;
   font-weight: 650;
@@ -108,7 +106,6 @@ code {
   color: var(--muted);
 }
 
-/* ---- cards ---- */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -122,7 +119,6 @@ code {
   margin-top: 14px;
 }
 
-/* ---- meta strip ---- */
 .meta {
   display: flex;
   align-items: baseline;
@@ -144,7 +140,6 @@ code {
   flex: 1;
 }
 
-/* ---- form controls ---- */
 label {
   display: block;
   font-size: 0.82rem;
@@ -215,7 +210,6 @@ select:disabled {
   flex-wrap: wrap;
 }
 
-/* ---- buttons ---- */
 button {
   font: inherit;
   font-weight: 550;
@@ -268,7 +262,6 @@ button.sm {
   font-size: 0.85rem;
 }
 
-/* ---- tabs ---- */
 .tabs {
   display: flex;
   gap: 4px;
@@ -295,7 +288,6 @@ button.sm {
   box-shadow: var(--shadow);
 }
 
-/* ---- callout ---- */
 .note {
   border: 1px solid var(--border);
   background: var(--surface-sunk);
@@ -318,7 +310,6 @@ button.sm {
   color: inherit;
 }
 
-/* ---- dropzone ---- */
 .dropzone {
   border: 2px dashed var(--border-strong);
   border-radius: var(--radius);
@@ -344,7 +335,6 @@ button.sm {
   margin-top: 0;
 }
 
-/* ---- inventory slots ---- */
 .slot-list {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -398,7 +388,6 @@ button.sm {
   color: var(--muted);
 }
 
-/* ---- catalog browser ---- */
 .catalog-list {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -454,7 +443,23 @@ button.sm {
   padding: 1px 5px;
 }
 
-/* ---- footer / action bar ---- */
+.swatch {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid var(--border-strong);
+}
+.color-input {
+  width: 48px;
+  height: 36px;
+  padding: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
 .actionbar {
   display: flex;
   gap: 12px;

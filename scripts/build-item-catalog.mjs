@@ -1,9 +1,3 @@
-// Builds src/lib/generated/itemCatalog.json from game data JSON placed anywhere
-// under data/raw/ (searched recursively; localised *.de-DE.json etc. skipped).
-// Handles the 1.6 and pre-1.6 shapes of Objects, BigCraftables, Weapons, Tools,
-// Boots, Hats, Furniture, Shirts, Pants. Extracts ids/names/categories/prices
-// and the per-kind fields injection needs — no descriptions.
-
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { basename, join, sep } from 'node:path'
 
@@ -62,7 +56,6 @@ const cleanName = (name, displayName, id) => {
   return String(id)
 }
 
-// Object `Type` strings worth showing as a filter bucket; the rest -> "Other".
 const TYPE_LABEL = {
   Minerals: 'Minerals',
   Fish: 'Fish',
@@ -78,9 +71,6 @@ const TYPE_LABEL = {
 const objLabel = (category, type) =>
   OBJ_CATEGORY[String(category)] ?? TYPE_LABEL[type] ?? 'Other'
 
-// A `Texture` value from game data -> the sprite-sheet key spriteRect() knows.
-// `fallback` is used for null/empty (the type's default sheet); unknown mod
-// sheets pass through by basename and resolve to a placeholder.
 const normTexture = (texture, fallback) => {
   if (!texture) return fallback
   return String(texture).replace(/\\/g, '/').split('/').pop()
@@ -91,7 +81,6 @@ function loadRaw() {
   const files = readdirSync(RAW_DIR, { recursive: true })
     .map((f) => join(RAW_DIR, f))
     .filter((f) => f.toLowerCase().endsWith('.json'))
-    // shallowest path first, so a top-level file wins over a nested copy
     .sort((a, b) => a.split(sep).length - b.split(sep).length)
   const find = (...names) => {
     for (const n of names) {
@@ -150,7 +139,6 @@ function parseObjects(data) {
       categoryLabel: kind === 'ring' ? 'Rings' : objLabel(category, type),
       price,
       edibility,
-      // The Combined Ring (880) has nested combinedRings state we can't build.
       injectable: kind === 'object' || (kind === 'ring' && id !== '880'),
       sprite: { sheet, index: spriteIndex },
     }
@@ -180,7 +168,6 @@ function parseBigCraftables(data) {
   })
 }
 
-// Data/Boots: Name/Description/Price/AddedDefense/AddedImmunity/ColorIndex/DisplayName
 function parseBoots(data) {
   return Object.entries(data).map(([id, v]) => {
     const p = String(v).split('/')
@@ -200,13 +187,11 @@ function parseBoots(data) {
         immunity: num(p[4]) ?? 0,
         colorIndex: num(p[5]) ?? 0,
       },
-      // Boots draw their menu icon from springobjects at their numeric id.
       sprite: { sheet: 'springobjects', index: num(id) ?? 0 },
     }
   })
 }
 
-// Data/Hats: Name/Description/ShowRealHair/HideHairstyleOffset/tags/DisplayName/SpriteIndex
 function parseHats(data) {
   return Object.entries(data).map(([id, v]) => {
     const p = String(v).split('/')
@@ -230,7 +215,6 @@ function parseHats(data) {
   })
 }
 
-// Pre-1.6 Weapons is slash: Name/Desc/MinDmg/MaxDmg/Knockback/Speed/Precision/Defense/Type/...
 function parseWeapons(data) {
   return Object.entries(data).map(([id, v]) => {
     const isStr = typeof v === 'string'
@@ -279,8 +263,6 @@ function parseWeapons(data) {
 
 function parseTools(data) {
   return Object.entries(data)
-    // Trash Can is <trashCanLevel> on the Farmer, not an item — an injected
-    // *TrashCan is inert and wouldn't change the sell rate.
     .filter(([key]) => !/TrashCan$/.test(key))
     .map(([key, v]) => {
     const menu = num(v?.MenuSpriteIndex)
@@ -309,6 +291,36 @@ function parseTools(data) {
   })
 }
 
+const NAMED_COLORS = {
+  white: '#ffffff',
+  black: '#000000',
+  red: '#ff0000',
+  green: '#008000',
+  blue: '#0000ff',
+  gray: '#808080',
+  grey: '#808080',
+  yellow: '#ffff00',
+  cyan: '#00ffff',
+  magenta: '#ff00ff',
+}
+
+function normalizeColor(spec) {
+  if (spec == null) return null
+  const s = String(spec).trim()
+  if (!s) return null
+  const named = NAMED_COLORS[s.toLowerCase()]
+  if (named) return named
+  const parts = s.split(/\s+/).map((n) => Number.parseInt(n, 10))
+  if (parts.length >= 3 && parts.slice(0, 3).every((n) => Number.isFinite(n))) {
+    const hex = parts
+      .slice(0, 3)
+      .map((n) => Math.max(0, Math.min(255, n)).toString(16).padStart(2, '0'))
+      .join('')
+    return `#${hex}`
+  }
+  return null
+}
+
 function parseClothes(data, prefix, kind, categoryLabel) {
   const clothesType = kind === 'pants' ? 1 : 0
   return Object.entries(data).map(([id, v]) => ({
@@ -327,11 +339,11 @@ function parseClothes(data, prefix, kind, categoryLabel) {
       spriteIndex: num(v?.SpriteIndex) ?? 0,
       dyeable: v?.CanBeDyed === true,
       isPrismatic: v?.IsPrismatic === true,
+      defaultColor: normalizeColor(v?.DefaultColor),
     },
   }))
 }
 
-// Furniture type string -> the game's furniture_type int.
 const FURNITURE_TYPE = {
   chair: 0,
   bench: 1,
@@ -351,7 +363,6 @@ const FURNITURE_TYPE = {
   torch: 16,
   sconce: 17,
 }
-// Types with dedicated Furniture subclasses (bed/TV/etc.) — not injectable yet.
 const FURNITURE_SUBCLASS = new Set([
   'tv',
   'bed',
@@ -362,8 +373,6 @@ const FURNITURE_SUBCLASS = new Set([
   'randomized_plant',
 ])
 
-// Furniture.GetDefaultWidthAndHeight — tile size for entries whose tilesheet
-// size field is "-1 -1". Unlisted types fall back to 1x1.
 const FURNITURE_DEFAULT_SIZE = {
   chair: [1, 2],
   bench: [2, 2],
@@ -386,8 +395,6 @@ const FURNITURE_DEFAULT_SIZE = {
 
 const FURNITURE_SHEET_W = { furniture: 512, furniture_2: 256, furniture_3: 208 }
 
-// Data/Furniture slash: name/type/tilesheetSize/boundingBoxSize/rotations/price/
-//                       placementRestriction/DisplayName/spriteIndex?/texture?/...
 function parseFurniture(data) {
   return Object.entries(data).map(([id, v]) => {
     const p = String(v).split('/')

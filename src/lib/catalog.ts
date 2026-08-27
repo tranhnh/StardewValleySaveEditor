@@ -1,5 +1,3 @@
-// generated/itemCatalog.json is produced by scripts/build-item-catalog.mjs.
-
 import raw from './generated/itemCatalog.json'
 
 export type ItemKind =
@@ -16,18 +14,15 @@ export type ItemKind =
 
 export interface CatalogItem {
   qualifiedId: string
-  /** String, not number: tool ids are class names like "Axe". */
   id: string
   kind: ItemKind
   name: string
-  /** Raw vanilla `Type` for objects (e.g. "Minerals"), else null. */
   type: string | null
   category: number | null
   categoryLabel: string
   price: number | null
   edibility: number | null
   injectable: boolean
-  /** Which spritesheet + tile index the icon comes from (objects, hats, etc.). */
   sprite?: { sheet: string; index: number }
   boots?: { defense: number; immunity: number; colorIndex: number }
   hat?: { skipHairDraw: boolean; ignoreHairstyleOffset: boolean }
@@ -55,6 +50,7 @@ export interface CatalogItem {
     spriteIndex: number
     dyeable: boolean
     isPrismatic: boolean
+    defaultColor: string | null
   }
   furniture?: {
     furnitureType: number
@@ -107,7 +103,6 @@ export function catalogCategories(): string[] {
 
 export interface CatalogQuery {
   text?: string
-  /** A `categoryLabel`, or 'all'. */
   category?: string
 }
 

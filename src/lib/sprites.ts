@@ -8,11 +8,6 @@ export interface SpriteRect {
   y: number
   w: number
   h: number
-  /**
-   * Shirts only: where the recolourable dye-mask sits (same w/h as the base).
-   * Unused for now — the base sprite is drawn untinted. A later pass can render
-   * this region tinted by `clothesColor` on top of the base.
-   */
   dyeMask?: { x: number; y: number }
 }
 
@@ -23,6 +18,7 @@ interface GridSheet {
   cols: number
   tw: number
   th: number
+  rowStride?: number
 }
 
 const GRID: Record<string, GridSheet> = {
@@ -31,7 +27,7 @@ const GRID: Record<string, GridSheet> = {
   Craftables: { file: 'Craftables.png', w: 128, h: 1472, cols: 8, tw: 16, th: 32 },
   weapons: { file: 'weapons.png', w: 128, h: 144, cols: 8, tw: 16, th: 16 },
   tools: { file: 'tools.png', w: 336, h: 384, cols: 21, tw: 16, th: 16 },
-  hats: { file: 'hats.png', w: 240, h: 880, cols: 12, tw: 20, th: 20 },
+  hats: { file: 'hats.png', w: 240, h: 880, cols: 12, tw: 20, th: 20, rowStride: 80 },
 }
 
 const FURNITURE_SHEET: Record<string, { file: string; w: number; h: number }> = {
@@ -40,9 +36,9 @@ const FURNITURE_SHEET: Record<string, { file: string; w: number; h: number }> = 
   furniture_3: { file: 'furniture_3.png', w: 208, h: 432 },
 }
 
-// shirts.png: the left 128px is a dense 16-column, 8px grid of shirt icons; the
-// right 128px mirrors it as grayscale dye masks (empty for non-dyeable shirts).
 const SHIRTS = { file: 'shirts.png', w: 256, h: 608, cols: 16, tile: 8, dyeDX: 128 }
+
+const PANTS = { file: 'pants.png', w: 1920, h: 1376, blockW: 192, blockH: 688, iconDY: 672, tile: 16 }
 
 function fromGrid(sheet: GridSheet, index: number): SpriteRect {
   return {
@@ -50,7 +46,7 @@ function fromGrid(sheet: GridSheet, index: number): SpriteRect {
     sheetW: sheet.w,
     sheetH: sheet.h,
     x: (index % sheet.cols) * sheet.tw,
-    y: Math.floor(index / sheet.cols) * sheet.th,
+    y: Math.floor(index / sheet.cols) * (sheet.rowStride ?? sheet.th),
     w: sheet.tw,
     h: sheet.th,
   }
@@ -71,6 +67,21 @@ function shirtRect(index: number): SpriteRect {
   }
 }
 
+function pantsRect(index: number): SpriteRect {
+  const perRow = PANTS.w / PANTS.blockW
+  const col = index % perRow
+  const row = Math.floor(index / perRow)
+  return {
+    sheet: PANTS.file,
+    sheetW: PANTS.w,
+    sheetH: PANTS.h,
+    x: col * PANTS.blockW,
+    y: row * PANTS.blockH + PANTS.iconDY,
+    w: PANTS.tile,
+    h: PANTS.tile,
+  }
+}
+
 export function spriteRect(item: CatalogItem): SpriteRect | null {
   if (item.kind === 'furniture') {
     const f = item.furniture
@@ -87,6 +98,11 @@ export function spriteRect(item: CatalogItem): SpriteRect | null {
   if (item.kind === 'shirt') {
     const idx = item.clothing?.spriteIndex
     return idx == null ? null : shirtRect(idx)
+  }
+
+  if (item.kind === 'pants') {
+    const idx = item.clothing?.spriteIndex
+    return idx == null ? null : pantsRect(idx)
   }
 
   const sp = item.sprite
