@@ -166,7 +166,7 @@ describe('inventory', () => {
   it('injects into an empty slot by cloning an existing Object (no fallback, no list growth)', () => {
     const parsed = parseSave(SAVE_1_6)
     const before = readInventory(parsed.doc).length
-    const result = injectItem(parsed.doc, 0, { objectId: 74, name: 'Prismatic Shard', stack: 5, quality: 2 })
+    const result = injectItem(parsed.doc, 0, { kind: 'object', id: '74', name: 'Prismatic Shard', stack: 5, quality: 2 })
     expect(result.usedFallbackTemplate).toBe(false)
 
     const reparsed = parseSave(serializeSave(parsed))
@@ -184,13 +184,13 @@ describe('inventory', () => {
   it('refuses to inject into a non-empty slot', () => {
     const parsed = parseSave(SAVE_1_6)
     expect(() =>
-      injectItem(parsed.doc, 1, { objectId: 74, name: 'x', stack: 1, quality: 0 }),
+      injectItem(parsed.doc, 1, { kind: 'object', id: '74', name: 'x', stack: 1, quality: 0 }),
     ).toThrow(/not empty/)
   })
 
   it('falls back to a template when nothing is clonable in a legacy save', () => {
     const parsed = parseSave(SAVE_LEGACY_EMPTY)
-    const result = injectItem(parsed.doc, 0, { objectId: 336, name: 'Gold Bar', stack: 3, quality: 0 })
+    const result = injectItem(parsed.doc, 0, { kind: 'object', id: '336', name: 'Gold Bar', stack: 3, quality: 0 })
     expect(result.usedFallbackTemplate).toBe(true)
     const reparsed = parseSave(serializeSave(parsed))
     const slots = readInventory(reparsed.doc)
@@ -213,7 +213,7 @@ describe('inventory', () => {
 
   it('injected nodes carry no xmlns attribute', () => {
     const parsed = parseSave(SAVE_1_6)
-    injectItem(parsed.doc, 0, { objectId: 74, name: 'Prismatic Shard', stack: 1, quality: 0 })
+    injectItem(parsed.doc, 0, { kind: 'object', id: '74', name: 'Prismatic Shard', stack: 1, quality: 0 })
     expect(serializeSave(parsed)).not.toContain('xmlns="http://www.w3.org/1999/xhtml"')
   })
 

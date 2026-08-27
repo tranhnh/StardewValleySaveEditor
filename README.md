@@ -41,23 +41,43 @@ Load the file named like `Farmer_123456789` (no extension), **not**
 
 ### Adding inventory items
 
-The game is strict about the `Object` XML schema and element order, so the
+The game is strict about each class's XML schema and element order, so the
 editor never hand-writes an item node. Instead (`src/lib/items.ts`):
 
 1. It finds an existing empty slot — an `<Item xsi:nil="true" />` — and never
    grows the `<items>` list past `<maxItems>`.
-2. It finds a real, already-valid `Object` node to use as a template: first in
-   the player's inventory, then anywhere in the save (other players, chests,
-   world debris). A world `<Object>` is cloned and its tag renamed to `<Item>`;
-   the class and schema are identical.
-3. It overwrites only identity (`name`, `parentSheetIndex`, `itemId` on 1.6+),
-   `stack` and `quality` on the clone, and neutralises any machine/world state
-   it carried.
+2. It finds a real, already-valid node of the right `xsi:type` to clone:
+   - **Objects** (and big craftables, which are `Object` + `bigCraftable=true`):
+     the player's bag, then any `<Item>` / world `<Object>` in the save.
+   - **Hats, boots, rings:** any `<Item xsi:type="…">` plus the equipped slots
+     `<hat>`, `<boots>`, `<leftRing>`, `<rightRing>`. Equipped tags are renamed
+     to `<Item>` — same class, same schema.
+3. It overwrites only identity and that type's own fields (hat hair flags, boots
+   defense/immunity, etc.), pulled from the catalog, and neutralises world/
+   machine state.
 4. It swaps the clone into the empty slot with `replaceChild`.
 
-Only if the save contains no `Object` anywhere to clone does it fall back to a
-bundled template, and that path is only trusted for pre-1.6 saves. The UI warns
-when the fallback is used.
+If the save has no node of that type to clone, it falls back to a bundled
+skeleton from `src/lib/generated/nodeTemplates.json` (see below). The object
+fallback is only trusted for pre-1.6 saves; the UI warns when any fallback runs.
+
+Weapons, tools, clothing and furniture are **not** insertable yet — they appear
+in the catalog for reference only.
+
+### Node templates
+
+`src/lib/generated/nodeTemplates.json` holds one zeroed skeleton per class
+(`Hat`, `Boots`, …), extracted from real saves so the element order is correct
+for the current game version:
+
+```bash
+# copy a save file or two into data/saves/ (git-ignored), then:
+npm run build:templates
+```
+
+Only structure is kept — every id, name and stat is zeroed. `Ring` is
+hand-authored in `items.ts` (no ring in the sample saves); drop in a save with
+a ring equipped and re-run to replace it with a verified one.
 
 ### Item catalog
 
@@ -77,9 +97,10 @@ A small placeholder catalog is checked in so the app builds without step 1–3.
 ## Scope / limitations
 
 - Edits the **host player** only (not farmhands).
-- Inventory: the catalog lists every item type, but only `Object` items can be
-  **added**. Tools, weapons, rings, boots, hats and furniture are searchable but
-  not yet insertable, and existing ones in a slot stay locked.
+- Inventory: the catalog lists every item type. Objects, big craftables, hats,
+  boots and rings can be **added**; weapons, tools, clothing and furniture are
+  searchable but not yet insertable. Non-object slots can't be edited in place,
+  only cleared.
 - In shared-wallet co-op, the game may override player gold with the team total.
 - Any object can also be added by entering a numeric id manually.
 - **Always keep a backup of your save folder.**

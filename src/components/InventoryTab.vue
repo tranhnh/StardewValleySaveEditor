@@ -5,9 +5,13 @@ import { QUALITY_OPTIONS, toQuality, type ItemPayload } from '../lib/items'
 import {
   CATALOG,
   catalogCategories,
+  isInjectableKind,
   queryCatalog,
   type CatalogItem,
 } from '../lib/catalog'
+
+/** Kinds that carry a stack + quality (the others are one-per-slot equipment). */
+const STACKABLE_KINDS = new Set(['object', 'bigCraftable'])
 
 const store = useSaveStore()
 
@@ -40,6 +44,12 @@ const canAdd = computed(() => {
   return selected.value?.injectable === true
 })
 
+/** Show stack + quality only when the selection (or the manual path) is stackable. */
+const showStackQuality = computed(() => {
+  if (showCustom.value) return true
+  return selected.value ? STACKABLE_KINDS.has(selected.value.kind) : false
+})
+
 function pick(item: CatalogItem): void {
   if (!item.injectable) return
   selected.value = item
@@ -59,16 +69,18 @@ function addItem(): void {
       return
     }
     payload = {
-      objectId: id,
+      kind: 'object',
+      id: String(id),
       name: customName.value.trim() || `Item ${id}`,
       stack: Math.max(1, Math.trunc(newStack.value)),
       quality: toQuality(newQuality.value),
     }
   } else {
     const item = selected.value
-    if (!item || !item.injectable) return
+    if (!item || !item.injectable || !isInjectableKind(item.kind)) return
     payload = {
-      objectId: Number(item.id),
+      kind: item.kind,
+      id: item.id,
       name: item.name,
       stack: Math.max(1, Math.trunc(newStack.value)),
       quality: toQuality(newQuality.value),
@@ -101,9 +113,9 @@ function onQualityInput(index: number, event: Event): void {
   <section class="card">
     <h2>Add an item</h2>
     <p class="muted" style="margin-top: 0">
-      Browsing {{ CATALOG.length.toLocaleString() }} items. Only regular items
-      (<code>Object</code>) can be added right now — weapons, tools, furniture and the
-      rest are shown for reference but not yet insertable.
+      Browsing {{ CATALOG.length.toLocaleString() }} items. Objects, big craftables, hats,
+      boots and rings can be added; weapons, tools, clothing and furniture are listed for
+      reference but not yet insertable.
     </p>
 
     <div class="row" style="align-items: flex-end">
@@ -168,11 +180,11 @@ function onQualityInput(index: number, event: Event): void {
     </div>
 
     <div class="row" style="margin-top: 14px">
-      <div class="field" style="margin: 0">
+      <div v-if="showStackQuality" class="field" style="margin: 0">
         <label>Stack</label>
         <input type="number" min="1" style="width: 96px" v-model.number="newStack" />
       </div>
-      <div class="field" style="margin: 0">
+      <div v-if="showStackQuality" class="field" style="margin: 0">
         <label>Quality</label>
         <select v-model.number="newQuality" style="width: auto">
           <option v-for="q in QUALITY_OPTIONS" :key="q.value" :value="q.value">{{ q.label }}</option>
@@ -204,6 +216,7 @@ function onQualityInput(index: number, event: Event): void {
           <span class="locked grow">
             {{ slot.typeName }}{{ slot.name ? ` · ${slot.name}` : '' }} (locked)
           </span>
+          <button class="ghost danger sm" @click="store.removeItem(slot.index)">Clear</button>
         </template>
 
         <template v-else>

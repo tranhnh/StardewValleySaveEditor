@@ -156,7 +156,8 @@ function parseObjects(data) {
       categoryLabel: kind === 'ring' ? 'Rings' : objLabel(category, type),
       price,
       edibility,
-      injectable: kind === 'object',
+      // The Combined Ring (880) has nested combinedRings state we can't build.
+      injectable: kind === 'object' || (kind === 'ring' && id !== '880'),
     }
   })
 }
@@ -175,7 +176,54 @@ function parseBigCraftables(data) {
       categoryLabel: 'Big Craftables',
       price: isStr ? num(p[1]) : num(v.Price),
       edibility: null,
-      injectable: false,
+      injectable: true,
+    }
+  })
+}
+
+// Data/Boots: Name/Description/Price/AddedDefense/AddedImmunity/ColorIndex/DisplayName
+function parseBoots(data) {
+  return Object.entries(data).map(([id, v]) => {
+    const p = String(v).split('/')
+    return {
+      qualifiedId: `(B)${id}`,
+      id: String(id),
+      kind: 'boots',
+      name: p[0],
+      type: null,
+      category: -97,
+      categoryLabel: 'Boots',
+      price: num(p[2]),
+      edibility: null,
+      injectable: true,
+      boots: {
+        defense: num(p[3]) ?? 0,
+        immunity: num(p[4]) ?? 0,
+        colorIndex: num(p[5]) ?? 0,
+      },
+    }
+  })
+}
+
+// Data/Hats: Name/Description/ShowRealHair/HideHairstyleOffset/tags/DisplayName
+function parseHats(data) {
+  return Object.entries(data).map(([id, v]) => {
+    const p = String(v).split('/')
+    return {
+      qualifiedId: `(H)${id}`,
+      id: String(id),
+      kind: 'hat',
+      name: p[0],
+      type: null,
+      category: -95,
+      categoryLabel: 'Hats',
+      price: null,
+      edibility: null,
+      injectable: true,
+      hat: {
+        skipHairDraw: (p[2] ?? '').toLowerCase() !== 'true',
+        ignoreHairstyleOffset: (p[3] ?? '').toLowerCase() === 'true',
+      },
     }
   })
 }
@@ -260,8 +308,8 @@ function main() {
   if (raw.bigCraftables) add('BigCraftables', parseBigCraftables(raw.bigCraftables))
   if (raw.weapons) add('Weapons', parseWeapons(raw.weapons))
   if (raw.tools) add('Tools', parseTools(raw.tools))
-  if (raw.boots) add('Boots', parseSlashList(raw.boots, '(B)', 'boots', 'Boots', 2))
-  if (raw.hats) add('Hats', parseSlashList(raw.hats, '(H)', 'hat', 'Hats', null))
+  if (raw.boots) add('Boots', parseBoots(raw.boots))
+  if (raw.hats) add('Hats', parseHats(raw.hats))
   if (raw.furniture) add('Furniture', parseSlashList(raw.furniture, '(F)', 'furniture', 'Furniture', 5))
   if (raw.shirts) add('Shirts', parseClothes(raw.shirts, '(S)', 'shirt', 'Clothing'))
   if (raw.pants) add('Pants', parseClothes(raw.pants, '(P)', 'pants', 'Clothing'))

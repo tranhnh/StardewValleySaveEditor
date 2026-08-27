@@ -8,3 +8,5 @@ dist
 # src/lib/generated/itemCatalog.json (ids/names/categories/prices) is checked in.
 /data/raw/*
 !/data/raw/.gitkeep
+/data/saves/*
+!/data/saves/.gitkeep

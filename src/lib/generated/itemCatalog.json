@@ -9,7 +9,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)155",
@@ -21,7 +21,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)161",
@@ -33,7 +33,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)67",
@@ -45,7 +45,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)66",
@@ -57,7 +57,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)Anvil",
@@ -69,7 +69,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)165",
@@ -81,7 +81,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)272",
@@ -93,7 +93,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)BaitMaker",
@@ -105,7 +105,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)118",
@@ -117,7 +117,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)120",
@@ -129,7 +129,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)122",
@@ -141,7 +141,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)124",
@@ -153,7 +153,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)174",
@@ -165,7 +165,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)262",
@@ -177,7 +177,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)150",
@@ -189,7 +189,7 @@
     "categoryLabel": "Big Craftables",
     "price": 80,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)35",
@@ -201,7 +201,7 @@
     "categoryLabel": "Big Craftables",
     "price": 125,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)10",
@@ -213,7 +213,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)BigChest",
@@ -225,7 +225,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)40",
@@ -237,7 +237,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)44",
@@ -249,7 +249,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)BigStoneChest",
@@ -261,7 +261,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)90",
@@ -273,7 +273,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)74",
@@ -285,7 +285,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)75",
@@ -297,7 +297,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)64",
@@ -309,7 +309,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)78",
@@ -321,7 +321,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)106",
@@ -333,7 +333,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)146",
@@ -345,7 +345,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)278",
@@ -357,7 +357,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)148",
@@ -369,7 +369,7 @@
     "categoryLabel": "Big Craftables",
     "price": 200,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)163",
@@ -381,7 +381,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)114",
@@ -393,7 +393,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)16",
@@ -405,7 +405,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)130",
@@ -417,7 +417,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)31",
@@ -429,7 +429,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)246",
@@ -441,7 +441,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)119",
@@ -453,7 +453,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)121",
@@ -465,7 +465,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)123",
@@ -477,7 +477,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)125",
@@ -489,7 +489,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)175",
@@ -501,7 +501,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)263",
@@ -513,7 +513,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)21",
@@ -525,7 +525,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)219",
@@ -537,7 +537,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)39",
@@ -549,7 +549,7 @@
     "categoryLabel": "Big Craftables",
     "price": 5,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)70",
@@ -561,7 +561,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)265",
@@ -573,7 +573,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)111",
@@ -585,7 +585,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)76",
@@ -597,7 +597,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)Dehydrator",
@@ -609,7 +609,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)167",
@@ -621,7 +621,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)DeluxeWormBin",
@@ -633,7 +633,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)79",
@@ -645,7 +645,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)80",
@@ -657,7 +657,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)112",
@@ -669,7 +669,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)98",
@@ -681,7 +681,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)65",
@@ -693,7 +693,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)239",
@@ -705,7 +705,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)99",
@@ -717,7 +717,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)FishSmoker",
@@ -729,7 +729,7 @@
     "categoryLabel": "Big Craftables",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)13",
@@ -741,7 +741,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)62",
@@ -753,7 +753,7 @@
     "categoryLabel": "Big Craftables",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)182",
@@ -765,7 +765,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)145",
@@ -777,7 +777,7 @@
     "categoryLabel": "Big Craftables",
     "price": 100,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)68",
@@ -789,7 +789,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)47",
@@ -801,7 +801,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)41",
@@ -813,7 +813,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)104",
@@ -825,7 +825,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)HeavyFurnace",
@@ -837,7 +837,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)264",
@@ -849,7 +849,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)275",
@@ -861,7 +861,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)0",
@@ -873,7 +873,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)1",
@@ -885,7 +885,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)2",
@@ -897,7 +897,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)3",
@@ -909,7 +909,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)4",
@@ -921,7 +921,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)5",
@@ -933,7 +933,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)6",
@@ -945,7 +945,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)7",
@@ -957,7 +957,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)101",
@@ -969,7 +969,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)153",
@@ -981,7 +981,7 @@
     "categoryLabel": "Big Craftables",
     "price": 100,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)221",
@@ -993,7 +993,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)256",
@@ -1005,7 +1005,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)159",
@@ -1017,7 +1017,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)12",
@@ -1029,7 +1029,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)36",
@@ -1041,7 +1041,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)9",
@@ -1053,7 +1053,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)81",
@@ -1065,7 +1065,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)82",
@@ -1077,7 +1077,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)46",
@@ -1089,7 +1089,7 @@
     "categoryLabel": "Big Craftables",
     "price": 175,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)17",
@@ -1101,7 +1101,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)151",
@@ -1113,7 +1113,7 @@
     "categoryLabel": "Big Craftables",
     "price": 500,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)24",
@@ -1125,7 +1125,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)MiniForge",
@@ -1137,7 +1137,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)216",
@@ -1149,7 +1149,7 @@
     "categoryLabel": "Big Craftables",
     "price": 1500,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)209",
@@ -1161,7 +1161,7 @@
     "categoryLabel": "Big Craftables",
     "price": 1500,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)238",
@@ -1173,7 +1173,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)248",
@@ -1185,7 +1185,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)42",
@@ -1197,7 +1197,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)128",
@@ -1209,7 +1209,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)MushroomLog",
@@ -1221,7 +1221,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)29",
@@ -1233,7 +1233,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)89",
@@ -1245,7 +1245,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)19",
@@ -1257,7 +1257,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)45",
@@ -1269,7 +1269,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)254",
@@ -1281,7 +1281,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)107",
@@ -1293,7 +1293,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)141",
@@ -1305,7 +1305,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)15",
@@ -1317,7 +1317,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)110",
@@ -1329,7 +1329,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)113",
@@ -1341,7 +1341,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)126",
@@ -1353,7 +1353,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)136",
@@ -1365,7 +1365,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)137",
@@ -1377,7 +1377,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)138",
@@ -1389,7 +1389,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)139",
@@ -1401,7 +1401,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)140",
@@ -1413,7 +1413,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)20",
@@ -1425,7 +1425,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)43",
@@ -1437,7 +1437,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)73",
@@ -1449,7 +1449,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)8",
@@ -1461,7 +1461,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)48",
@@ -1473,7 +1473,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)184",
@@ -1485,7 +1485,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)188",
@@ -1497,7 +1497,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)192",
@@ -1509,7 +1509,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)196",
@@ -1521,7 +1521,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)200",
@@ -1533,7 +1533,7 @@
     "categoryLabel": "Big Craftables",
     "price": 200,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)204",
@@ -1545,7 +1545,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)25",
@@ -1557,7 +1557,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)247",
@@ -1569,7 +1569,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)34",
@@ -1581,7 +1581,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)94",
@@ -1593,7 +1593,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)28",
@@ -1605,7 +1605,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)149",
@@ -1617,7 +1617,7 @@
     "categoryLabel": "Big Craftables",
     "price": 300,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)56",
@@ -1629,7 +1629,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)158",
@@ -1641,7 +1641,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)156",
@@ -1653,7 +1653,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)85",
@@ -1665,7 +1665,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)86",
@@ -1677,7 +1677,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)87",
@@ -1689,7 +1689,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)117",
@@ -1701,7 +1701,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)231",
@@ -1713,7 +1713,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)164",
@@ -1725,7 +1725,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)71",
@@ -1737,7 +1737,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)88",
@@ -1749,7 +1749,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)116",
@@ -1761,7 +1761,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)StatueOfBlessings",
@@ -1773,7 +1773,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)127",
@@ -1785,7 +1785,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)160",
@@ -1797,7 +1797,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)StatueOfTheDwarfKing",
@@ -1809,7 +1809,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)280",
@@ -1821,7 +1821,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)144",
@@ -1833,7 +1833,7 @@
     "categoryLabel": "Big Craftables",
     "price": 40,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)32",
@@ -1845,7 +1845,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)232",
@@ -1857,7 +1857,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)52",
@@ -1869,7 +1869,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)55",
@@ -1881,7 +1881,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)54",
@@ -1893,7 +1893,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)95",
@@ -1905,7 +1905,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)53",
@@ -1917,7 +1917,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)38",
@@ -1929,7 +1929,7 @@
     "categoryLabel": "Big Craftables",
     "price": 5,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)96",
@@ -1941,7 +1941,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)147",
@@ -1953,7 +1953,7 @@
     "categoryLabel": "Big Craftables",
     "price": 80,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)33",
@@ -1965,7 +1965,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)22",
@@ -1977,7 +1977,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)23",
@@ -1989,7 +1989,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)72",
@@ -2001,7 +2001,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)105",
@@ -2013,7 +2013,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)69",
@@ -2025,7 +2025,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)214",
@@ -2037,7 +2037,7 @@
     "categoryLabel": "Big Craftables",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)TextSign",
@@ -2049,7 +2049,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)108",
@@ -2061,7 +2061,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)83",
@@ -2073,7 +2073,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)84",
@@ -2085,7 +2085,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)26",
@@ -2097,7 +2097,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)27",
@@ -2109,7 +2109,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)211",
@@ -2121,7 +2121,7 @@
     "categoryLabel": "Big Craftables",
     "price": 500,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)152",
@@ -2133,7 +2133,7 @@
     "categoryLabel": "Big Craftables",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)37",
@@ -2145,7 +2145,7 @@
     "categoryLabel": "Big Craftables",
     "price": 5,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)143",
@@ -2157,7 +2157,7 @@
     "categoryLabel": "Big Craftables",
     "price": 25,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)208",
@@ -2169,7 +2169,7 @@
     "categoryLabel": "Big Craftables",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(BC)154",
@@ -2181,7 +2181,7 @@
     "categoryLabel": "Big Craftables",
     "price": 0,
     "edibility": null,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(B)853",
@@ -2189,11 +2189,16 @@
     "kind": "boots",
     "name": "Cinderclown Shoes",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 6,
+      "immunity": 5,
+      "colorIndex": 15
+    }
   },
   {
     "qualifiedId": "(B)508",
@@ -2201,11 +2206,16 @@
     "kind": "boots",
     "name": "Combat Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 150,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 3,
+      "immunity": 0,
+      "colorIndex": 4
+    }
   },
   {
     "qualifiedId": "(B)515",
@@ -2213,11 +2223,16 @@
     "kind": "boots",
     "name": "Cowboy Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 250,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 2,
+      "immunity": 2,
+      "colorIndex": 11
+    }
   },
   {
     "qualifiedId": "(B)878",
@@ -2225,11 +2240,16 @@
     "kind": "boots",
     "name": "Crystal Shoes",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 3,
+      "immunity": 5,
+      "colorIndex": 18
+    }
   },
   {
     "qualifiedId": "(B)511",
@@ -2237,11 +2257,16 @@
     "kind": "boots",
     "name": "Dark Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 250,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 4,
+      "immunity": 2,
+      "colorIndex": 7
+    }
   },
   {
     "qualifiedId": "(B)855",
@@ -2249,11 +2274,16 @@
     "kind": "boots",
     "name": "Dragonscale Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 7,
+      "immunity": 0,
+      "colorIndex": 17
+    }
   },
   {
     "qualifiedId": "(B)804",
@@ -2261,11 +2291,16 @@
     "kind": "boots",
     "name": "Emily's Magic Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 250,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 4,
+      "immunity": 4,
+      "colorIndex": 13
+    }
   },
   {
     "qualifiedId": "(B)512",
@@ -2273,11 +2308,16 @@
     "kind": "boots",
     "name": "Firewalker Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 250,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 3,
+      "immunity": 3,
+      "colorIndex": 8
+    }
   },
   {
     "qualifiedId": "(B)513",
@@ -2285,11 +2325,16 @@
     "kind": "boots",
     "name": "Genie Shoes",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 250,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 1,
+      "immunity": 6,
+      "colorIndex": 9
+    }
   },
   {
     "qualifiedId": "(B)506",
@@ -2297,11 +2342,16 @@
     "kind": "boots",
     "name": "Leather Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 1,
+      "immunity": 1,
+      "colorIndex": 2
+    }
   },
   {
     "qualifiedId": "(B)806",
@@ -2309,11 +2359,16 @@
     "kind": "boots",
     "name": "Leprechaun Shoes",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 250,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 2,
+      "immunity": 1,
+      "colorIndex": 14
+    }
   },
   {
     "qualifiedId": "(B)854",
@@ -2321,11 +2376,16 @@
     "kind": "boots",
     "name": "Mermaid Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 1000,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 5,
+      "immunity": 8,
+      "colorIndex": 16
+    }
   },
   {
     "qualifiedId": "(B)505",
@@ -2333,11 +2393,16 @@
     "kind": "boots",
     "name": "Rubber Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 0,
+      "immunity": 1,
+      "colorIndex": 1
+    }
   },
   {
     "qualifiedId": "(B)504",
@@ -2345,11 +2410,16 @@
     "kind": "boots",
     "name": "Sneakers",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 1,
+      "immunity": 0,
+      "colorIndex": 0
+    }
   },
   {
     "qualifiedId": "(B)514",
@@ -2357,11 +2427,16 @@
     "kind": "boots",
     "name": "Space Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 450,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 4,
+      "immunity": 4,
+      "colorIndex": 10
+    }
   },
   {
     "qualifiedId": "(B)510",
@@ -2369,11 +2444,16 @@
     "kind": "boots",
     "name": "Thermal Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 1,
+      "immunity": 2,
+      "colorIndex": 6
+    }
   },
   {
     "qualifiedId": "(B)509",
@@ -2381,11 +2461,16 @@
     "kind": "boots",
     "name": "Tundra Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 150,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 2,
+      "immunity": 1,
+      "colorIndex": 5
+    }
   },
   {
     "qualifiedId": "(B)507",
@@ -2393,11 +2478,16 @@
     "kind": "boots",
     "name": "Work Boots",
     "type": null,
-    "category": null,
+    "category": -97,
     "categoryLabel": "Boots",
     "price": 50,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "boots": {
+      "defense": 2,
+      "immunity": 0,
+      "colorIndex": 3
+    }
   },
   {
     "qualifiedId": "(F)1846",
@@ -10145,11 +10235,15 @@
     "kind": "hat",
     "name": "???",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)AbigailsBow",
@@ -10157,11 +10251,15 @@
     "kind": "hat",
     "name": "Abigail's Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)60",
@@ -10169,11 +10267,15 @@
     "kind": "hat",
     "name": "Arcane Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)35",
@@ -10181,11 +10283,15 @@
     "kind": "hat",
     "name": "Archer's Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)53",
@@ -10193,11 +10299,15 @@
     "kind": "hat",
     "name": "Beanie",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)56",
@@ -10205,11 +10315,15 @@
     "kind": "hat",
     "name": "Blobfish Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)6",
@@ -10217,11 +10331,15 @@
     "kind": "hat",
     "name": "Blue Bonnet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)BlueBow",
@@ -10229,11 +10347,15 @@
     "kind": "hat",
     "name": "Blue Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)37",
@@ -10241,11 +10363,15 @@
     "kind": "hat",
     "name": "Blue Cowboy Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)BlueRibbon",
@@ -10253,11 +10379,15 @@
     "kind": "hat",
     "name": "Blue Ribbon",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)80",
@@ -10265,11 +10395,15 @@
     "kind": "hat",
     "name": "Bluebird Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)1",
@@ -10277,11 +10411,15 @@
     "kind": "hat",
     "name": "Bowler Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)69",
@@ -10289,11 +10427,15 @@
     "kind": "hat",
     "name": "Bridal Veil",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)BucketHat",
@@ -10301,11 +10443,15 @@
     "kind": "hat",
     "name": "Bucket Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)14",
@@ -10313,11 +10459,15 @@
     "kind": "hat",
     "name": "Butterfly Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)32",
@@ -10325,11 +10475,15 @@
     "kind": "hat",
     "name": "Cat Ears",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)61",
@@ -10337,11 +10491,15 @@
     "kind": "hat",
     "name": "Chef Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)10",
@@ -10349,11 +10507,15 @@
     "kind": "hat",
     "name": "Chicken Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)39",
@@ -10361,11 +10523,15 @@
     "kind": "hat",
     "name": "Cone Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)20",
@@ -10373,11 +10539,15 @@
     "kind": "hat",
     "name": "Cool Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)71",
@@ -10385,11 +10555,15 @@
     "kind": "hat",
     "name": "Copper Pan",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)0",
@@ -10397,11 +10571,15 @@
     "kind": "hat",
     "name": "Cowboy Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)33",
@@ -10409,11 +10587,15 @@
     "kind": "hat",
     "name": "Cowgal Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)34",
@@ -10421,11 +10603,15 @@
     "kind": "hat",
     "name": "Cowpoke Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)29",
@@ -10433,11 +10619,15 @@
     "kind": "hat",
     "name": "Daisy",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)DarkBallcap",
@@ -10445,11 +10635,15 @@
     "kind": "hat",
     "name": "Dark Ballcap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)83",
@@ -10457,11 +10651,15 @@
     "kind": "hat",
     "name": "Dark Cowboy Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)DarkVelvetBow",
@@ -10469,11 +10667,15 @@
     "kind": "hat",
     "name": "Dark Velvet Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)12",
@@ -10481,11 +10683,15 @@
     "kind": "hat",
     "name": "Delicate Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)81",
@@ -10493,11 +10699,15 @@
     "kind": "hat",
     "name": "Deluxe Cowboy Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)76",
@@ -10505,11 +10715,15 @@
     "kind": "hat",
     "name": "Deluxe Pirate Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)43",
@@ -10517,11 +10731,15 @@
     "kind": "hat",
     "name": "Dinosaur Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)11",
@@ -10529,11 +10747,15 @@
     "kind": "hat",
     "name": "Earmuffs",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)64",
@@ -10541,11 +10763,15 @@
     "kind": "hat",
     "name": "Elegant Turban",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)41",
@@ -10553,11 +10779,15 @@
     "kind": "hat",
     "name": "Emily's Magic Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)24",
@@ -10565,11 +10795,15 @@
     "kind": "hat",
     "name": "Eye Patch",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)47",
@@ -10577,11 +10811,15 @@
     "kind": "hat",
     "name": "Fashion Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)19",
@@ -10589,11 +10827,15 @@
     "kind": "hat",
     "name": "Fedora",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)55",
@@ -10601,11 +10843,15 @@
     "kind": "hat",
     "name": "Fishing Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)63",
@@ -10613,11 +10859,15 @@
     "kind": "hat",
     "name": "Flat Topped Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)54",
@@ -10625,11 +10875,15 @@
     "kind": "hat",
     "name": "Floppy Beanie",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)90",
@@ -10637,11 +10891,15 @@
     "kind": "hat",
     "name": "Forager's Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)78",
@@ -10649,11 +10907,15 @@
     "kind": "hat",
     "name": "Frog Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)66",
@@ -10661,11 +10923,15 @@
     "kind": "hat",
     "name": "Garbage Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)GilsHat",
@@ -10673,11 +10939,15 @@
     "kind": "hat",
     "name": "Gil's Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)23",
@@ -10685,11 +10955,15 @@
     "kind": "hat",
     "name": "Gnome's Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)9",
@@ -10697,11 +10971,15 @@
     "kind": "hat",
     "name": "Goblin Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)89",
@@ -10709,11 +10987,15 @@
     "kind": "hat",
     "name": "Goggles",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)GoldPanHat",
@@ -10721,11 +11003,15 @@
     "kind": "hat",
     "name": "Gold Pan",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)75",
@@ -10733,11 +11019,15 @@
     "kind": "hat",
     "name": "Golden Helmet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)67",
@@ -10745,11 +11035,15 @@
     "kind": "hat",
     "name": "Golden Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)18",
@@ -10757,11 +11051,15 @@
     "kind": "hat",
     "name": "Good Ol' Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)GovernorsHat",
@@ -10769,11 +11067,15 @@
     "kind": "hat",
     "name": "Governor's Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)72",
@@ -10781,11 +11083,15 @@
     "kind": "hat",
     "name": "Green Turban",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)49",
@@ -10793,11 +11099,15 @@
     "kind": "hat",
     "name": "Hair Bone",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)27",
@@ -10805,11 +11115,15 @@
     "kind": "hat",
     "name": "Hard Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)15",
@@ -10817,11 +11131,15 @@
     "kind": "hat",
     "name": "Hunter's Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)InfinityCrown",
@@ -10829,11 +11147,15 @@
     "kind": "hat",
     "name": "Infinity Crown",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)IridiumPanHat",
@@ -10841,11 +11163,15 @@
     "kind": "hat",
     "name": "Iridium Pan",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)JesterHat",
@@ -10853,11 +11179,15 @@
     "kind": "hat",
     "name": "Jester Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)JojaCap",
@@ -10865,11 +11195,15 @@
     "kind": "hat",
     "name": "Joja Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)JunimoHat",
@@ -10877,11 +11211,15 @@
     "kind": "hat",
     "name": "Junimo Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)50",
@@ -10889,11 +11227,15 @@
     "kind": "hat",
     "name": "Knight's Helmet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)LaurelWreathCrown",
@@ -10901,11 +11243,15 @@
     "kind": "hat",
     "name": "Laurel Wreath Crown",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)LeprechuanHat",
@@ -10913,11 +11259,15 @@
     "kind": "hat",
     "name": "Leprechaun Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)40",
@@ -10925,11 +11275,15 @@
     "kind": "hat",
     "name": "Living Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)45",
@@ -10937,11 +11291,15 @@
     "kind": "hat",
     "name": "Logo Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)21",
@@ -10949,11 +11307,15 @@
     "kind": "hat",
     "name": "Lucky Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)73",
@@ -10961,11 +11323,15 @@
     "kind": "hat",
     "name": "Magic Cowboy Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)74",
@@ -10973,11 +11339,15 @@
     "kind": "hat",
     "name": "Magic Turban",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)31",
@@ -10985,11 +11355,15 @@
     "kind": "hat",
     "name": "Mouse Ears",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)82",
@@ -10997,11 +11371,15 @@
     "kind": "hat",
     "name": "Mr. Qi's Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)MummyMask",
@@ -11009,11 +11387,15 @@
     "kind": "hat",
     "name": "Mummy Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)42",
@@ -11021,11 +11403,15 @@
     "kind": "hat",
     "name": "Mushroom Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)MysteryHat",
@@ -11033,11 +11419,15 @@
     "kind": "hat",
     "name": "Mystery Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)5",
@@ -11045,11 +11435,15 @@
     "kind": "hat",
     "name": "Official Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)PageboyCap",
@@ -11057,11 +11451,15 @@
     "kind": "hat",
     "name": "Pageboy Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)36",
@@ -11069,11 +11467,15 @@
     "kind": "hat",
     "name": "Panda Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)PaperHat",
@@ -11081,11 +11483,15 @@
     "kind": "hat",
     "name": "Paper Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)57",
@@ -11093,11 +11499,15 @@
     "kind": "hat",
     "name": "Party Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)58",
@@ -11105,11 +11515,15 @@
     "kind": "hat",
     "name": "Party Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)59",
@@ -11117,11 +11531,15 @@
     "kind": "hat",
     "name": "Party Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)77",
@@ -11129,11 +11547,15 @@
     "kind": "hat",
     "name": "Pink Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)62",
@@ -11141,11 +11563,15 @@
     "kind": "hat",
     "name": "Pirate Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)7",
@@ -11153,11 +11579,15 @@
     "kind": "hat",
     "name": "Plum Chapeau",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)22",
@@ -11165,11 +11595,15 @@
     "kind": "hat",
     "name": "Polka Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)68",
@@ -11177,11 +11611,15 @@
     "kind": "hat",
     "name": "Propeller Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)48",
@@ -11189,11 +11627,15 @@
     "kind": "hat",
     "name": "Pumpkin Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)86",
@@ -11201,11 +11643,15 @@
     "kind": "hat",
     "name": "Qi Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)RaccoonHat",
@@ -11213,11 +11659,15 @@
     "kind": "hat",
     "name": "Raccoon Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)84",
@@ -11225,11 +11675,15 @@
     "kind": "hat",
     "name": "Radioactive Goggles",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)38",
@@ -11237,11 +11691,15 @@
     "kind": "hat",
     "name": "Red Cowboy Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)RedFez",
@@ -11249,11 +11707,15 @@
     "kind": "hat",
     "name": "Red Fez",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)17",
@@ -11261,11 +11723,15 @@
     "kind": "hat",
     "name": "Sailor's Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)25",
@@ -11273,11 +11739,15 @@
     "kind": "hat",
     "name": "Santa Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)8",
@@ -11285,11 +11755,15 @@
     "kind": "hat",
     "name": "Skeleton Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)79",
@@ -11297,11 +11771,15 @@
     "kind": "hat",
     "name": "Small Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)3",
@@ -11309,11 +11787,15 @@
     "kind": "hat",
     "name": "Sombrero",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)28",
@@ -11321,11 +11803,15 @@
     "kind": "hat",
     "name": "Sou'wester",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)SpaceHelmet",
@@ -11333,11 +11819,15 @@
     "kind": "hat",
     "name": "Space Helmet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)SportsCap",
@@ -11345,11 +11835,15 @@
     "kind": "hat",
     "name": "Sports Cap",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)52",
@@ -11357,11 +11851,15 @@
     "kind": "hat",
     "name": "Spotted Headscarf",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)SquidHat",
@@ -11369,11 +11867,15 @@
     "kind": "hat",
     "name": "Squid Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)51",
@@ -11381,11 +11883,15 @@
     "kind": "hat",
     "name": "Squire's Helmet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)87",
@@ -11393,11 +11899,15 @@
     "kind": "hat",
     "name": "Star Helmet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)SteelPanHat",
@@ -11405,11 +11915,15 @@
     "kind": "hat",
     "name": "Steel Pan",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)4",
@@ -11417,11 +11931,15 @@
     "kind": "hat",
     "name": "Straw Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)88",
@@ -11429,11 +11947,15 @@
     "kind": "hat",
     "name": "Sunglasses",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)85",
@@ -11441,11 +11963,15 @@
     "kind": "hat",
     "name": "Swashbuckler Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)26",
@@ -11453,11 +11979,15 @@
     "kind": "hat",
     "name": "Tiara",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)91",
@@ -11465,11 +11995,15 @@
     "kind": "hat",
     "name": "Tiger Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)2",
@@ -11477,11 +12011,15 @@
     "kind": "hat",
     "name": "Top Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)44",
@@ -11489,11 +12027,15 @@
     "kind": "hat",
     "name": "Totem Mask",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)TricornHat",
@@ -11501,11 +12043,15 @@
     "kind": "hat",
     "name": "Tricorn Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)13",
@@ -11513,11 +12059,15 @@
     "kind": "hat",
     "name": "Tropiclip",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)16",
@@ -11525,11 +12075,15 @@
     "kind": "hat",
     "name": "Trucker Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)93",
@@ -11537,11 +12091,15 @@
     "kind": "hat",
     "name": "Warrior Helmet",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)30",
@@ -11549,11 +12107,15 @@
     "kind": "hat",
     "name": "Watermelon Band",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)46",
@@ -11561,11 +12123,15 @@
     "kind": "hat",
     "name": "Wearable Dwarf Helm",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)WhiteBow",
@@ -11573,11 +12139,15 @@
     "kind": "hat",
     "name": "White Bow",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": false,
+      "ignoreHairstyleOffset": false
+    }
   },
   {
     "qualifiedId": "(H)65",
@@ -11585,11 +12155,15 @@
     "kind": "hat",
     "name": "White Turban",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(H)70",
@@ -11597,11 +12171,15 @@
     "kind": "hat",
     "name": "Witch Hat",
     "type": null,
-    "category": null,
+    "category": -95,
     "categoryLabel": "Hats",
     "price": null,
     "edibility": null,
-    "injectable": false
+    "injectable": true,
+    "hat": {
+      "skipHairDraw": true,
+      "ignoreHairstyleOffset": true
+    }
   },
   {
     "qualifiedId": "(O)930",
@@ -21141,7 +21719,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)531",
@@ -21153,7 +21731,7 @@
     "categoryLabel": "Rings",
     "price": 400,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)526",
@@ -21165,7 +21743,7 @@
     "categoryLabel": "Rings",
     "price": 1500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)880",
@@ -21189,7 +21767,7 @@
     "categoryLabel": "Rings",
     "price": 2000,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)533",
@@ -21201,7 +21779,7 @@
     "categoryLabel": "Rings",
     "price": 600,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)517",
@@ -21213,7 +21791,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)888",
@@ -21225,7 +21803,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)860",
@@ -21237,7 +21815,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)887",
@@ -21249,7 +21827,7 @@
     "categoryLabel": "Rings",
     "price": 500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)527",
@@ -21261,7 +21839,7 @@
     "categoryLabel": "Rings",
     "price": 2000,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)532",
@@ -21273,7 +21851,7 @@
     "categoryLabel": "Rings",
     "price": 400,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)528",
@@ -21285,7 +21863,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)859",
@@ -21297,7 +21875,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)519",
@@ -21309,7 +21887,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)811",
@@ -21321,7 +21899,7 @@
     "categoryLabel": "Rings",
     "price": 2000,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)863",
@@ -21333,7 +21911,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)861",
@@ -21345,7 +21923,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)524",
@@ -21357,7 +21935,7 @@
     "categoryLabel": "Rings",
     "price": 1500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)534",
@@ -21369,7 +21947,7 @@
     "categoryLabel": "Rings",
     "price": 600,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)523",
@@ -21381,7 +21959,7 @@
     "categoryLabel": "Rings",
     "price": 1500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)520",
@@ -21393,7 +21971,7 @@
     "categoryLabel": "Rings",
     "price": 700,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)516",
@@ -21405,7 +21983,7 @@
     "categoryLabel": "Rings",
     "price": 100,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)518",
@@ -21417,7 +21995,7 @@
     "categoryLabel": "Rings",
     "price": 100,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)862",
@@ -21429,7 +22007,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)525",
@@ -21441,7 +22019,7 @@
     "categoryLabel": "Rings",
     "price": 1500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)839",
@@ -21453,7 +22031,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)530",
@@ -21465,7 +22043,7 @@
     "categoryLabel": "Rings",
     "price": 200,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)522",
@@ -21477,7 +22055,7 @@
     "categoryLabel": "Rings",
     "price": 1500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)521",
@@ -21489,7 +22067,7 @@
     "categoryLabel": "Rings",
     "price": 1500,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(O)801",
@@ -21501,7 +22079,7 @@
     "categoryLabel": "Rings",
     "price": 2000,
     "edibility": -300,
-    "injectable": false
+    "injectable": true
   },
   {
     "qualifiedId": "(S)1136",

@@ -35,8 +35,20 @@ export interface CatalogItem {
   categoryLabel: string
   price: number | null
   edibility: number | null
-  /** Whether the current editor knows how to inject this item (objects only). */
+  /** Whether the editor can inject this item into an inventory slot. */
   injectable: boolean
+  /** Boots only: stat bonuses and colour-sheet index from Data/Boots. */
+  boots?: { defense: number; immunity: number; colorIndex: number }
+  /** Hats only: hair-draw flags from Data/Hats. */
+  hat?: { skipHairDraw: boolean; ignoreHairstyleOffset: boolean }
+}
+
+/** The item kinds the editor can currently inject. */
+export const INJECTABLE_KINDS = ['object', 'bigCraftable', 'hat', 'boots', 'ring'] as const
+export type InjectableKind = (typeof INJECTABLE_KINDS)[number]
+
+export function isInjectableKind(kind: ItemKind): kind is InjectableKind {
+  return (INJECTABLE_KINDS as readonly ItemKind[]).includes(kind)
 }
 
 export const CATALOG: readonly CatalogItem[] = raw as CatalogItem[]
