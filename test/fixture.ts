@@ -1,0 +1,144 @@
+// A trimmed but structurally faithful Stardew 1.6 save. Enough nodes for the
+// editor's read/write paths; not a real farm.
+
+export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
+<SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <player>
+    <name>Alex</name>
+    <farmName>Willow</farmName>
+    <favoriteThing>Coding</favoriteThing>
+    <farmingLevel>3</farmingLevel>
+    <miningLevel>1</miningLevel>
+    <combatLevel>0</combatLevel>
+    <foragingLevel>2</foragingLevel>
+    <fishingLevel>5</fishingLevel>
+    <luckLevel>0</luckLevel>
+    <professions>
+      <int>6</int>
+    </professions>
+    <experiencePoints>
+      <int>770</int>
+      <int>2150</int>
+      <int>380</int>
+      <int>100</int>
+      <int>0</int>
+      <int>0</int>
+    </experiencePoints>
+    <items>
+      <Item xsi:nil="true" />
+      <Item xsi:type="Object">
+        <isLostItem>false</isLostItem>
+        <category>-2</category>
+        <hasBeenInInventory>true</hasBeenInInventory>
+        <name>Diamond</name>
+        <itemId>72</itemId>
+        <parentSheetIndex>72</parentSheetIndex>
+        <indexInTileSheet>72</indexInTileSheet>
+        <SpecialVariable>0</SpecialVariable>
+        <DisplayName>Diamond</DisplayName>
+        <Name>Diamond</Name>
+        <Category>-2</Category>
+        <bigCraftable>false</bigCraftable>
+        <type>Minerals</type>
+        <price>750</price>
+        <edibility>-300</edibility>
+        <stack>1</stack>
+        <quality>0</quality>
+        <minutesUntilReady>0</minutesUntilReady>
+        <preservedParentSheetIndex>0</preservedParentSheetIndex>
+        <preserve xsi:nil="true" />
+      </Item>
+      <Item xsi:type="MeleeWeapon">
+        <category>-98</category>
+        <name>Rusty Sword</name>
+        <parentSheetIndex>0</parentSheetIndex>
+        <itemId>0</itemId>
+        <Name>Rusty Sword</Name>
+      </Item>
+      <Item xsi:nil="true" />
+      <Item xsi:nil="true" />
+    </items>
+    <maxItems>36</maxItems>
+    <money>5000</money>
+    <totalMoneyEarned>18000</totalMoneyEarned>
+    <maxHealth>100</maxHealth>
+    <maxStamina>270</maxStamina>
+    <millisecondsPlayed>7200000</millisecondsPlayed>
+    <seasonForSaveGame>0</seasonForSaveGame>
+    <yearForSaveGame>1</yearForSaveGame>
+    <dayOfMonthForSaveGame>1</dayOfMonthForSaveGame>
+  </player>
+  <locations>
+    <GameLocation xsi:type="Farm">
+      <objects>
+        <item>
+          <key><Vector2><X>10</X><Y>12</Y></Vector2></key>
+          <value>
+            <Object xsi:type="Object">
+              <isLostItem>false</isLostItem>
+              <category>-999</category>
+              <hasBeenInInventory>false</hasBeenInInventory>
+              <name>Weeds</name>
+              <itemId>784</itemId>
+              <parentSheetIndex>784</parentSheetIndex>
+              <indexInTileSheet>784</indexInTileSheet>
+              <SpecialVariable>0</SpecialVariable>
+              <DisplayName>Weeds</DisplayName>
+              <Name>Weeds</Name>
+              <Category>-999</Category>
+              <bigCraftable>false</bigCraftable>
+              <type>Litter</type>
+              <price>0</price>
+              <edibility>-300</edibility>
+              <stack>1</stack>
+              <quality>0</quality>
+              <tileLocation><X>10</X><Y>12</Y></tileLocation>
+              <owner>0</owner>
+              <isSpawnedObject>true</isSpawnedObject>
+              <minutesUntilReady>0</minutesUntilReady>
+              <preservedParentSheetIndex>0</preservedParentSheetIndex>
+            </Object>
+          </value>
+        </item>
+      </objects>
+    </GameLocation>
+  </locations>
+  <currentSeason>spring</currentSeason>
+  <year>1</year>
+  <dayOfMonth>1</dayOfMonth>
+  <gameVersion>1.6.15</gameVersion>
+</SaveGame>`
+
+// A pre-1.6 save whose inventory has no Object at all (forces the fallback).
+export const SAVE_LEGACY_EMPTY = `<?xml version="1.0" encoding="utf-8"?>
+<SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <player>
+    <name>Sam</name>
+    <farmName>Old</farmName>
+    <favoriteThing>Guitar</favoriteThing>
+    <farmingLevel>0</farmingLevel>
+    <miningLevel>0</miningLevel>
+    <combatLevel>0</combatLevel>
+    <foragingLevel>0</foragingLevel>
+    <fishingLevel>0</fishingLevel>
+    <luckLevel>0</luckLevel>
+    <professions />
+    <experiencePoints>
+      <int>0</int><int>0</int><int>0</int><int>0</int><int>0</int><int>0</int>
+    </experiencePoints>
+    <items>
+      <Item xsi:nil="true" />
+      <Item xsi:nil="true" />
+    </items>
+    <maxItems>12</maxItems>
+    <money>0</money>
+    <totalMoneyEarned>0</totalMoneyEarned>
+    <maxHealth>100</maxHealth>
+    <maxStamina>270</maxStamina>
+    <millisecondsPlayed>0</millisecondsPlayed>
+  </player>
+  <currentSeason>fall</currentSeason>
+  <year>1</year>
+  <dayOfMonth>5</dayOfMonth>
+  <gameVersion>1.5.6</gameVersion>
+</SaveGame>`
