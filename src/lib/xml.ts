@@ -38,7 +38,7 @@ export function serializeSave({ doc, prolog }: ParsedSave): string {
 }
 
 export function downloadText(fileName: string, text: string): void {
-  const blob = new Blob([text], { type: 'application/xml' })
+  const blob = new Blob([text], { type: 'application/octet-stream' })
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = url
