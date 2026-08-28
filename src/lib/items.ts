@@ -406,9 +406,18 @@ function obtainNode(doc: XMLDocument, xsi: string): ObtainedNode {
   return { node: parseTemplate(doc, tpl), usedFallbackTemplate: true }
 }
 
-function setId(node: Element, id: string, era: GameEra): void {
+function isNumericId(id: string): boolean {
+  return /^-?\d+$/.test(id)
+}
+
+function spriteIndexFor(id: string, def: CatalogItem | undefined): string {
+  if (isNumericId(id)) return id
+  return String(def?.sprite?.index ?? -1)
+}
+
+function setId(node: Element, id: string, era: GameEra, spriteIndex: string): void {
   for (const tag of ['parentSheetIndex', 'indexInTileSheet', 'initialParentTileIndex']) {
-    setChildText(node, tag, id)
+    setChildText(node, tag, spriteIndex)
   }
   if (era === 'v16plus') setChildText(node, 'itemId', id)
 }
@@ -420,7 +429,7 @@ function applyObject(
   era: GameEra,
 ): void {
   for (const tag of ['name', 'Name', 'DisplayName']) setChildText(node, tag, payload.name)
-  setId(node, payload.id, era)
+  setId(node, payload.id, era, spriteIndexFor(payload.id, def))
 
   if (payload.kind === 'bigCraftable') {
     setChildText(node, 'bigCraftable', 'true')
@@ -450,7 +459,7 @@ function applyObject(
 function applyHat(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
   setChildText(node, 'itemId', payload.id)
-  setChildText(node, 'parentSheetIndex', payload.id)
+  setChildText(node, 'parentSheetIndex', spriteIndexFor(payload.id, def))
   setChildText(node, 'category', '-95')
   setChildText(node, 'quality', '0')
   setChildText(node, 'stack', '1')
@@ -517,7 +526,10 @@ const WEAPON_ID_TAGS = [
 
 function applyWeapon(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
-  for (const tag of WEAPON_ID_TAGS) setChildText(node, tag, payload.id)
+  const spriteIndex = spriteIndexFor(payload.id, def)
+  for (const tag of WEAPON_ID_TAGS) {
+    setChildText(node, tag, tag === 'itemId' ? payload.id : spriteIndex)
+  }
   setChildText(node, 'category', '-98')
   setChildText(node, 'stack', '1')
   setChildText(node, 'quality', '0')
@@ -615,7 +627,8 @@ function applyClothing(node: Element, payload: ItemPayload, def: CatalogItem | u
 
 function applyFurniture(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
   setChildText(node, 'name', payload.name)
-  for (const tag of ['parentSheetIndex', 'itemId']) setChildText(node, tag, payload.id)
+  setChildText(node, 'parentSheetIndex', spriteIndexFor(payload.id, def))
+  setChildText(node, 'itemId', payload.id)
   setChildText(node, 'stack', '1')
   setChildText(node, 'quality', '0')
   if (def?.price != null) setChildText(node, 'price', String(def.price))
