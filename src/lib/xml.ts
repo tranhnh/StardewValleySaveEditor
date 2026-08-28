@@ -1,13 +1,17 @@
 export const XSI_NS = 'http://www.w3.org/2001/XMLSchema-instance'
 
+const BOM = '﻿'
 const DEFAULT_PROLOG = '<?xml version="1.0" encoding="utf-8"?>'
 
 export interface ParsedSave {
   doc: XMLDocument
   prolog: string
+  /** The game writes its saves as UTF-8 with a BOM; round-trip it exactly. */
+  bom: boolean
 }
 
 export function parseSave(raw: string): ParsedSave {
+  const bom = raw.startsWith(BOM)
   const prologMatch = raw.match(/^﻿?\s*<\?xml[^>]*\?>/)
   const prolog = prologMatch ? prologMatch[0].replace(/^﻿/, '').trim() : DEFAULT_PROLOG
 
@@ -29,16 +33,17 @@ export function parseSave(raw: string): ParsedSave {
     )
   }
 
-  return { doc, prolog }
+  return { doc, prolog, bom }
 }
 
-export function serializeSave({ doc, prolog }: ParsedSave): string {
+export function serializeSave({ doc, prolog, bom }: ParsedSave): string {
   const body = new XMLSerializer().serializeToString(doc.documentElement)
-  return `${prolog}\n${body}`
+  // The game writes "<?xml …?><SaveGame …>" with no separator and a leading BOM.
+  return `${bom ? BOM : ''}${prolog}${body}`
 }
 
 export function downloadText(fileName: string, text: string): void {
-  const blob = new Blob([text], { type: 'application/xml' })
+  const blob = new Blob([text], { type: 'application/octet-stream' })
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = url

@@ -216,6 +216,44 @@ describe('per-type field mapping — weapons / tools / clothing / furniture', ()
   })
 })
 
+describe('string-id items keep integer sprite-index fields', () => {
+  const INT_TAGS = [
+    'parentSheetIndex',
+    'indexInTileSheet',
+    'initialParentTileIndex',
+    'currentParentTileIndex',
+    'indexOfMenuItemView',
+  ]
+
+  it.each([
+    ['object', { kind: 'object', id: 'DeluxeBait', name: 'Deluxe Bait' }, SAVE_1_6],
+    ['hat', { kind: 'hat', id: 'TricornHat', name: 'Tricorn Hat' }, SAVE_1_6],
+    ['furniture', { kind: 'furniture', id: 'MessyShirt', name: 'MessyShirt' }, SAVE_1_6_BARE],
+  ] as const)('%s: string id lands in itemId, sprite-index fields stay numeric', (_k, base, save) => {
+    const parsed = parseSave(save)
+    injectItem(parsed.doc, 0, { ...base, stack: 1, quality: 0 } as ItemPayload)
+    const out = serializeSave(parsed)
+    const node = firstSlot(parseSave(out).doc)
+    expect(node.querySelector('itemId')?.textContent).toBe(base.id)
+    for (const tag of INT_TAGS) {
+      const v = node.querySelector(tag)?.textContent
+      if (v != null) expect(v, tag).toMatch(/^-?\d+$/)
+    }
+  })
+
+  it('a full serialize has no non-numeric value in any sprite-index field', () => {
+    const parsed = parseSave(SAVE_1_6)
+    injectItem(parsed.doc, 0, { kind: 'object', id: 'DeluxeBait', name: 'Deluxe Bait', stack: 1, quality: 0 })
+    const out = serializeSave(parsed)
+    for (const tag of INT_TAGS) {
+      const bad = [...out.matchAll(new RegExp(`<${tag}>([^<]*)</${tag}>`, 'g'))]
+        .map((m) => m[1])
+        .filter((v) => !/^-?\d+$/.test(v))
+      expect(bad, tag).toEqual([])
+    }
+  })
+})
+
 describe('clothing colour', () => {
   const colorOf = (node: Element) => {
     const cc = node.querySelector('clothesColor')!
