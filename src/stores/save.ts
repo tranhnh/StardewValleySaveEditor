@@ -30,10 +30,9 @@ import {
 } from '../lib/items'
 
 export const useSaveStore = defineStore('save', () => {
-  // The parsed document is deliberately NOT deeply reactive: it is large and we
-  // only ever mutate it through the lib helpers.
+  // shallowRef: the document is large and only ever mutated via the lib helpers.
   const parsed = shallowRef<ParsedSave | null>(null)
-  const rawText = ref('') // kept so "Revert all changes" can re-parse cleanly
+  const rawText = ref('') // kept so revert() can re-parse the original
   const fileName = ref('')
   const errorMessage = ref('')
   const era = ref<GameEra>('legacy')
@@ -82,7 +81,6 @@ export const useSaveStore = defineStore('save', () => {
     inventory.value = []
   }
 
-  // Core + skills write through to the DOM on any change.
   watch(
     core,
     (value) => {
@@ -98,7 +96,6 @@ export const useSaveStore = defineStore('save', () => {
     { deep: true },
   )
 
-  // Inventory edits are discrete DOM operations, then we re-read for display.
   function refreshInventory(): void {
     if (parsed.value) inventory.value = readInventory(parsed.value.doc)
   }
@@ -121,7 +118,7 @@ export const useSaveStore = defineStore('save', () => {
     refreshInventory()
   }
 
-  /** Returns a warning string if the bundled fallback template was used. */
+  /** Returns a warning string when a fallback template was used, else "". */
   function addItem(index: number, payload: ItemPayload): string {
     if (!parsed.value) return ''
     const { usedFallbackTemplate } = injectItem(parsed.value.doc, index, payload)
@@ -142,7 +139,6 @@ export const useSaveStore = defineStore('save', () => {
   }
 
   return {
-    // state
     loaded,
     fileName,
     errorMessage,
@@ -152,7 +148,6 @@ export const useSaveStore = defineStore('save', () => {
     skills,
     inventory,
     capacity,
-    // actions
     load,
     revert,
     unload,

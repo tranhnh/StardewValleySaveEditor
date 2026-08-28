@@ -1,16 +1,10 @@
-// Inventory reading and, importantly, safe item injection.
-//
-// Strategy for adding an item (see README):
-//   1. Never grow the <items> list. Find an existing <Item xsi:nil="true" />.
-//   2. Never hand-write the Object schema. Instead clone a real, already-valid
-//      Object node from the same save (the game is strict about element order,
-//      and a real node is guaranteed correct for this exact game version).
-//   3. Overwrite only identity + stack + quality on the clone, neutralise any
-//      world/machine state it carried, then replaceChild into the empty slot.
-//   4. Only fall back to a bundled template when the save contains no Object
-//      anywhere to clone (rare) and the save is pre-1.6.
-
-import { COMMON_ITEMS, type ItemDef } from './itemData'
+import {
+  catalogByQualifiedId,
+  type CatalogItem,
+  type InjectableKind,
+} from './catalog'
+import { packColor, parseColorHex, unpackColor, type Rgb } from './color'
+import nodeTemplates from './generated/nodeTemplates.json'
 import { XSI_NS, child, childText, createEl, setChildText, toInt } from './xml'
 
 export type Quality = 0 | 1 | 2 | 4
@@ -23,33 +17,34 @@ export const QUALITY_OPTIONS: { value: Quality; label: string }[] = [
 ]
 
 export interface ItemPayload {
-  /** Unqualified numeric object id, e.g. 74 = Prismatic Shard. */
-  objectId: number
+  kind: InjectableKind
+  id: string
   name: string
   stack: number
   quality: Quality
+  color?: string | null
 }
 
 export type GameEra = 'v16plus' | 'legacy'
 
-export type SlotKind = 'empty' | 'object' | 'other'
+export type SlotKind = 'empty' | 'object' | 'other' | 'clothing'
 
 export interface InventorySlot {
   index: number
   kind: SlotKind
-  /** For `other`: the xsi:type, e.g. "MeleeWeapon", "Hat", "Ring", "Boots". */
   typeName: string
   name: string
   objectId: number | null
   stack: number
   quality: Quality
+  qualifiedId?: string | null
+  clothesColor?: Rgb | null
+  isPrismatic?: boolean
 }
 
 export interface InjectResult {
   usedFallbackTemplate: boolean
 }
-
-// ---------------------------------------------------------------------------
 
 export function detectEra(doc: XMLDocument): GameEra {
   const raw = doc.querySelector('SaveGame > gameVersion')?.textContent?.trim() ?? ''
@@ -64,7 +59,6 @@ export function gameVersionString(doc: XMLDocument): string {
   return doc.querySelector('SaveGame > gameVersion')?.textContent?.trim() || 'unknown (pre-1.3)'
 }
 
-/** The host player's <items> element. */
 export function inventoryEl(doc: XMLDocument): Element {
   const player = doc.querySelector('SaveGame > player')
   if (!player) throw new Error('Save has no <player> element.')
@@ -73,7 +67,6 @@ export function inventoryEl(doc: XMLDocument): Element {
   return items
 }
 
-/** Backpack capacity: 12, 24 or 36. Falls back to the actual node count. */
 export function maxItems(doc: XMLDocument): number {
   const player = doc.querySelector('SaveGame > player')
   const fromNode = player ? toInt(childText(player, 'maxItems'), 0) : 0
@@ -88,8 +81,6 @@ function xsiType(el: Element): string {
 function isNil(el: Element): boolean {
   return (el.getAttributeNS(XSI_NS, 'nil') ?? el.getAttribute('xsi:nil')) === 'true'
 }
-
-// ---------------------------------------------------------------------------
 
 export function readInventory(doc: XMLDocument): InventorySlot[] {
   const items = inventoryEl(doc)
@@ -113,24 +104,67 @@ export function readInventory(doc: XMLDocument): InventorySlot[] {
         stack: toInt(childText(el, 'stack') ?? childText(el, 'Stack'), 1),
         quality: toQuality(toInt(childText(el, 'quality'), 0)),
       })
-    } else {
+    } else if (type === 'Clothing') {
+      const idRaw = (childText(el, 'itemId') ?? childText(el, 'parentSheetIndex') ?? '').trim()
+      const ct = (childText(el, 'clothesType') ?? '').trim().toUpperCase()
+      const prefix = ct === 'PANTS' || ct === '1' ? '(P)' : '(S)'
       slots.push({
         index,
-        kind: 'other',
-        typeName: type || el.tagName,
+        kind: 'clothing',
+        typeName: 'Clothing',
         name: childText(el, 'name') ?? childText(el, 'Name') ?? '',
         objectId: null,
         stack: 1,
         quality: 0,
+        qualifiedId: idRaw ? `${prefix}${idRaw}` : null,
+        clothesColor: readClothesColor(el),
+        isPrismatic: (childText(el, 'isPrismatic') ?? 'false') === 'true',
+      })
+    } else {
+      const typeName = type || el.tagName
+      const idRaw = (childText(el, 'itemId') ?? childText(el, 'parentSheetIndex') ?? '').trim()
+      const prefix = otherQidPrefix(type)
+      slots.push({
+        index,
+        kind: 'other',
+        typeName,
+        name: childText(el, 'name') ?? childText(el, 'Name') ?? '',
+        objectId: null,
+        stack: 1,
+        quality: 0,
+        qualifiedId: prefix && idRaw ? `(${prefix})${idRaw}` : null,
       })
     }
   }
   return slots
 }
 
-/** Coerce any number to a valid quality tier (0 normal, 1 silver, 2 gold, 4 iridium). */
 export function toQuality(n: number): Quality {
   return n === 1 || n === 2 || n === 4 ? n : 0
+}
+
+function otherQidPrefix(type: string): string | null {
+  if (type === 'MeleeWeapon' || type === 'Slingshot') return 'W'
+  if (type === 'Hat') return 'H'
+  if (type === 'Boots') return 'B'
+  if (type === 'Ring') return 'O'
+  if (type === 'Furniture') return 'F'
+  if (TOOL_CLASSES.includes(type)) return 'T'
+  return null
+}
+
+function readClothesColor(el: Element): Rgb | null {
+  const cc = child(el, 'clothesColor')
+  if (!cc || isNil(cc)) return null
+  const packed = childText(cc, 'PackedValue')
+  if (packed != null && packed.trim() !== '') {
+    const n = Number(packed.trim())
+    if (Number.isFinite(n)) return unpackColor(n)
+  }
+  const r = toInt(childText(cc, 'R'), -1)
+  const g = toInt(childText(cc, 'G'), -1)
+  const b = toInt(childText(cc, 'B'), -1)
+  return r >= 0 && g >= 0 && b >= 0 ? { r, g, b } : null
 }
 
 function slotAt(doc: XMLDocument, index: number): Element {
@@ -149,7 +183,6 @@ export function setSlotQuality(doc: XMLDocument, index: number, quality: Quality
   setChildText(slotAt(doc, index), 'quality', String(quality))
 }
 
-/** Turn a populated slot back into an empty one: <Item xsi:nil="true" />. */
 export function clearSlot(doc: XMLDocument, index: number): void {
   const items = inventoryEl(doc)
   const current = items.children[index]
@@ -159,38 +192,23 @@ export function clearSlot(doc: XMLDocument, index: number): void {
   items.replaceChild(empty, current)
 }
 
-// ---------------------------------------------------------------------------
-// Injection
-// ---------------------------------------------------------------------------
-
-/**
- * True when `el` is a plain object node we can safely clone: not a big
- * craftable, not a machine holding something, not a container.
- */
 function isPlainObjectNode(el: Element): boolean {
   if (xsiType(el) !== 'Object') return false
   if ((childText(el, 'bigCraftable') ?? 'false') === 'true') return false
   if (childText(el, 'minutesUntilReady') && toInt(childText(el, 'minutesUntilReady'), 0) !== 0) return false
   const held = child(el, 'heldObject')
   if (held && held.children.length > 0) return false
-  if (child(el, 'items')) return false // chest-like
+  if (child(el, 'items')) return false
   return true
 }
 
-/** Find any clonable Object anywhere in the document. */
 function findTemplateNode(doc: XMLDocument): { node: Element; renameToItem: boolean } | null {
-  const inv = inventoryEl(doc)
-
-  // 1. Prefer the host player's own inventory.
-  for (const el of Array.from(inv.children)) {
+  for (const el of Array.from(inventoryEl(doc).children)) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: false }
   }
-  // 2. Any other <Item xsi:type="Object"> in the save (other players, etc.).
   for (const el of Array.from(doc.getElementsByTagName('Item'))) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: false }
   }
-  // 3. Any world/chest <Object xsi:type="Object">. Same class, same schema, so
-  //    cloning and renaming the tag to <Item> is safe.
   for (const el of Array.from(doc.getElementsByTagName('Object'))) {
     if (isPlainObjectNode(el)) return { node: el, renameToItem: true }
   }
@@ -208,7 +226,6 @@ function renameElement(el: Element, newTag: string): Element {
   return replacement
 }
 
-/** Reset world/machine-only state carried over from a cloned node. */
 function neutralize(node: Element): void {
   const zero: Record<string, string> = {
     minutesUntilReady: '0',
@@ -238,67 +255,427 @@ function neutralize(node: Element): void {
   }
 }
 
-function applyPayload(node: Element, payload: ItemPayload, era: GameEra, def: ItemDef | undefined): void {
-  const id = String(payload.objectId)
-  for (const tag of ['name', 'Name', 'DisplayName']) setChildText(node, tag, payload.name)
-  for (const tag of ['parentSheetIndex', 'indexInTileSheet', 'initialParentTileIndex']) {
-    setChildText(node, tag, id)
-  }
-  for (const tag of ['stack', 'Stack']) setChildText(node, tag, String(payload.stack))
-  setChildText(node, 'quality', String(payload.quality))
-  if (era === 'v16plus') setChildText(node, 'itemId', id)
+const QID_PREFIX: Record<InjectableKind, string> = {
+  object: 'O',
+  bigCraftable: 'BC',
+  hat: 'H',
+  boots: 'B',
+  ring: 'O',
+  weapon: 'W',
+  tool: 'T',
+  shirt: 'S',
+  pants: 'P',
+  furniture: 'F',
+}
 
-  if (def) {
-    setChildText(node, 'category', String(def.category))
-    setChildText(node, 'Category', String(def.category))
-    setChildText(node, 'type', def.type)
-    setChildText(node, 'price', String(def.price))
-    setChildText(node, 'edibility', String(def.edibility))
+function resolveXsiType(kind: InjectableKind, def: CatalogItem | undefined): string {
+  switch (kind) {
+    case 'object':
+    case 'bigCraftable':
+      return 'Object'
+    case 'hat':
+      return 'Hat'
+    case 'boots':
+      return 'Boots'
+    case 'ring':
+      return 'Ring'
+    case 'weapon':
+      return def && ['32', '33', '34'].includes(def.id) ? 'Slingshot' : 'MeleeWeapon'
+    case 'tool':
+      return def?.tool?.className ?? 'GenericTool'
+    case 'shirt':
+    case 'pants':
+      return 'Clothing'
+    case 'furniture':
+      return 'Furniture'
   }
 }
 
-/**
- * Inject an item into the empty slot at `index`. Throws if the slot is not
- * actually empty, or if the save contains nothing clonable and is too new for
- * the bundled fallback template.
- */
-export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload): InjectResult {
-  const items = inventoryEl(doc)
-  const target = items.children[index]
-  if (!target) throw new Error(`No inventory slot at index ${index}.`)
-  if (!isNil(target)) throw new Error(`Slot ${index} is not empty. Clear it first.`)
+const EQUIPPED_SLOTS: Record<string, string[]> = {
+  Hat: ['hat'],
+  Boots: ['boots'],
+  Ring: ['leftRing', 'rightRing'],
+  Clothing: ['shirtItem', 'pantsItem'],
+}
 
-  const def = COMMON_ITEMS.find((d) => d.id === payload.objectId)
+const TOOL_CLASSES = [
+  'Axe',
+  'Pickaxe',
+  'Hoe',
+  'WateringCan',
+  'FishingRod',
+  'MilkPail',
+  'Shears',
+  'Pan',
+  'Lantern',
+  'Wand',
+  'GenericTool',
+]
 
-  const template = findTemplateNode(doc)
-  let node: Element
-  let usedFallbackTemplate = false
+function findTypedNode(doc: XMLDocument, xsi: string): { node: Element; tag: string } | null {
+  for (const el of Array.from(doc.getElementsByTagName('Item'))) {
+    if (xsiType(el) === xsi && !isNil(el)) return { node: el, tag: 'Item' }
+  }
+  for (const slot of EQUIPPED_SLOTS[xsi] ?? []) {
+    for (const el of Array.from(doc.getElementsByTagName(slot))) {
+      if (!isNil(el) && el.children.length > 0) return { node: el, tag: slot }
+    }
+  }
+  return null
+}
 
-  if (template) {
-    node = template.node.cloneNode(true) as Element
-    if (template.renameToItem) node = renameElement(node, 'Item')
-  } else {
-    const era = detectEra(doc)
-    if (era !== 'legacy') {
+function parseTemplate(doc: XMLDocument, xml: string): Element {
+  const parsed = new DOMParser().parseFromString(xml, 'application/xml')
+  if (parsed.querySelector('parsererror')) throw new Error('Internal: node template failed to parse.')
+  const node = doc.importNode(parsed.documentElement, true) as Element
+  node.removeAttribute('xmlns:xsi')
+  return node
+}
+
+const HAND_TEMPLATES: Record<string, string> = {
+  Ring:
+    `<Item xmlns:xsi="${XSI_NS}" xsi:type="Ring">` +
+    '<isLostItem>false</isLostItem><category>-96</category>' +
+    '<hasBeenInInventory>true</hasBeenInInventory><name>Ring</name>' +
+    '<parentSheetIndex>0</parentSheetIndex><itemId>0</itemId>' +
+    '<specialItem>false</specialItem><isRecipe>false</isRecipe>' +
+    '<quality>0</quality><stack>1</stack><SpecialVariable>0</SpecialVariable>' +
+    '<indexInTileSheet>0</indexInTileSheet><uniqueID>0</uniqueID></Item>',
+  Slingshot:
+    `<Item xmlns:xsi="${XSI_NS}" xsi:type="Slingshot">` +
+    '<isLostItem>false</isLostItem><category>-98</category>' +
+    '<hasBeenInInventory>true</hasBeenInInventory><name>Slingshot</name>' +
+    '<parentSheetIndex>0</parentSheetIndex><itemId>0</itemId>' +
+    '<specialItem>false</specialItem><isRecipe>false</isRecipe>' +
+    '<quality>0</quality><stack>1</stack><SpecialVariable>0</SpecialVariable>' +
+    '<initialParentTileIndex>0</initialParentTileIndex>' +
+    '<currentParentTileIndex>0</currentParentTileIndex>' +
+    '<indexOfMenuItemView>0</indexOfMenuItemView><instantUse>false</instantUse>' +
+    '<isEfficient>false</isEfficient><animationSpeedModifier>1</animationSpeedModifier>' +
+    '<upgradeLevel>0</upgradeLevel><numAttachmentSlots>1</numAttachmentSlots>' +
+    '<attachments><Object xsi:nil="true" /></attachments></Item>',
+}
+
+function templateFor(xsi: string): string | undefined {
+  const direct = (nodeTemplates as Record<string, string>)[xsi] ?? HAND_TEMPLATES[xsi]
+  if (direct) return direct
+  if (TOOL_CLASSES.includes(xsi)) {
+    const templates = nodeTemplates as Record<string, string>
+    const base = templates.Hoe ?? templates.GenericTool
+    if (base) return base.replace(/xsi:type="[A-Za-z]+"/, `xsi:type="${xsi}"`)
+  }
+  return undefined
+}
+
+interface ObtainedNode {
+  node: Element
+  usedFallbackTemplate: boolean
+}
+
+function obtainNode(doc: XMLDocument, xsi: string): ObtainedNode {
+  if (xsi === 'Object') {
+    const template = findTemplateNode(doc)
+    if (template) {
+      let node = template.node.cloneNode(true) as Element
+      if (template.renameToItem) node = renameElement(node, 'Item')
+      return { node, usedFallbackTemplate: false }
+    }
+    if (detectEra(doc) !== 'legacy') {
       throw new Error(
         'This save has no existing item to safely copy, and automatic template ' +
           'generation is only trusted for pre-1.6 saves. Add any item to your ' +
           'inventory in-game, save, and try again.',
       )
     }
-    node = parseFallbackTemplate(doc)
-    usedFallbackTemplate = true
+    return { node: parseTemplate(doc, LEGACY_OBJECT_TEMPLATE), usedFallbackTemplate: true }
   }
 
-  neutralize(node)
-  applyPayload(node, payload, detectEra(doc), def)
-  items.replaceChild(node, target)
+  const existing = findTypedNode(doc, xsi)
+  if (existing) {
+    let node = existing.node.cloneNode(true) as Element
+    if (existing.tag !== 'Item') {
+      node = renameElement(node, 'Item')
+      if (!node.getAttribute('xsi:type')) node.setAttributeNS(XSI_NS, 'xsi:type', xsi)
+    }
+    return { node, usedFallbackTemplate: false }
+  }
+  const tpl = templateFor(xsi)
+  if (!tpl) {
+    throw new Error(`This save has no ${xsi} to copy and no bundled ${xsi} template is available.`)
+  }
+  return { node: parseTemplate(doc, tpl), usedFallbackTemplate: true }
+}
 
+function setId(node: Element, id: string, era: GameEra): void {
+  for (const tag of ['parentSheetIndex', 'indexInTileSheet', 'initialParentTileIndex']) {
+    setChildText(node, tag, id)
+  }
+  if (era === 'v16plus') setChildText(node, 'itemId', id)
+}
+
+function applyObject(
+  node: Element,
+  payload: ItemPayload,
+  def: CatalogItem | undefined,
+  era: GameEra,
+): void {
+  for (const tag of ['name', 'Name', 'DisplayName']) setChildText(node, tag, payload.name)
+  setId(node, payload.id, era)
+
+  if (payload.kind === 'bigCraftable') {
+    setChildText(node, 'bigCraftable', 'true')
+    setChildText(node, 'type', def?.type || 'Crafting')
+    setChildText(node, 'category', '-9')
+    setChildText(node, 'Category', '-9')
+    setChildText(node, 'edibility', '-300')
+    setChildText(node, 'quality', '0')
+    for (const tag of ['stack', 'Stack']) setChildText(node, tag, String(payload.stack))
+    if (def?.price != null) setChildText(node, 'price', String(def.price))
+    return
+  }
+
+  for (const tag of ['stack', 'Stack']) setChildText(node, tag, String(payload.stack))
+  setChildText(node, 'quality', String(payload.quality))
+  if (def) {
+    if (def.category != null) {
+      setChildText(node, 'category', String(def.category))
+      setChildText(node, 'Category', String(def.category))
+    }
+    if (def.type) setChildText(node, 'type', def.type)
+    if (def.price != null) setChildText(node, 'price', String(def.price))
+    if (def.edibility != null) setChildText(node, 'edibility', String(def.edibility))
+  }
+}
+
+function applyHat(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  setChildText(node, 'itemId', payload.id)
+  setChildText(node, 'parentSheetIndex', payload.id)
+  setChildText(node, 'category', '-95')
+  setChildText(node, 'quality', '0')
+  setChildText(node, 'stack', '1')
+  if (def?.hat) {
+    setChildText(node, 'skipHairDraw', String(def.hat.skipHairDraw))
+    setChildText(node, 'ignoreHairstyleOffset', String(def.hat.ignoreHairstyleOffset))
+  }
+}
+
+function applyBoots(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  for (const tag of ['parentSheetIndex', 'itemId', 'indexInTileSheet']) {
+    setChildText(node, tag, payload.id)
+  }
+  setChildText(node, 'category', '-97')
+  setChildText(node, 'quality', '0')
+  setChildText(node, 'stack', '1')
+  if (def?.boots) {
+    setChildText(node, 'defenseBonus', String(def.boots.defense))
+    setChildText(node, 'immunityBonus', String(def.boots.immunity))
+    setChildText(node, 'indexInColorSheet', String(def.boots.colorIndex))
+  }
+  if (def?.price != null) setChildText(node, 'price', String(def.price))
+}
+
+function applyRing(node: Element, payload: ItemPayload): void {
+  setChildText(node, 'name', payload.name)
+  for (const tag of ['parentSheetIndex', 'itemId', 'indexInTileSheet']) {
+    setChildText(node, tag, payload.id)
+  }
+  setChildText(node, 'category', '-96')
+  setChildText(node, 'quality', '0')
+  setChildText(node, 'stack', '1')
+}
+
+function setRect(node: Element, tag: string, x: number, y: number, w: number, h: number): void {
+  const rect = child(node, tag)
+  if (!rect) return
+  setChildText(rect, 'X', String(x))
+  setChildText(rect, 'Y', String(y))
+  setChildText(rect, 'Width', String(w))
+  setChildText(rect, 'Height', String(h))
+  const loc = child(rect, 'Location')
+  if (loc) {
+    setChildText(loc, 'X', String(x))
+    setChildText(loc, 'Y', String(y))
+  }
+  const size = child(rect, 'Size')
+  if (size) {
+    setChildText(size, 'X', String(w))
+    setChildText(size, 'Y', String(h))
+  }
+}
+
+const WEAPON_ID_TAGS = [
+  'parentSheetIndex',
+  'itemId',
+  'initialParentTileIndex',
+  'InitialParentTileIndex',
+  'currentParentTileIndex',
+  'indexOfMenuItemView',
+  'IndexOfMenuItemView',
+]
+
+function applyWeapon(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  for (const tag of WEAPON_ID_TAGS) setChildText(node, tag, payload.id)
+  setChildText(node, 'category', '-98')
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+  const w = def?.weapon
+  if (w) {
+    setChildText(node, 'minDamage', String(w.minDamage))
+    setChildText(node, 'maxDamage', String(w.maxDamage))
+    setChildText(node, 'speed', String(w.speed))
+    setChildText(node, 'addedPrecision', String(w.precision))
+    setChildText(node, 'addedDefense', String(w.defense))
+    setChildText(node, 'addedAreaOfEffect', String(w.areaOfEffect))
+    setChildText(node, 'knockback', String(w.knockback))
+    setChildText(node, 'critChance', String(w.critChance))
+    setChildText(node, 'critMultiplier', String(w.critMultiplier))
+    setChildText(node, 'type', String(w.type))
+  }
+}
+
+function applyTool(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  setChildText(node, 'itemId', payload.id)
+  setChildText(node, 'category', '-99')
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+
+  const t = def?.tool
+  if (t) {
+    for (const tag of ['parentSheetIndex', 'indexOfMenuItemView', 'IndexOfMenuItemView']) {
+      setChildText(node, tag, String(t.menuSpriteIndex))
+    }
+    for (const tag of ['initialParentTileIndex', 'InitialParentTileIndex', 'currentParentTileIndex']) {
+      setChildText(node, tag, String(t.spriteIndex))
+    }
+    setChildText(node, 'upgradeLevel', String(t.upgradeLevel))
+    setChildText(node, 'numAttachmentSlots', String(t.attachmentSlots))
+  }
+
+  const attachments = child(node, 'attachments')
+  if (attachments) {
+    while (attachments.firstChild) attachments.removeChild(attachments.firstChild)
+    for (let i = 0; i < (t?.attachmentSlots ?? 0); i++) {
+      const nil = createEl(node.ownerDocument, 'Object')
+      nil.setAttributeNS(XSI_NS, 'xsi:nil', 'true')
+      attachments.appendChild(nil)
+    }
+  }
+  setChildText(node, 'WaterLeft', '0')
+  setChildText(node, 'waterLeft', '0')
+}
+
+function setClothesColor(node: Element, rgb: Rgb): void {
+  const doc = node.ownerDocument
+  let cc = child(node, 'clothesColor')
+  if (!cc) {
+    cc = createEl(doc, 'clothesColor')
+    node.appendChild(cc)
+  }
+  cc.removeAttributeNS(XSI_NS, 'nil')
+  cc.removeAttribute('xsi:nil')
+  while (cc.firstChild) cc.removeChild(cc.firstChild)
+  const parts: [string, number][] = [
+    ['R', rgb.r],
+    ['G', rgb.g],
+    ['B', rgb.b],
+    ['A', 255],
+    ['PackedValue', packColor(rgb)],
+  ]
+  for (const [tag, value] of parts) {
+    const el = createEl(doc, tag)
+    el.textContent = String(value)
+    cc.appendChild(el)
+  }
+}
+
+function applyClothing(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  setChildText(node, 'itemId', payload.id)
+  setChildText(node, 'category', '-100')
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+  const c = def?.clothing
+  if (c) {
+    setChildText(node, 'parentSheetIndex', String(c.spriteIndex))
+    setChildText(node, 'indexInTileSheet', String(c.spriteIndex))
+    setChildText(node, 'clothesType', String(c.clothesType))
+    setChildText(node, 'dyeable', String(c.dyeable))
+    setChildText(node, 'isPrismatic', String(c.isPrismatic))
+  }
+  if (def?.price != null) setChildText(node, 'price', String(def.price))
+
+  const rgb =
+    parseColorHex(payload.color) ?? parseColorHex(c?.defaultColor ?? null) ?? { r: 255, g: 255, b: 255 }
+  setClothesColor(node, rgb)
+}
+
+function applyFurniture(node: Element, payload: ItemPayload, def: CatalogItem | undefined): void {
+  setChildText(node, 'name', payload.name)
+  for (const tag of ['parentSheetIndex', 'itemId']) setChildText(node, tag, payload.id)
+  setChildText(node, 'stack', '1')
+  setChildText(node, 'quality', '0')
+  if (def?.price != null) setChildText(node, 'price', String(def.price))
+  const f = def?.furniture
+  if (f) {
+    setChildText(node, 'furniture_type', String(f.furnitureType))
+    setChildText(node, 'rotations', String(f.rotations))
+    setChildText(node, 'currentRotation', '0')
+    setRect(node, 'sourceRect', f.srcX, f.srcY, f.srcW, f.srcH)
+    setRect(node, 'defaultSourceRect', f.srcX, f.srcY, f.srcW, f.srcH)
+    setRect(node, 'boundingBox', 0, 0, f.boxW, f.boxH)
+    setRect(node, 'defaultBoundingBox', 0, 0, f.boxW, f.boxH)
+  }
+}
+
+export function injectItem(doc: XMLDocument, index: number, payload: ItemPayload): InjectResult {
+  const items = inventoryEl(doc)
+  const target = items.children[index]
+  if (!target) throw new Error(`No inventory slot at index ${index}.`)
+  if (!isNil(target)) throw new Error(`Slot ${index} is not empty. Clear it first.`)
+
+  const def = catalogByQualifiedId(`(${QID_PREFIX[payload.kind]})${payload.id}`)
+  const xsi = resolveXsiType(payload.kind, def)
+  const { node, usedFallbackTemplate } = obtainNode(doc, xsi)
+  neutralize(node)
+
+  const era = detectEra(doc)
+  switch (payload.kind) {
+    case 'object':
+    case 'bigCraftable':
+      applyObject(node, payload, def, era)
+      break
+    case 'hat':
+      applyHat(node, payload, def)
+      break
+    case 'boots':
+      applyBoots(node, payload, def)
+      break
+    case 'ring':
+      applyRing(node, payload)
+      break
+    case 'weapon':
+      applyWeapon(node, payload, def)
+      break
+    case 'tool':
+      applyTool(node, payload, def)
+      break
+    case 'shirt':
+    case 'pants':
+      applyClothing(node, payload, def)
+      break
+    case 'furniture':
+      applyFurniture(node, payload, def)
+      break
+  }
+
+  items.replaceChild(node, target)
   return { usedFallbackTemplate }
 }
 
-// Last-resort template, only used for pre-1.6 saves with an empty-ish inventory.
-// Field order follows StardewValley.Object's 1.5 serialization.
 const LEGACY_OBJECT_TEMPLATE = `<Item xmlns:xsi="${XSI_NS}" xsi:type="Object">
   <isLostItem>false</isLostItem>
   <category>-2</category>
@@ -334,9 +711,3 @@ const LEGACY_OBJECT_TEMPLATE = `<Item xmlns:xsi="${XSI_NS}" xsi:type="Object">
   <preservedParentSheetIndex>0</preservedParentSheetIndex>
   <destroyOvernight>false</destroyOvernight>
 </Item>`
-
-function parseFallbackTemplate(doc: XMLDocument): Element {
-  const parsed = new DOMParser().parseFromString(LEGACY_OBJECT_TEMPLATE, 'application/xml')
-  if (parsed.querySelector('parsererror')) throw new Error('Internal: fallback template failed to parse.')
-  return doc.importNode(parsed.documentElement, true) as Element
-}

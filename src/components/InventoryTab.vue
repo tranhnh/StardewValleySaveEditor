@@ -1,22 +1,104 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useSaveStore } from '../stores/save'
-import { QUALITY_OPTIONS, toQuality, type ItemPayload } from '../lib/items'
-import { COMMON_ITEMS } from '../lib/itemData'
+import {
+  QUALITY_OPTIONS,
+  toQuality,
+  type ItemPayload,
+  type InventorySlot,
+} from '../lib/items'
+import {
+  CATALOG,
+  catalogByQualifiedId,
+  catalogCategories,
+  catalogObject,
+  isInjectableKind,
+  queryCatalog,
+  type CatalogItem,
+} from '../lib/catalog'
+import { isWhite, rgbToHex } from '../lib/color'
+import ItemIcon from './ItemIcon.vue'
+
+const STACKABLE_KINDS = new Set(['object', 'bigCraftable'])
+const CLOTHING_KINDS = new Set(['shirt', 'pants'])
 
 const store = useSaveStore()
 
-const mode = ref<'preset' | 'custom'>('preset')
-const presetId = ref<number>(COMMON_ITEMS[0].id)
-const customId = ref<number>(0)
-const customName = ref('')
+const MAX_ROWS = 60
+const categories = catalogCategories()
+
+const search = ref('')
+const category = ref<string>('all')
+const selected = ref<CatalogItem | null>(null)
 const newStack = ref<number>(1)
 const newQuality = ref<number>(0)
+const newColor = ref('#ffffff')
 const notice = ref('')
+
+const showCustom = ref(false)
+const customId = ref<number>(0)
+const customName = ref('')
+
+const results = computed(() =>
+  queryCatalog({ text: search.value, category: category.value }),
+)
+const shown = computed(() => results.value.slice(0, MAX_ROWS))
 
 const firstEmpty = computed<number>(
   () => store.inventory.find((s) => s.kind === 'empty')?.index ?? -1,
 )
+
+const canAdd = computed(() => {
+  if (firstEmpty.value < 0) return false
+  if (showCustom.value) return Math.trunc(customId.value) > 0
+  return selected.value?.injectable === true
+})
+
+const showStackQuality = computed(() => {
+  if (showCustom.value) return true
+  return selected.value ? STACKABLE_KINDS.has(selected.value.kind) : false
+})
+
+const colorEditable = computed(() => {
+  const item = selected.value
+  const c = item?.clothing
+  return (
+    !showCustom.value &&
+    !!item &&
+    CLOTHING_KINDS.has(item.kind) &&
+    !!c &&
+    c.dyeable &&
+    !c.isPrismatic
+  )
+})
+
+function catalogTint(item: CatalogItem): string | null {
+  if (!CLOTHING_KINDS.has(item.kind) || item.clothing?.isPrismatic) return null
+  return item.clothing?.defaultColor ?? null
+}
+
+function pick(item: CatalogItem): void {
+  if (!item.injectable) return
+  selected.value = item
+  notice.value = ''
+  if (item.clothing) newColor.value = item.clothing.defaultColor ?? '#ffffff'
+}
+
+function slotCatalog(slot: InventorySlot): CatalogItem | null {
+  return slot.qualifiedId ? catalogByQualifiedId(slot.qualifiedId) ?? null : null
+}
+
+function slotSwatch(slot: InventorySlot): string | null {
+  const c = slot.clothesColor
+  return c && !isWhite(c) ? rgbToHex(c) : null
+}
+
+function slotTint(slot: InventorySlot): string | null {
+  if (slot.isPrismatic) return null
+  const c = slot.clothesColor
+  if (c) return isWhite(c) ? null : rgbToHex(c)
+  return slotCatalog(slot)?.clothing?.defaultColor ?? null
+}
 
 function addItem(): void {
   notice.value = ''
@@ -24,26 +106,29 @@ function addItem(): void {
   if (index < 0) return
 
   let payload: ItemPayload
-  if (mode.value === 'preset') {
-    const def = COMMON_ITEMS.find((d) => d.id === presetId.value)
-    if (!def) return
-    payload = {
-      objectId: def.id,
-      name: def.name,
-      stack: Math.max(1, Math.trunc(newStack.value)),
-      quality: toQuality(newQuality.value),
-    }
-  } else {
+  if (showCustom.value) {
     const id = Math.trunc(customId.value)
     if (!Number.isFinite(id) || id <= 0) {
       notice.value = 'Enter a positive numeric object id.'
       return
     }
     payload = {
-      objectId: id,
+      kind: 'object',
+      id: String(id),
       name: customName.value.trim() || `Item ${id}`,
       stack: Math.max(1, Math.trunc(newStack.value)),
       quality: toQuality(newQuality.value),
+    }
+  } else {
+    const item = selected.value
+    if (!item || !item.injectable || !isInjectableKind(item.kind)) return
+    payload = {
+      kind: item.kind,
+      id: item.id,
+      name: item.name,
+      stack: Math.max(1, Math.trunc(newStack.value)),
+      quality: toQuality(newQuality.value),
+      color: colorEditable.value ? newColor.value : undefined,
     }
   }
 
@@ -73,57 +158,101 @@ function onQualityInput(index: number, event: Event): void {
   <section class="card">
     <h2>Add an item</h2>
     <p class="muted" style="margin-top: 0">
-      Regular items (<code>Object</code>) only. Tools, weapons, rings, boots and hats use
-      different formats and are shown locked below.
+      Browsing {{ CATALOG.length.toLocaleString() }} items. Almost everything is
+      insertable now — the exceptions (the Combined Ring, and beds / TVs / fish tanks /
+      dressers) are marked <em>not yet</em>.
     </p>
 
-    <div class="field">
-      <label>Source</label>
-      <div class="row">
-        <label style="font-weight: 500; display: flex; gap: 6px; align-items: center; margin: 0">
-          <input type="radio" value="preset" v-model="mode" /> Common item
-        </label>
-        <label style="font-weight: 500; display: flex; gap: 6px; align-items: center; margin: 0">
-          <input type="radio" value="custom" v-model="mode" /> Custom object id
-        </label>
+    <div class="row" style="align-items: flex-end">
+      <div class="field grow" style="margin: 0">
+        <label>Search</label>
+        <input type="text" v-model="search" placeholder="Prismatic Shard" />
+      </div>
+      <div class="field" style="margin: 0">
+        <label>Category</label>
+        <select v-model="category">
+          <option value="all">All categories</option>
+          <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
+        </select>
       </div>
     </div>
 
-    <div v-if="mode === 'preset'" class="field">
-      <label>Item</label>
-      <select v-model.number="presetId">
-        <option v-for="d in COMMON_ITEMS" :key="d.id" :value="d.id">
-          {{ d.name }} (#{{ d.id }})
-        </option>
-      </select>
+    <div class="catalog-list" role="listbox" aria-label="Item search results">
+      <button
+        v-for="item in shown"
+        :key="item.qualifiedId"
+        type="button"
+        class="catalog-row"
+        :class="{
+          selected: selected?.qualifiedId === item.qualifiedId,
+          disabled: !item.injectable,
+        }"
+        role="option"
+        :aria-selected="selected?.qualifiedId === item.qualifiedId"
+        :aria-disabled="!item.injectable"
+        @click="pick(item)"
+      >
+        <ItemIcon
+          :item="item"
+          :tint="catalogTint(item)"
+          :prismatic="item.clothing?.isPrismatic === true"
+        />
+        <span class="name">{{ item.name }}</span>
+        <code>{{ item.qualifiedId }}</code>
+        <span class="grow" />
+        <span class="muted">{{ item.categoryLabel }}</span>
+        <span v-if="item.clothing?.isPrismatic" class="tag">prism</span>
+        <span v-if="!item.injectable" class="tag">not yet</span>
+      </button>
+      <p v-if="!shown.length" class="muted" style="padding: 10px 12px; margin: 0">
+        No items match.
+      </p>
     </div>
+    <p class="muted" style="margin: 6px 0 0">
+      <template v-if="results.length > MAX_ROWS">
+        Showing first {{ MAX_ROWS }} of {{ results.length.toLocaleString() }} — refine your
+        search.
+      </template>
+      <template v-else>{{ results.length.toLocaleString() }} match.</template>
+      <button class="ghost sm" @click="showCustom = !showCustom">
+        {{ showCustom ? 'Hide manual id' : 'Enter an id manually' }}
+      </button>
+    </p>
 
-    <div v-else class="grid">
-      <div class="field">
+    <div v-if="showCustom" class="grid" style="margin-top: 12px">
+      <div class="field" style="margin: 0">
         <label>Object id</label>
         <input type="number" min="1" v-model.number="customId" />
       </div>
-      <div class="field">
+      <div class="field" style="margin: 0">
         <label>Name (label only)</label>
         <input type="text" v-model="customName" />
       </div>
     </div>
 
-    <div class="row">
-      <div class="field" style="margin: 0">
+    <div class="row" style="margin-top: 14px">
+      <div v-if="showStackQuality" class="field" style="margin: 0">
         <label>Stack</label>
         <input type="number" min="1" style="width: 96px" v-model.number="newStack" />
       </div>
-      <div class="field" style="margin: 0">
+      <div v-if="showStackQuality" class="field" style="margin: 0">
         <label>Quality</label>
         <select v-model.number="newQuality" style="width: auto">
           <option v-for="q in QUALITY_OPTIONS" :key="q.value" :value="q.value">{{ q.label }}</option>
         </select>
       </div>
-      <button class="primary" :disabled="firstEmpty < 0" @click="addItem">
+      <div v-if="colorEditable" class="field" style="margin: 0">
+        <label>Color</label>
+        <input type="color" v-model="newColor" class="color-input" />
+      </div>
+      <button class="primary" :disabled="!canAdd" @click="addItem">
         Add to first empty slot
       </button>
     </div>
+
+    <p v-if="!showCustom && selected" class="muted" style="margin: 8px 0 0">
+      Selected: <strong>{{ selected.name }}</strong> <code>{{ selected.qualifiedId }}</code>
+    </p>
     <p v-if="firstEmpty < 0" class="muted">Inventory is full — clear a slot first.</p>
     <p v-if="notice" class="note warn" style="white-space: pre-wrap">{{ notice }}</p>
   </section>
@@ -139,12 +268,33 @@ function onQualityInput(index: number, event: Event): void {
         </template>
 
         <template v-else-if="slot.kind === 'other'">
+          <ItemIcon :item="slotCatalog(slot)" :size="18" />
           <span class="locked grow">
             {{ slot.typeName }}{{ slot.name ? ` · ${slot.name}` : '' }} (locked)
           </span>
+          <button class="ghost danger sm" @click="store.removeItem(slot.index)">Clear</button>
+        </template>
+
+        <template v-else-if="slot.kind === 'clothing'">
+          <ItemIcon
+            :item="slotCatalog(slot)"
+            :size="18"
+            :tint="slotTint(slot)"
+            :prismatic="slot.isPrismatic === true"
+          />
+          <span class="name">{{ slot.name || slot.typeName }}</span>
+          <code v-if="slot.qualifiedId">{{ slot.qualifiedId }}</code>
+          <span class="grow" />
+          <span v-if="slot.isPrismatic" class="tag">prism</span>
+          <template v-else-if="slotSwatch(slot)">
+            <span class="swatch" :style="{ background: slotSwatch(slot)! }" />
+            <code>{{ slotSwatch(slot) }}</code>
+          </template>
+          <button class="ghost danger sm" @click="store.removeItem(slot.index)">Clear</button>
         </template>
 
         <template v-else>
+          <ItemIcon :item="catalogObject(slot.objectId ?? -1)" :size="18" />
           <span class="name">{{ slot.name }}</span>
           <code>#{{ slot.objectId }}</code>
           <span class="grow" />

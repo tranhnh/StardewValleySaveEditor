@@ -41,32 +41,74 @@ Load the file named like `Farmer_123456789` (no extension), **not**
 
 ### Adding inventory items
 
-The game is strict about the `Object` XML schema and element order, so the
+The game is strict about each class's XML schema and element order, so the
 editor never hand-writes an item node. Instead (`src/lib/items.ts`):
 
 1. It finds an existing empty slot — an `<Item xsi:nil="true" />` — and never
    grows the `<items>` list past `<maxItems>`.
-2. It finds a real, already-valid `Object` node to use as a template: first in
-   the player's inventory, then anywhere in the save (other players, chests,
-   world debris). A world `<Object>` is cloned and its tag renamed to `<Item>`;
-   the class and schema are identical.
-3. It overwrites only identity (`name`, `parentSheetIndex`, `itemId` on 1.6+),
-   `stack` and `quality` on the clone, and neutralises any machine/world state
-   it carried.
+2. It finds a real, already-valid node of the right `xsi:type` to clone:
+   - **Objects** (and big craftables, which are `Object` + `bigCraftable=true`):
+     the player's bag, then any `<Item>` / world `<Object>` in the save.
+   - **Hats, boots, rings, weapons, tools, clothing, furniture:** any
+     `<Item xsi:type="…">` plus the equipped slots `<hat>`, `<boots>`,
+     `<leftRing>`, `<rightRing>`, `<shirtItem>`, `<pantsItem>`. Equipped tags
+     are renamed to `<Item>` (and given an `xsi:type` if they lacked one).
+3. It overwrites identity and that type's own fields, pulled from the catalog:
+   hat hair flags; boots defense/immunity; weapon damage/speed/crit; tool class,
+   sprite indices, upgrade level and attachment slots; clothing type/colour;
+   furniture type, rotations and computed source rect. Then it neutralises
+   world/machine state.
 4. It swaps the clone into the empty slot with `replaceChild`.
 
-Only if the save contains no `Object` anywhere to clone does it fall back to a
-bundled template, and that path is only trusted for pre-1.6 saves. The UI warns
-when the fallback is used.
+If the save has no node of that type to clone, it falls back to a bundled
+skeleton from `src/lib/generated/nodeTemplates.json` (see below). Tool classes
+with no skeleton are derived from the `Hoe` one. The object fallback is only
+trusted for pre-1.6 saves; the UI warns when any fallback runs.
+
+Not insertable: the Combined Ring, and furniture subclasses (beds, TVs, fish
+tanks, dressers) — they appear in the catalog marked "not yet".
+
+### Node templates
+
+`src/lib/generated/nodeTemplates.json` holds one zeroed skeleton per class
+(`Hat`, `Boots`, …), extracted from real saves so the element order is correct
+for the current game version:
+
+```bash
+# copy a save file or two into data/saves/ (git-ignored), then:
+npm run build:templates
+```
+
+Only structure is kept — every id, name and stat is zeroed. `Ring` is
+hand-authored in `items.ts` (no ring in the sample saves); drop in a save with
+a ring equipped and re-run to replace it with a verified one.
+
+### Item catalog
+
+The inventory tab's search / category browser is backed by
+`src/lib/generated/itemCatalog.json`, generated from unpacked game data:
+
+1. Export the game's data files with [StardewXnbHack](https://github.com/Pathoschild/StardewXnbHack)
+   (drop it in the game folder and run it).
+2. Copy these JSON files into `data/raw/` (git-ignored — game content is never
+   committed): `Objects`, `BigCraftables`, `Weapons`, `Tools`, `Boots`, `Hats`,
+   `Furniture`, `Shirts`, `Pants`.
+3. Run `npm run build:catalog`. It extracts only ids, names, categories and
+   prices into `src/lib/generated/itemCatalog.json`, which *is* committed.
+
+A small placeholder catalog is checked in so the app builds without step 1–3.
 
 ## Scope / limitations
 
 - Edits the **host player** only (not farmhands).
-- Inventory: `Object` items only. Tools, weapons, rings, boots and hats are
-  shown but locked.
+- Inventory: nearly every item can be **added** — objects, big craftables, hats,
+  boots, rings, weapons, tools, shirts, pants and (non-subclass) furniture. The
+  Combined Ring and furniture subclasses (bed/TV/fish tank/dresser) are the
+  exceptions. Non-object slots can't be edited in place, only cleared.
+- Tools are added at their catalogued upgrade level (e.g. `IridiumAxe`), not a
+  chosen one; watering cans/rods start empty.
 - In shared-wallet co-op, the game may override player gold with the team total.
-- `src/lib/itemData.ts` is a short curated list for the "add item" dropdown; any
-  other item can be added by entering a numeric object id.
+- Any object can also be added by entering a numeric id manually.
 - **Always keep a backup of your save folder.**
 
 ## Not affiliated with ConcernedApe. Use at your own risk.

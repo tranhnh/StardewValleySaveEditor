@@ -1,5 +1,6 @@
-// A trimmed but structurally faithful Stardew 1.6 save. Enough nodes for the
-// editor's read/write paths; not a real farm.
+// Trimmed 1.6 saves for the read/write/inject paths. SAVE_1_6 has equipped
+// hat/boots/rings/clothing and a weapon to clone; SAVE_1_6_BARE has none, so
+// those types hit the bundled templates.
 
 export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
 <SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -67,6 +68,97 @@ export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
     <seasonForSaveGame>0</seasonForSaveGame>
     <yearForSaveGame>1</yearForSaveGame>
     <dayOfMonthForSaveGame>1</dayOfMonthForSaveGame>
+    <hat xsi:type="Hat">
+      <isLostItem>false</isLostItem>
+      <category>-95</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Straw Hat</name>
+      <itemId>3</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <which xsi:nil="true" />
+      <skipHairDraw>false</skipHairDraw>
+      <ignoreHairstyleOffset>true</ignoreHairstyleOffset>
+      <hairDrawType>0</hairDrawType>
+      <isPrismatic>false</isPrismatic>
+    </hat>
+    <boots xsi:type="Boots">
+      <isLostItem>false</isLostItem>
+      <category>-97</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Leather Boots</name>
+      <parentSheetIndex>506</parentSheetIndex>
+      <itemId>506</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <defenseBonus>1</defenseBonus>
+      <immunityBonus>1</immunityBonus>
+      <indexInTileSheet>506</indexInTileSheet>
+      <price>50</price>
+      <indexInColorSheet>2</indexInColorSheet>
+    </boots>
+    <leftRing xsi:type="Ring">
+      <isLostItem>false</isLostItem>
+      <category>-96</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Glow Ring</name>
+      <parentSheetIndex>517</parentSheetIndex>
+      <itemId>517</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <indexInTileSheet>517</indexInTileSheet>
+      <uniqueID>1</uniqueID>
+    </leftRing>
+    <rightRing xsi:nil="true" />
+    <shirtItem>
+      <isLostItem>false</isLostItem>
+      <category>-100</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Aquamarine Shirt</name>
+      <parentSheetIndex>9</parentSheetIndex>
+      <itemId>1009</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <price>50</price>
+      <indexInTileSheet>9</indexInTileSheet>
+      <indexInTileSheetFemale xsi:nil="true" />
+      <clothesType>0</clothesType>
+      <dyeable>false</dyeable>
+      <clothesColor><R>255</R><G>255</G><B>255</B><A>255</A></clothesColor>
+      <isPrismatic>false</isPrismatic>
+    </shirtItem>
+    <pantsItem>
+      <isLostItem>false</isLostItem>
+      <category>-100</category>
+      <hasBeenInInventory>true</hasBeenInInventory>
+      <name>Farmer Pants</name>
+      <parentSheetIndex>0</parentSheetIndex>
+      <itemId>0</itemId>
+      <specialItem>false</specialItem>
+      <isRecipe>false</isRecipe>
+      <quality>0</quality>
+      <stack>1</stack>
+      <SpecialVariable>0</SpecialVariable>
+      <price>50</price>
+      <indexInTileSheet>0</indexInTileSheet>
+      <indexInTileSheetFemale xsi:nil="true" />
+      <clothesType>1</clothesType>
+      <dyeable>true</dyeable>
+      <clothesColor><R>255</R><G>235</G><B>203</B><A>255</A></clothesColor>
+      <isPrismatic>false</isPrismatic>
+    </pantsItem>
   </player>
   <locations>
     <GameLocation xsi:type="Farm">
@@ -109,7 +201,61 @@ export const SAVE_1_6 = `<?xml version="1.0" encoding="utf-8"?>
   <gameVersion>1.6.15</gameVersion>
 </SaveGame>`
 
-// A pre-1.6 save whose inventory has no Object at all (forces the fallback).
+export const SAVE_1_6_BARE = `<?xml version="1.0" encoding="utf-8"?>
+<SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <player>
+    <name>Abigail</name>
+    <farmName>Bare</farmName>
+    <favoriteThing>Pixels</favoriteThing>
+    <farmingLevel>0</farmingLevel>
+    <miningLevel>0</miningLevel>
+    <combatLevel>0</combatLevel>
+    <foragingLevel>0</foragingLevel>
+    <fishingLevel>0</fishingLevel>
+    <luckLevel>0</luckLevel>
+    <professions />
+    <experiencePoints>
+      <int>0</int><int>0</int><int>0</int><int>0</int><int>0</int><int>0</int>
+    </experiencePoints>
+    <items>
+      <Item xsi:nil="true" />
+      <Item xsi:type="Object">
+        <isLostItem>false</isLostItem>
+        <category>-16</category>
+        <hasBeenInInventory>true</hasBeenInInventory>
+        <name>Wood</name>
+        <itemId>388</itemId>
+        <parentSheetIndex>388</parentSheetIndex>
+        <SpecialVariable>0</SpecialVariable>
+        <bigCraftable>false</bigCraftable>
+        <type>Basic</type>
+        <price>2</price>
+        <edibility>-300</edibility>
+        <stack>10</stack>
+        <quality>0</quality>
+        <minutesUntilReady>0</minutesUntilReady>
+      </Item>
+      <Item xsi:nil="true" />
+      <Item xsi:nil="true" />
+    </items>
+    <maxItems>36</maxItems>
+    <money>0</money>
+    <totalMoneyEarned>0</totalMoneyEarned>
+    <maxHealth>100</maxHealth>
+    <maxStamina>270</maxStamina>
+    <millisecondsPlayed>0</millisecondsPlayed>
+    <hat xsi:nil="true" />
+    <boots xsi:nil="true" />
+    <leftRing xsi:nil="true" />
+    <rightRing xsi:nil="true" />
+  </player>
+  <currentSeason>summer</currentSeason>
+  <year>1</year>
+  <dayOfMonth>1</dayOfMonth>
+  <gameVersion>1.6.15</gameVersion>
+</SaveGame>`
+
+// Pre-1.6, no Object anywhere -> forces the legacy Object template.
 export const SAVE_LEGACY_EMPTY = `<?xml version="1.0" encoding="utf-8"?>
 <SaveGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <player>
