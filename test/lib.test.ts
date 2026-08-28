@@ -21,6 +21,17 @@ describe('xml', () => {
     expect(() => parseSave(out)).not.toThrow()
   })
 
+  it('matches the game format: keeps the BOM, no separator before <SaveGame>', () => {
+    const out = serializeSave(parseSave('﻿' + SAVE_1_6))
+    expect(out.startsWith('﻿<?xml version="1.0" encoding="utf-8"?><SaveGame')).toBe(true)
+    expect(out).not.toContain('?>\n')
+    expect(() => parseSave(out)).not.toThrow()
+  })
+
+  it('does not invent a BOM when the input had none', () => {
+    expect(serializeSave(parseSave(SAVE_1_6)).startsWith('<?xml')).toBe(true)
+  })
+
   it('rejects non-SaveGame documents', () => {
     expect(() => parseSave('<SaveGameInfo><x/></SaveGameInfo>')).toThrow()
     expect(() => parseSave('not xml at all <')).toThrow()
