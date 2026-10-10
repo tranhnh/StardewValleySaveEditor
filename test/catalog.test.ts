@@ -55,13 +55,12 @@ describe('catalog', () => {
   })
 
   it('trash-can tools are absent; the four upgrade families are fully present', () => {
-    // Trash Can is a <trashCanLevel> int on the Farmer, not an item.
     expect(CATALOG.some((i) => i.kind === 'tool' && /TrashCan$/.test(i.id))).toBe(false)
 
     const upgradeFamilies = CATALOG.filter(
       (i) => i.kind === 'tool' && /(Axe|Pickaxe|Hoe|WateringCan)$/.test(i.id),
     )
-    expect(upgradeFamilies.length).toBe(20) // 4 families x (base + 4 tiers)
+    expect(upgradeFamilies.length).toBe(20)
     expect(upgradeFamilies.every((i) => i.injectable === true)).toBe(true)
   })
 })

@@ -6,7 +6,6 @@ const DEFAULT_PROLOG = '<?xml version="1.0" encoding="utf-8"?>'
 export interface ParsedSave {
   doc: XMLDocument
   prolog: string
-  /** The game writes its saves as UTF-8 with a BOM; round-trip it exactly. */
   bom: boolean
 }
 
@@ -38,7 +37,6 @@ export function parseSave(raw: string): ParsedSave {
 
 export function serializeSave({ doc, prolog, bom }: ParsedSave): string {
   const body = new XMLSerializer().serializeToString(doc.documentElement)
-  // The game writes "<?xml …?><SaveGame …>" with no separator and a leading BOM.
   return `${bom ? BOM : ''}${prolog}${body}`
 }
 
@@ -76,7 +74,6 @@ export function childText(parent: Element, tag: string): string | null {
   return el ? (el.textContent ?? '') : null
 }
 
-/** Returns whether the child existed, so callers can detect version-specific fields. */
 export function setChildText(parent: Element, tag: string, value: string): boolean {
   const el = child(parent, tag)
   if (!el) return false
@@ -84,11 +81,6 @@ export function setChildText(parent: Element, tag: string, value: string): boole
   return true
 }
 
-/**
- * `document.createElement` on an XML document can land the node in the XHTML
- * namespace and inject an `xmlns` attribute, which corrupts the save. The null
- * namespace matches the rest of the document.
- */
 export function createEl(doc: Document, tag: string): Element {
   return doc.createElementNS(null, tag)
 }

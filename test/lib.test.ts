@@ -105,7 +105,6 @@ describe('skills', () => {
       fishing: 5,
       luck: 0,
     })
-    // xp order: farming, fishing, foraging, mining, combat, luck
     expect(skills.xp).toEqual([770, 2150, 380, 100, 0, 0])
     expect(skills.professions).toEqual([6])
   })
@@ -128,7 +127,7 @@ describe('skills', () => {
     const parsed = parseSave(SAVE_1_6)
     const skills = readSkills(parsed.doc)
     skills.professions = [1, 2, 3]
-    skills.xp = [1, 2, 3, 4, 5, 6, 7, 8] // more entries than exist -> forces node creation
+    skills.xp = [1, 2, 3, 4, 5, 6, 7, 8]
     writeSkills(parsed.doc, skills)
     const out = serializeSave(parsed)
     expect(out).not.toContain('xmlns="http://www.w3.org/1999/xhtml"')
@@ -186,9 +185,9 @@ describe('inventory', () => {
 
     const node = reparsed.doc.querySelector('SaveGame > player > items')!.children[0]
     expect(node.getAttribute('xsi:type')).toBe('Object')
-    expect(node.querySelector('itemId')?.textContent).toBe('74') // 1.6 field kept
+    expect(node.querySelector('itemId')?.textContent).toBe('74')
     expect(node.querySelector('parentSheetIndex')?.textContent).toBe('74')
-    expect(node.querySelector('category')?.textContent).toBe('-2') // from the catalog
+    expect(node.querySelector('category')?.textContent).toBe('-2')
   })
 
   it('refuses to inject into a non-empty slot', () => {
@@ -206,7 +205,6 @@ describe('inventory', () => {
     const slots = readInventory(reparsed.doc)
     expect(slots).toHaveLength(2)
     expect(slots[0]).toMatchObject({ kind: 'object', name: 'Gold Bar', objectId: 336, stack: 3 })
-    // legacy save: no <itemId> element should have been invented
     expect(reparsed.doc.querySelector('SaveGame > player > items')!.children[0].querySelector('itemId'))
       .toBeNull()
   })
@@ -231,7 +229,7 @@ describe('inventory', () => {
     const parsed = parseSave(SAVE_1_6)
     setSlotStack(parsed.doc, 1, 42)
     const out = serializeSave(parsed)
-    expect(out).toContain('<name>Weeds</name>') // the world object is untouched
+    expect(out).toContain('<name>Weeds</name>')
     expect(out).toContain('<favoriteThing>Coding</favoriteThing>')
   })
 })

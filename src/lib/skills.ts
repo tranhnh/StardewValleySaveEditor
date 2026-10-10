@@ -1,6 +1,5 @@
 export type SkillKey = 'farming' | 'fishing' | 'foraging' | 'mining' | 'combat' | 'luck'
 
-/** Index order of the six <player><experiencePoints> entries (luck is unused but present). */
 export const XP_ORDER: SkillKey[] = ['farming', 'fishing', 'foraging', 'mining', 'combat', 'luck']
 
 export const LEVEL_TAG: Record<SkillKey, string> = {
@@ -12,7 +11,6 @@ export const LEVEL_TAG: Record<SkillKey, string> = {
   luck: 'luckLevel',
 }
 
-/** Cumulative XP to reach each level (index 0 = level 0). */
 export const XP_FOR_LEVEL: number[] = [
   0, 100, 380, 770, 1300, 2150, 3300, 4800, 6900, 10000, 15000,
 ]
@@ -32,7 +30,6 @@ export interface ProfessionChoice {
 
 export interface SkillProfessions {
   tier5: [ProfessionChoice, ProfessionChoice]
-  /** Keyed by the chosen tier-5 id. */
   tier10: Record<number, [ProfessionChoice, ProfessionChoice]>
 }
 

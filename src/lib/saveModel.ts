@@ -27,7 +27,6 @@ export interface CoreStats {
 
 export interface SkillsState {
   levels: Record<SkillKey, number>;
-  /** Six entries, in XP_ORDER. */
   xp: number[];
   professions: number[];
 }
@@ -88,7 +87,6 @@ export function writeCore(doc: XMLDocument, core: CoreStats): void {
     String(Math.max(0, Math.round(core.hoursPlayed * 3_600_000))),
   );
 
-  // The date is stored on <SaveGame> and mirrored onto <player>.
   const seasonIndex = SEASONS.indexOf(core.season);
   setChildText(save, "currentSeason", core.season);
   setChildText(player, "seasonForSaveGame", String(seasonIndex));

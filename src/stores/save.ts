@@ -30,9 +30,8 @@ import {
 } from '../lib/items'
 
 export const useSaveStore = defineStore('save', () => {
-  // shallowRef: the document is large and only ever mutated via the lib helpers.
   const parsed = shallowRef<ParsedSave | null>(null)
-  const rawText = ref('') // kept so revert() can re-parse the original
+  const rawText = ref('')
   const fileName = ref('')
   const errorMessage = ref('')
   const era = ref<GameEra>('legacy')
@@ -118,7 +117,6 @@ export const useSaveStore = defineStore('save', () => {
     refreshInventory()
   }
 
-  /** Returns a warning string when a fallback template was used, else "". */
   function addItem(index: number, payload: ItemPayload): string {
     if (!parsed.value) return ''
     const { usedFallbackTemplate } = injectItem(parsed.value.doc, index, payload)
